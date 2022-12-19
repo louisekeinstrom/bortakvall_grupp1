@@ -14,60 +14,66 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container justify-content-center">
 
-        <form>
-            <div class="row">
-                <div class="col-25 mx-2">
-                    <label for="firstName">Förnamn:</label>
-                </div>
-                <div class="col-75">
-                    <input type="text" id="firstName" name="firstName" placeholder="Förnamn" autofocus required>
-                </div>
-                <div class="col-25 mx-2">
-                    <label for="lastName">Efternamn:</label>
-                </div>
-                <div class="col-75">
-                    <input type="text" id="lastName" name="lastName" placeholder="Efternamn" required>
-                </div>
-                <div class="col-25 mx-2">
-                    <label for="adress">Adress:</label>
-                </div>
-                <div class="col-75">
-                    <input type="adress" id="adress" name="adress" placeholder="Adress" required>
-                </div>
-                <div class="col-25 mx-2">
-                    <label for="postcode">Postnr</label>
-                </div>
-                <div class="col-75">
-                    <input type="postcode" id="postcode" name="postcode" placeholder="Postnr" required>
-                </div>
-                <div class="col-25 mx-2">
-                    <label for="city">Stad</label>
-                </div>
-                <div class="col-75">
-                    <input type="city" id="city" name="city" placeholder="Stad" required>
-                </div>
-                <div class="col-25 mx-2">
-                    <label for="tel">Telefonnr</label>
-                </div>
-                <div class="col-75">
-                    <input type="tel" id="tel" name="tel" placeholder="Telefonnr">
-                </div>
-                <div class="col-25 mx-2">
-                    <label for="email">Email</label>
-                </div>
-                <div class="col-75">
-                    <input type="email" id="email" name="email" placeholder="Email" required>
-                </div>
-            </div>
 
-            <div class="row">
-                <button type="submit">submit</button>
-            </div>
+        <div class="container">
+            <h2 class="text-center">Kontaktuppgifter</h2>
 
-        </form>
+            <form>
+                <div class="row justify-content-center mx-auto">
+                    <div class="col-25">
+                        <label for="firstName">Förnamn:</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="firstName" name="firstName" placeholder="Förnamn" autofocus required>
+                    </div>
+                    <div class="col-25">
+                        <label for="lastName">Efternamn:</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="text" id="lastName" name="lastName" placeholder="Efternamn" required>
+                    </div>
+                    <div class="col-25">
+                        <label for="adress">Adress:</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="adress" id="adress" name="adress" placeholder="Adress" required>
+                    </div>
+                    <div class="col-25">
+                        <label for="postcode">Postnr:</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="postcode" id="postcode" name="postcode" placeholder="Postnr" required>
+                    </div>
+                    <div class="col-25">
+                        <label for="city">Stad:</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="city" id="city" name="city" placeholder="Stad" required>
+                    </div>
+                    <div class="col-25">
+                        <label for="tel">Telefonnr:</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="tel" id="tel" name="tel" placeholder="Telefonnr">
+                    </div>
+                    <div class="col-25">
+                        <label for="email">Email:</label>
+                    </div>
+                    <div class="col-75">
+                        <input type="email" id="email" name="email" placeholder="Email" required>
+                    </div>
+                </div>
 
+                <div class="row justify-content-center p-4 mx-auto" id="submitBtn">
+                    <!--container justify-content-center row mx-2 p-4-->
+                    <button type="submit" class="btn btn-outline-primary">submit</button>
+                </div>
+
+            </form>
+
+        </div>
     </div>
 
 </body>
