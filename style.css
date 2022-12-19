@@ -6,21 +6,30 @@ Hover menu: #568A83
 
  */
 .body {
-  background-color: #fff;
+  background-color: #fcbfb7;
 }
 
-h1 {
-  color: #9bc1bc;
+.my-4 {
+  font-family: "Rubik Vinyl", cursive;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
 }
 
 .container {
-  background-color: #fdf1c3;
+  background-color: #9bc1bc;
+  border-radius: 5px;
+  height: 100%;
 }
 
-.read-more-btn {
-  background-color: #fcd757;
-  box-shadow: none;
-  border-style: none;
+.read-more-btn:hover {
+  background-color: #9bc1bc;
+  border-radius: 5px;
+}
+
+.catalog {
+  background-color: #fff;
+  border-radius: 5px;
 }
 
 .product-container {
@@ -28,6 +37,10 @@ h1 {
   height: 350px;
   max-width: 250px;
   position: relative;
+
+  background-color: #fff;
+  box-shadow: 2px 5px 10px 0px;
+  border-radius: 5px;
 }
 
 .products-grid {
@@ -43,4 +56,8 @@ h1 {
   bottom: 12px;
   right: 15px;
   padding: none;
+
+  background-color: #fcd757;
+  box-shadow: none;
+  border-style: none;
 }
