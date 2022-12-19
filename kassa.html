@@ -7,9 +7,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bortakväll</title>
 </head>
+<!--"En ny vy där man får fylla i namn, adress, postnr, ort, telefon (ska ej vara required) och e-post."-->
 
 <body>
-    <h1>Kassa</h1>
+    <div class="container">
+        <form>
+            <label for="firstName">Förnamn:</label><br>
+            <input type="text" id="firstName" name="firstName" autofocus required><br>
+            <label for="lastName">Efternamn:</label><br>
+            <input type="text" id="lastName" name="lastName" required>
+            <label for="adress">Adress:</label>
+            <input type="adress" id="adress" name="adress" required>
+            <label for="postcode">Postnr</label>
+            <input type="postcode" id="postcode" name="postcode" required>
+            <label for="city">Stad</label>
+            <input type="city" id="city" name="city" required>
+            <label for="tel">Telefonnr</label>
+            <input type="tel" id="tel" name="tel">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+
+
+
+            <button type="submit">submit</button>
+        </form>
+    </div>
 
 </body>
 
