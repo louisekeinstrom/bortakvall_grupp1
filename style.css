@@ -4,16 +4,30 @@ body{
     background-size: cover;
 }
 
+.products-grid{
+    background-color: dimgray;
+}
+
 .product-container{
     background-color: rgb(145, 145, 144);
-    height: 350px;
+    height: 380px;
     max-width: 250px;
     position: relative;
     
 }
 
-.products-grid{
+.cart-icon-container{
+    display: inline;
+    position: absolute;
+    top: 10px;
+    right: 10px;
     background-color: dimgray;
+    border-radius: 20px;
+    padding: 8px;
+}
+
+.product-name-price-container{
+    font-weight: 600;
 }
 
 .description-text{
