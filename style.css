@@ -1,9 +1,22 @@
-.product{
+.product-container{
     background-color: rgb(145, 145, 144);
-    height: 230px;
-    max-width: 230px;
+    height: 350px;
+    max-width: 250px;
+    position: relative;
+    
 }
 
 .products-grid{
     background-color: dimgray;
+}
+
+.description-text{
+    font-size: 14px;
+}
+
+.read-more-btn{
+    position: absolute;
+    bottom: 12px;
+    right: 15px;
+    padding: none;
 }
