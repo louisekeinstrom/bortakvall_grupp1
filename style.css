@@ -68,7 +68,7 @@ Hover menu: #568A83
   background-color: #fcd757;
 }
 
-.shopping-cart {
+.shopping-cart-roll-down {
   display: flex;
   justify-content: right;
   flex-direction: column;
