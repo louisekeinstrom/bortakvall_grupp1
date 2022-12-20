@@ -18,7 +18,7 @@
     <!--div där varukorgen visas-->
     <div class="container justify-content-center">
 
-        <div class="customer container hide">
+        <div class="customer container hide"> <!--hide-->
             <h2 class="text-center">Kontaktuppgifter</h2>
 
             <form>
@@ -78,7 +78,7 @@
         <!--div med bokningsbekräftelse som göms till efter att
     kunduppgifterna submittas om beställningen går igenom.
 ordernr + tackmeddelande -->
-        <div class="container text-center mx-auto p-4" id="confirmation">
+        <div class="container text-center mx-auto m-3 p-3" id="confirmation">
             <div>
                 <h2>Tack! :)</h2><!--kundnamn här-->
                 <p>Din order med ordernr xxx har gått igenom. Leverans inom 2 vardagar</p><!--ordernr-->
@@ -86,10 +86,11 @@ ordernr + tackmeddelande -->
         </div>
 
         <!--div som göms med felmeddelande visas beställningen inte går igenom-->
-        <div class="container text-center mx-auto hide" id="wrong">
+        <div class="container text-center mx-auto m-3 p-3 hide" id="wrong">
             <div>
                 <h2>Något gick fel! :(</h2><!--kundnamn här-->
                 <p>Vänligen kontrollera din order och dina uppgifter</p>
+                <!--click-event som backar till kunduppgiftena-->
                 <button class="inventory btn btn-secondary">Tillbaka</button>
             </div>
         </div>
