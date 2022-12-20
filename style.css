@@ -8,24 +8,28 @@ Hover menu: #568A83
 .body {
   display: flex;
   justify-content: center;
-  background-image: url("../assets/pexels-alexander-grey-3866851.jpg");
+  background-image: url("../assets/pexels-polina-tankilevitch-5469042.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 .my-4 {
-  font-family: "Prompt", sans-serif;
-  color: #00a7e1;
+  font-family: "Fredoka One", cursive;
+  color: #ffb8d1;
   text-align: left;
   padding: 20px 30px;
   font-size: 70px;
 }
 
+.color-change {
+  color: #00a7e1;
+}
+
 .menu {
   display: flex;
   justify-content: space-between;
-  background-color: #ffb8d1;
+  background-color: #00a7e1;
   width: 100%;
   padding: 20px;
   margin: 2px 0px;
@@ -38,10 +42,12 @@ Hover menu: #568A83
   border-style: none;
   margin: 0px;
   padding: 20px;
+  transition: 0.5s;
 }
 
 .menu-btn:hover {
-  color: #00a7e1;
+  color: #ffb8d1;
+  text-decoration: none;
 }
 
 .container {
@@ -52,13 +58,14 @@ Hover menu: #568A83
 }
 
 .shopping-cart-btn {
-  background-color: #fcd757;
+  background-color: #ffb8d1;
   box-shadow: none;
   border-style: none;
+  transition: 0.5s;
 }
 
 .shopping-cart-btn:hover {
-  background-color: #00a7e1;
+  background-color: #fcd757;
 }
 
 .read-more-btn:hover {
@@ -99,4 +106,5 @@ Hover menu: #568A83
   background-color: #fcd757;
   box-shadow: none;
   border-style: none;
+  transition: 0.5s;
 }
