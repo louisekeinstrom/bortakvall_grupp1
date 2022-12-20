@@ -22,6 +22,7 @@
 .menu {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   background-color: #00a7e1;
   width: 100%;
   padding: 20px;
@@ -52,6 +53,7 @@
 
 .shopping-cart-btn {
   background-color: #ffb8d1;
+  padding: 15px;
   box-shadow: none;
   border-style: none;
   transition: 0.5s;
@@ -193,7 +195,7 @@
   position: absolute;
   bottom: 12px;
   right: 15px;
-  padding: none;
+  padding: 10px;
 
   background-color: #fcd757;
   box-shadow: none;
