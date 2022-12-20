@@ -37,6 +37,16 @@ label {
     margin-top: 6px;
 }
 
+/* för att gömma olika delar*/
+
+.hide {
+    display: none;
+}
+
+/*tackmeddelande*/
+
+
+
 /*knapp för felmeddelande */
 .inventory {
     background-color: #fcd757;
