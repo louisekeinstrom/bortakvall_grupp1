@@ -1,11 +1,7 @@
-body {
-    box-sizing: border-box;
-    /*background-color: #fcc4c4;*/
-}
-
+/*formuläret*/
 .container {
     border-radius: 5px;
-    background-color: #fcc4c4;
+    background-color: #fcbfb7;
     padding: 20px;
 }
 
@@ -41,12 +37,13 @@ label {
     margin-top: 6px;
 }
 
-/*
-.row:after {
-    content: "";
-    display: table;
-    clear: both;
-}*/
+/*knapp för felmeddelande */
+.inventory {
+    background-color: #fcd757;
+    box-shadow: none;
+    border-style: none;
+}
+
 
 
 @media screen and (min-width: 600px) {
@@ -77,11 +74,6 @@ label {
         justify-content: right;
     }
 
-    /*input,
-    textarea {
-        width: 80%;
-    }*/
-
 
     #submitBtn {
         width: 50%;
@@ -109,9 +101,6 @@ label {
     }
 
     #submitBtn {
-        /* display: flex;
-        flex-direction: row;
-        align-items: center;*/
         width: 30%;
 
     }

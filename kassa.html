@@ -13,11 +13,12 @@
     <link rel="stylesheet" href="kassa.css">
 </head>
 
-<body>
+<body class="container-fluid">
+
+    <!--div där varukorgen visas-->
     <div class="container justify-content-center">
 
-
-        <div class="container">
+        <div class="customer container">
             <h2 class="text-center">Kontaktuppgifter</h2>
 
             <form>
@@ -67,15 +68,32 @@
                 </div>
 
                 <div class="row justify-content-center p-4 mx-auto" id="submitBtn">
-                    <!--container justify-content-center row mx-2 p-4-->
                     <button type="submit" class="btn btn-outline-primary">submit</button>
                 </div>
 
             </form>
 
         </div>
-    </div>
 
+        <!--div med bokningsbekräftelse som göms till efter att
+    kunduppgifterna submittas om beställningen går igenom.
+ordernr + tackmeddelande -->
+        <div class="container text-center mx-auto" id="confirmation">
+            <div>
+                <h2>Tack! :)</h2><!--kundnamn här-->
+                <p>Din order med ordernr xxx har gått igenom. Leverans inom 2 vardagar</p><!--ordernr-->
+            </div>
+        </div>
+
+        <!--div som göms med felmeddelande visas beställningen inte går igenom-->
+        <div class="container text-center mx-auto" id="wrong">
+            <div>
+                <h2>Något gick fel! :(</h2><!--kundnamn här-->
+                <p>Vänligen kontrollera din order och dina uppgifter</p>
+                <button class="inventory btn btn-secondary">Tillbaka</button>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
