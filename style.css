@@ -16,52 +16,53 @@ Hover menu: #568A83
 
 .my-4 {
   font-family: "Prompt", sans-serif;
-  color: #fff;
-  text-align: center;
-  padding: 20px;
+  color: #00a7e1;
+  text-align: left;
+  padding: 20px 30px;
   font-size: 70px;
 }
 
 .menu {
   display: flex;
   justify-content: space-between;
-  background-color: #fcbfb7;
+  background-color: #ffb8d1;
   width: 100%;
   padding: 20px;
-  margin: 0px;
+  margin: 2px 0px;
   font-size: 20px;
-  box-shadow: 2px 5px 10px 0px;
 }
 
-.home-btn {
-  text-decoration: none;
+.menu-btn {
   color: #fff;
-  padding: 0px 20px;
-  border-right: #fff 2px solid;
+  box-shadow: none;
+  border-style: none;
+  margin: 0px;
+  padding: 20px;
 }
 
-.home-btn:hover {
-  color: #fcd757;
-  text-decoration: none;
+.menu-btn:hover {
+  color: #00a7e1;
 }
 
 .container {
-  background-color: #9bc1bc;
+  background-color: #fff;
   border-radius: 5px;
   height: 100%;
   margin: 0px;
-
-  box-shadow: 2px 5px 10px 0px;
 }
 
-.shopping-cart {
+.shopping-cart-btn {
   background-color: #fcd757;
   box-shadow: none;
   border-style: none;
 }
 
+.shopping-cart-btn:hover {
+  background-color: #00a7e1;
+}
+
 .read-more-btn:hover {
-  background-color: #9bc1bc;
+  background-color: #00a7e1;
   border-radius: 5px;
 }
 
