@@ -24,6 +24,14 @@ body{
     background-color: dimgray;
     border-radius: 20px;
     padding: 8px;
+    transition: all .1s ease-in-out;
+}
+@media (hover: hover) and (pointer: fine){
+    .cart-icon-container:hover{
+        transform: scale(1.1);
+        cursor: pointer;
+        background-color: rgb(91, 91, 91);
+    }
 }
 
 .product-name-price-container{
