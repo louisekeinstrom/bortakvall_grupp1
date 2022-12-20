@@ -13,12 +13,14 @@
     <link rel="stylesheet" href="kassa.css">
 </head>
 
-<body class="container-fluid">
+<body> <!--class="container-fluid"-->
+
+    <!--menyn med hem-länk till katalogsidan-->
 
     <!--div där varukorgen visas-->
-    <div class="container justify-content-center">
+    <div class="container-fluid justify-content-center">
 
-        <div class="customer container hide"> <!--hide-->
+        <div class="customer container"> <!--hide-->
             <h2 class="text-center">Kontaktuppgifter</h2>
 
             <form>
@@ -78,7 +80,7 @@
         <!--div med bokningsbekräftelse som göms till efter att
     kunduppgifterna submittas om beställningen går igenom.
 ordernr + tackmeddelande -->
-        <div class="container text-center mx-auto m-3 p-3" id="confirmation">
+        <div class="container text-center mx-auto m-3 p-3 hide" id="confirmation">
             <div>
                 <h2>Tack! :)</h2><!--kundnamn här-->
                 <p>Din order med ordernr xxx har gått igenom. Leverans inom 2 vardagar</p><!--ordernr-->
