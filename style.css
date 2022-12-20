@@ -13,6 +13,7 @@
   text-align: left;
   padding: 20px 30px;
   font-size: 70px;
+  cursor: default;
 }
 
 .color-change {
