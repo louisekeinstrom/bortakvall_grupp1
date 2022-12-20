@@ -8,29 +8,36 @@ Hover menu: #568A83
 .body {
   display: flex;
   justify-content: center;
-  background-color: #fff;
+  background-image: url("../assets/pexels-alexander-grey-3866851.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .my-4 {
-  font-family: "Rubik Vinyl", cursive;
+  font-family: "Prompt", sans-serif;
   color: #fff;
   text-align: center;
   padding: 20px;
+  font-size: 70px;
 }
 
 .menu {
   display: flex;
   justify-content: space-between;
-  background-color: #9bc1bc;
+  background-color: #fcbfb7;
   width: 100%;
   padding: 20px;
   margin: 0px;
+  font-size: 20px;
+  box-shadow: 2px 5px 10px 0px;
 }
 
 .home-btn {
   text-decoration: none;
   color: #fff;
-  padding: 0px 10px;
+  padding: 0px 20px;
+  border-right: #fff 2px solid;
 }
 
 .home-btn:hover {
@@ -39,13 +46,15 @@ Hover menu: #568A83
 }
 
 .container {
-  background-color: #fcbfb7;
+  background-color: #9bc1bc;
   border-radius: 5px;
   height: 100%;
   margin: 0px;
+
+  box-shadow: 2px 5px 10px 0px;
 }
 
-.inventory {
+.shopping-cart {
   background-color: #fcd757;
   box-shadow: none;
   border-style: none;
