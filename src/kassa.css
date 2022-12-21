@@ -1,17 +1,26 @@
+html {
+    height: 100%;
+}
+
 body {
     /*background-color: #fcbfb7;*/
-    background-image: linear-gradient(rgba(161, 135, 149, 0.65), rgba(109, 60, 86, 0.7)), url(bortakvall-assets/candy.jpg);
+    background-image:
+        linear-gradient(rgba(161, 135, 149, 0.65), rgba(109, 60, 86, 0.7)),
+        url(src/bortakvall-assets/candy.jpg);
+    /*bortakvall-assets/candy.jpg*/
     background-position: center;
     background-size: cover;
-    /*background-repeat: no-repeat;*/
 
 }
 
 /*formuläret*/
-.container {
+
+.customer-container {
     border-radius: 5px;
     background-color: #fcbfb7;
     padding: 20px;
+    position: relative;
+
 }
 
 input,
@@ -57,17 +66,17 @@ label {
 #confirmation {
     box-shadow: 2px 5px 10px 0px;
     border-radius: 5px;
-    background-color: #fff;
+    background-color: #fcbfb7;
 }
 
 #wrong {
     box-shadow: 2px 5px 10px 0px;
     border-radius: 5px;
-    background-color: #fff;
+    background-color: #fcbfb7;
 }
 
 /*knapp för felmeddelande */
-.inventory {
+.back {
     background-color: #fcd757;
     box-shadow: none;
     /*border-style: none;*/
@@ -112,6 +121,7 @@ label {
     /*konfirmation / felmeddelande */
     #confirmation {
         width: 70%;
+
     }
 
     #wrong {
