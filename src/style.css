@@ -127,14 +127,14 @@ body {
   padding: 10px;
   font-size: 20px;
   cursor: pointer;
-  transition: 0.5s;
   margin: 10px 0px;
   width: 30px;
   height: 30px;
+  transition: 0.5s;
 }
 
 .increase:hover {
-  transform: scale(2, 2);
+  color: #00a7e1;
 }
 
 .amount {
@@ -151,14 +151,14 @@ body {
   padding: 10px;
   font-size: 20px;
   cursor: pointer;
-  transition: 0.5s;
   margin: 10px 0px;
   width: 30px;
   height: 30px;
+  transition: 0.5s;
 }
 
 .decrease:hover {
-  transform: scale(2, 2);
+  color: #00a7e1;
 }
 
 .check-out {
@@ -213,9 +213,10 @@ body {
   position: absolute;
   top: 10px;
   right: 10px;
-  background-color: dimgray;
-  border-radius: 20px;
   padding: 8px;
+
+  background-color: #ffb8d1;
+  border-radius: 20px;
   transition: all 0.1s ease-in-out;
 }
 
