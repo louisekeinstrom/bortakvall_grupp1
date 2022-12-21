@@ -10,10 +10,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <!--css-->
-    <link rel="stylesheet" href="kassa.css">
+    <link rel="stylesheet" href="src/kassa.css">
 </head>
 
-<body> <!--class="container-fluid"-->
+<body>
     <div class="container-fluid justify-content-center">
 
         <!--menyn med hem-länk till katalogsidan-->
@@ -21,7 +21,7 @@
         <!--div där varukorgen visas-->
         <div class="container-fluid justify-content-center">
 
-            <div class="customer-container mt-4 p-5 hide"> <!--hide class="customer-container"-->
+            <div class="customer-container mt-4 p-5"> <!--hide class="customer-container"-->
                 <h2 class="text-center">Kontaktuppgifter</h2>
 
                 <form>
@@ -90,7 +90,7 @@ ordernr + tackmeddelande -->
             </div>
 
             <!--div som göms med felmeddelande visas beställningen inte går igenom-->
-            <div class="container text-center mt-4 p-5 text-white rounded" id="wrong">
+            <div class="container text-center mt-4 p-5 text-white rounded hide" id="wrong">
                 <div>
                     <h2>Något gick fel! :(</h2>
                     <p>Vänligen kontrollera din order och dina uppgifter</p>
