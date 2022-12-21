@@ -187,6 +187,7 @@ body {
   height: 350px;
   max-width: 250px;
   position: relative;
+  box-shadow: 2px 5px 10px 0px;
 
   background-color: #fff;
 }
@@ -246,7 +247,7 @@ body {
   .cart-icon-container:hover {
     transform: scale(1.1);
     cursor: pointer;
-    background-color: rgb(91, 91, 91);
+    background-color: #00a7e1;
   }
 }
 
