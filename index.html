@@ -1,17 +1,21 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/44fc62139d.js" crossorigin="anonymous"></script>
+      <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="src/style.css">
     <link rel="stylesheet" href="src/popup.css">
     <title>Bortakväll</title>
   </head>
-  <body class="bg-dark text-secondary">
+  <body class="body text-secondary">
 
     <!-- READ MORE POPUP -->
     <div class="popup-wrapper">
@@ -41,10 +45,93 @@
     <!-- KATALOGSIDAN -->
     <div class="container-fluid justify-content-center">
       
-      <h1 class="my-4">Bortakväll🍭</h1>
+      <h1 class="my-4">BORTA<span class="color-change">KVÄLL</span></h1>
+      
+      <!--Meny -->
+       <nav class="menu navbar-expand navbar-nav">
+        <div>
+          <a href="#" class="menu-btn">Hem</a>
+          <a href="#" class="menu-btn">Om oss</a>
+        </div>
+        <button
+          class="shopping-cart-btn btn btn-secondary dropdown-toggle"
+          type="button"
+          data-bs-toggle="dropdown"
+          data-bs-auto-close="outside"
+          aria-expanded="false"
+        >
+          Varukorg
+        </button>
+      </nav>
+      <!-- roll down menu varukorg -->
+      <div class="shopping-cart-roll-down dropdown-menu">
+        <div class="cart-product">
+          <img
+            class="cart-image"
+            src="https://picsum.photos/150"
+            alt="Produkt från Bortakväll"
+          />
+          <div class="cart-description">
+            <p class="product-name">Produktnamn</p>
+            <div class="show-amount-in-cart">
+              <p class="increase">+</p>
+              <input class="amount" />
+              <p class="decrease">-</p>
+            </div>
+          </div>
+        </div>
+        <div class="cart-product">
+          <img
+            class="cart-image"
+            src="https://picsum.photos/150"
+            alt="Produkt från Bortakväll"
+          />
+          <div class="cart-description">
+            <p class="product-name">Produktnamn</p>
+            <div class="show-amount-in-cart">
+              <p class="increase">+</p>
+              <input class="amount" />
+              <p class="decrease">-</p>
+            </div>
+          </div>
+        </div>
+        <div class="cart-product">
+          <img
+            class="cart-image"
+            src="https://picsum.photos/150"
+            alt="Produkt från Bortakväll"
+          />
+          <div class="cart-description">
+            <p class="product-name">Produktnamn</p>
+            <div class="show-amount-in-cart">
+              <p class="increase">+</p>
+              <input class="amount" />
+              <p class="decrease">-</p>
+            </div>
+          </div>
+        </div>
+        <div class="cart-product">
+          <img
+            class="cart-image"
+            src="https://picsum.photos/150"
+            alt="Produkt från Bortakväll"
+          />
+          <div class="cart-description">
+            <p class="product-name">Produktnamn</p>
+            <div class="show-amount-in-cart">
+              <p class="increase">+</p>
+              <input class="amount" />
+              <p class="decrease">-</p>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="check-out btn btn-secondary">
+          Gå till Kassan
+        </button>
+      </div>
 
       <div class="container products-grid col-11 col-md-10 col-lg-12 py-3 mb-4">
-        <div class="row justify-content-center">
+        <div class="product-catalog row justify-content-center">
           <!-- ett sånt här kodblock kommer vi rendera products.forEach() eller dyl  -->
           <!-- finns det något som kan begränsa antal tecken i beskrivningen av en random produkt och lägga "..." i slutet. En if-sats? -->
           <div class="product-container m-3 col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center flex-column">
@@ -125,12 +212,9 @@
             <p class="description-text">Cookie I love cheesecake jelly-o halvah cupcake jelly halvah dessert. Gummies...</p>
             <button class="read-more-btn btn btn-secondary">Läs mer</button>
           </div>
-
         </div>
       </div>
     </div>
-
-  
   <script type="module" src="src/popup.ts"></script>
   <script type="module" src="src/main.ts"></script>
   </body>
