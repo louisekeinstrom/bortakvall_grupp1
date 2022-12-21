@@ -1,3 +1,5 @@
 export { };
-import './interfaces'
-import './fetch'
+import { IProducts } from "./interfaces";
+import { fetchProducts, testFetch } from "./fetch";
+
+testFetch()

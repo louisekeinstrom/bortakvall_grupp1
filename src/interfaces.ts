@@ -1,6 +1,6 @@
-export { };
-
-interface IProducts {
+//export { };
+//Interface för product-info
+export interface IProducts {
     "status": "success",
     "data": [
         {
