@@ -1,0 +1,51 @@
+body{
+    background-image: linear-gradient(rgba(161, 135, 149, 0.65),rgba(109, 60, 86, 0.7)), url('/bortakvall-assets/candy.jpg');
+    background-position: center;
+    background-size: cover;
+}
+
+.products-grid{
+    background-color: dimgray;
+}
+
+.product-container{
+    background-color: rgb(145, 145, 144);
+    height: 380px;
+    max-width: 250px;
+    position: relative;
+    
+}
+
+.cart-icon-container{
+    display: inline;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: dimgray;
+    border-radius: 20px;
+    padding: 8px;
+    transition: all .1s ease-in-out;
+}
+@media (hover: hover) and (pointer: fine){
+    .cart-icon-container:hover{
+        transform: scale(1.1);
+        cursor: pointer;
+        background-color: rgb(91, 91, 91);
+    }
+}
+
+.product-name-price-container{
+    font-weight: 600;
+}
+
+.description-text{
+    font-size: 14px;
+}
+
+.read-more-btn{
+    position: absolute;
+    bottom: 12px;
+    right: 15px;
+    padding: none;
+}
+
