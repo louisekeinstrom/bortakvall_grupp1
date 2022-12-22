@@ -36,6 +36,13 @@ decreaseEl?.addEventListener("click", () => {
   return amountOfProducts;
 });
 
+function renderProducts() {
+  Products.forEach((product) => {
+    productsEl.innerHtml += `
+        `;
+  });
+}
+
 /*
 catalogen : för varje obj i katalogen skapas ett kort som visar properties. 
 Finns även en lägg till i varukorgen-knapp som filtrerar ut varje objekt som klickats på i en enskild array.
