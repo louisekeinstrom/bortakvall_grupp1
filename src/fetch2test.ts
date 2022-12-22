@@ -13,7 +13,7 @@ const renderCatalog = (products: IProducts[]) => {
             <i class="cart-icon-container text-light fa-solid fa-cart-plus"></i>
             <img
               src="${product.images.thumbnail}"
-              alt="Produkt från Bortakväll"
+              alt="Produkt från Bortakväll: ${product.name}"
               class="product-img img-fluid mx-1"
             />
             <div
