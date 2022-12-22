@@ -59,7 +59,6 @@ const getProducts= async () => {
         console.log("Caught the error: ", err);
     }
     
-    
     // setAttribute('src', `https://cataas.com/${cat.url}`); 
 
 }
