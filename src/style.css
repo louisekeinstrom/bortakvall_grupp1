@@ -76,9 +76,10 @@ body {
 
 .shopping-cart-roll-down {
   display: flex;
-  justify-content: right;
   flex-direction: column;
   background-color: #fff;
+  left: 64%;
+  top: -120%;
   height: 600px;
   width: 400px;
   overflow: scroll;
@@ -86,6 +87,11 @@ body {
   box-shadow: 2px 5px 10px 0px;
   z-index: 10;
   position: absolute;
+  transition: 0.3s;
+}
+
+.shopping-cart-roll-down.active {
+  top: 0;
 }
 
 .cart-product {
@@ -138,7 +144,7 @@ body {
 }
 
 .amount {
-  border: gray 0.5px solid;
+  border: none;
   padding: 0px 10px;
   width: 30px;
   height: 30px;
