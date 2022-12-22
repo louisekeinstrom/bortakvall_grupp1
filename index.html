@@ -154,7 +154,7 @@
       </div>
 
       <div class="container products-grid col-11 col-md-10 col-lg-12 py-3 mb-4">
-        <div class="product-catalog row justify-content-center">
+        <div id="product-catalog" class="product-catalog row justify-content-center">
           <!-- ett sånt här kodblock kommer vi rendera products.forEach() eller dyl  -->
           <!-- finns det något som kan begränsa antal tecken i beskrivningen av en random produkt och lägga "..." i slutet. En if-sats? -->
           <div
@@ -304,7 +304,10 @@
         </div>
       </div>
     </div>
+    <script type="module" src="src/interfaces.ts"></script>
+    <script type="module" src="src/fetch2test.ts"></script>
     <script type="module" src="src/popup.ts"></script>
+    <script type="module" src="src/render-katalog.ts"></script>
     <script type="module" src="src/main.ts"></script>
   </body>
 </html>

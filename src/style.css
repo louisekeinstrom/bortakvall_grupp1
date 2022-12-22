@@ -67,11 +67,11 @@ h1{
   transition: 0.5s;
 }
 
-/* dropdown meny börjar här */
-
 .shopping-cart-btn:hover {
   background-color: #fcd757;
 }
+
+/* dropdown meny börjar här */
 
 .shopping-cart-roll-down {
   display: flex;
@@ -85,6 +85,7 @@ h1{
   box-shadow: 2px 5px 10px 0px;
   z-index: 10;
   position: absolute;
+  display: none; /* toggla detta senare */
 }
 
 .cart-product {
@@ -192,23 +193,6 @@ h1{
   background-color: #fff;
 }
 
-.read-more-btn {
-  position: absolute;
-  bottom: 12px;
-  right: 15px;
-  padding: 5px;
-
-  background-color: #fcd757;
-  box-shadow: none;
-  border-style: none;
-  transition: 0.5s;
-}
-
-.read-more-btn:hover {
-  background-color: #00a7e1;
-  border-radius: 5px;
-}
-
 .cart-icon-container {
   display: inline;
   position: absolute;
@@ -247,7 +231,7 @@ h1{
   .cart-icon-container:hover {
     transform: scale(1.1);
     cursor: pointer;
-    background-color: rgb(91, 91, 91);
+    background-color: #00a7e1;
   }
 }
 

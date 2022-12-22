@@ -49,7 +49,7 @@ export const fetchProducts = () => {
         })//'data i arrow-funktionen är bara ett namn, den andra i data.data är den viktiga'
         .then(data => {
             console.log(data.data)
-
+            // ska det inte vara IProducts ist för any här på nästa rad?
             products = data.data.map((product: any) => {
                 return `id: ${product.id} 
                 name:${product.name} 
