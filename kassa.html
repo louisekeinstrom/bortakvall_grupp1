@@ -9,6 +9,11 @@
     <!--bootstrap-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <!-- font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap"
+      rel="stylesheet"
+    />
     <!--css-->
     <link rel="stylesheet" href="src/kassa.css">
 </head>
@@ -17,7 +22,27 @@
     <div class="container-fluid justify-content-center">
 
         <!--menyn med hem-länk till katalogsidan-->
-        
+        <h1 class="mt-4">BORTA<span class="color-change">KVÄLL</span></h1>
+
+        <!--Meny -->
+        <nav class="menu navbar-expand navbar-nav">
+          <div>
+            <a href="index.html" class="menu-btn">Hem</a>
+            <a href="#" class="menu-btn">Om oss</a>
+            <a href="kassa.html" class="menu-btn">Kassa</a>
+          </div>
+          <button
+            class="shopping-cart-btn btn btn-secondary dropdown-toggle"
+            type="button"
+            data-bs-toggle="dropdown"
+            data-bs-auto-close="outside"
+            aria-expanded="false"
+          >
+            Varukorg
+          </button>
+        </nav>
+
+        <!-- lägg in dropdown menyn till varukorgen här, när den är klar -->
 
         <!--div där varukorgen visas-->
         <div class="container-fluid justify-content-center">
