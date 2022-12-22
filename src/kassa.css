@@ -173,9 +173,19 @@ body {
   }
   
 
+/* översikt varukorg */
+
+.chosen-products{
+    border-radius: 5px;
+    background-color: #ffb8d1;
+    padding: 20px;
+    position: relative;
+}
+
+
 /*formuläret*/
 
-.customer-container {
+.customer-container{
     border-radius: 5px;
     background-color: #ffb8d1;
     padding: 20px;
