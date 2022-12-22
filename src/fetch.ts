@@ -2,20 +2,6 @@
 import { IProducts } from "./interfaces";
 
 
-//function för att hämta produktinfo från api
-//orginal, fungerade dåligt med interface
-
-/*
-export const fetchProducts = async () => {
-    const res = await fetch('https://bortakvall.se/api/products')
-    if (!res.ok) {
-        throw new Error(`${res.status} ${res.statusText}`)
-    }
-    return await res.json() as IProducts[]
-
-}*/
-
-
 //fungerar bra
 /*
 export const fetchProducts = () => {
@@ -37,9 +23,10 @@ export const fetchProducts = () => {
             console.log(err)
         })
 } */
-
+/*
 let products = {}
 
+//funktion för att få infon i console
 export const fetchProducts = () => {
     fetch('https://bortakvall.se/api/products')
         .then(res => {
@@ -69,21 +56,50 @@ export const fetchProducts = () => {
             console.log(err)
         })
 }
-
-/*
-//test för att göra om det till IProducts
-export const getProducts = () => {
-
-    fetch('https://bortakvall.se/api/products').then(res => {
-        if (!res.ok) {
-            throw new Error(`${res.status} ${res.statusText}`)
-        }
-        return res.json()
-    }).then(data => {
-        let test = data as IProducts
-        console.log(test)
-    })
-
-}
-
 */
+
+
+let products = {}
+
+//queryselectorn är inne i funktionen
+export const renderProducts = () => {
+    fetch('https://bortakvall.se/api/products')
+        .then(res => {
+            if (!res.ok) {
+                throw new Error(`${res.status} ${res.statusText}`)
+            }
+            return res.json()
+        })
+        .then(data => {
+            //console.log(data.data)
+
+            document.querySelector('.test')!.innerHTML = data.data.map((product: any) => {
+                return `
+                <div class="product-container m-3 col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center flex-column">
+            <i class="cart-icon-container text-light fa-solid fa-cart-plus"></i>
+            <img
+              src="https://bortakvall.se${product.images.thumbnail}"
+              alt="Produkt från Bortakväll"
+              class="product-img img-fluid mx-1"
+            />
+            <div
+              class="product-name-price-container d-flex justify-content-between my-1"
+            >
+              <span class="candy-name">${product.name}</span>
+              <span class="candy-price-container">
+                <span class="candy-price">${product.price}</span> kr
+              </span>
+            </div>
+            <p class="description-text">${product.description}</p>
+            <button class="read-more-btn btn btn-secondary">Läs mer</button>
+          </div>
+                  
+               `
+            })
+
+            console.log(products)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}

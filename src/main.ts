@@ -1,9 +1,10 @@
 export { };
 import { IProducts } from "./interfaces";
-import { fetchProducts } from "./fetch";
+import { renderProducts } from "./fetch";
 
-fetchProducts()
+//fetchProducts()
 //getProducts()
+renderProducts()
 
 
 
