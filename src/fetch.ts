@@ -39,6 +39,7 @@ export const fetchProducts = () => {
 } */
 
 let products = {}
+
 export const fetchProducts = () => {
     fetch('https://bortakvall.se/api/products')
         .then(res => {
@@ -69,16 +70,20 @@ export const fetchProducts = () => {
         })
 }
 
+/*
+//test för att göra om det till IProducts
+export const getProducts = () => {
 
+    fetch('https://bortakvall.se/api/products').then(res => {
+        if (!res.ok) {
+            throw new Error(`${res.status} ${res.statusText}`)
+        }
+        return res.json()
+    }).then(data => {
+        let test = data as IProducts
+        console.log(test)
+    })
 
+}
 
-
-
-
-
-
-
-
-
-
-
+*/
