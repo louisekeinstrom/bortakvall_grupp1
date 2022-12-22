@@ -1,16 +1,18 @@
+export{}
 import { IProducts } from "./interfaces";
 // import { fetchProducts } from "./fetch";
 
 
-const renderCatalog = () => {
+const renderCatalog = (products: IProducts[]) => {
+    
     products.forEach(product => {
         (document.querySelector('#product-catalog') as HTMLElement).innerHTML = `
         <div
             class="product-container m-3 col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center flex-column"
-          >
+        >
             <i class="cart-icon-container text-light fa-solid fa-cart-plus"></i>
             <img
-              src="${products.images.thumbnail}"
+              src="${product.images.thumbnail}"
               alt="Produkt från Bortakväll"
               class="product-img img-fluid mx-1"
             />
@@ -19,18 +21,16 @@ const renderCatalog = () => {
             >
               <span class="candy-name">${product.name}</span>
               <span class="candy-price-container">
-                <span class="candy-price">X</span> kr
+                <span class="candy-price">${product.price}</span> kr
               </span>
             </div>
-            <p class="description-text">
-              Cookie I love cheesecake jelly-o halvah cupcake jelly halvah
-              dessert. Gummies...
+            <p class="description-text">${product.description}
             </p>
             <button class="read-more-btn btn btn-secondary">Läs mer</button>
           </div>
 
           `
-    });
+    })
     
 }
 
@@ -53,15 +53,17 @@ const getProducts= async () => {
         const products: IProducts[] = await get('https://bortakvall.se/api/products');
         console.log(products)
 
-        renderCatalog()
+        renderCatalog(products)
 
     } catch (err) {
         console.log("Caught the error: ", err);
     }
     
     
-    setAttribute('src', `https://cataas.com/${cat.url}`); 
+    // setAttribute('src', `https://cataas.com/${cat.url}`); 
 
 }
+
+
 
 getProducts();

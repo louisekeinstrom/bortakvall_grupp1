@@ -1,2 +1,2 @@
-import { IProducts } from "./interfaces";
-import { fetchProducts } from "./fetch";
+// import { IProducts } from "./interfaces";
+// import { fetchProducts } from "./fetch";
