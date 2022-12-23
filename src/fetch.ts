@@ -81,6 +81,7 @@ export const renderProducts = () => {
                     src="https://bortakvall.se${product.images.thumbnail}"
                     alt="Produkt från Bortakväll"
                     class="product-img img-fluid mx-1"
+                    data-product-id="${product.id}"
                   />
                   <div
                     class="product-name-price-container d-flex justify-content-between my-1"

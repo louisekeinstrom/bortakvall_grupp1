@@ -9,12 +9,12 @@ const popup = document.querySelector('.popup');
 
 document.addEventListener('click', (e) => {
 	
-	if( (e.target as HTMLButtonElement).tagName === "BUTTON" && (e.target as HTMLButtonElement).dataset.productId){
+	if( (e.target as HTMLButtonElement).tagName === "BUTTON" && (e.target as HTMLButtonElement).dataset.productId || (e.target as HTMLButtonElement).tagName === "IMG" && (e.target as HTMLButtonElement).dataset.productId ){
 		// e.stopPropagation();
 		
 		(popupWrapper as HTMLElement).style.display = 'block'
 
-		// const productId = (e.target as HTMLButtonElement).dataset.productId?
+		const productId = (e.target as HTMLButtonElement).dataset.productId?
 
 		console.log("You clicked 'Read more'")
 

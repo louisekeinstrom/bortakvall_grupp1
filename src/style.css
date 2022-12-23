@@ -184,6 +184,10 @@ h1{
 
 /* dropdown meny slutar här */
 
+.product-img{
+  cursor: pointer;
+}
+
 .product-catalog {
   background-color: #fff;
   border-radius: 0px 0px 5px 5px;
