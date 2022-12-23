@@ -1,5 +1,5 @@
 export { };
-import { IProducts } from "./interfaces";
+import { IProducts } from "/interfaces";
 import { renderProducts } from "./fetch";
 
 // const cartBtn = document.querySelector(".shopping-cart-btn");
