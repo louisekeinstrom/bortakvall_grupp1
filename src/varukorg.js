@@ -3,10 +3,11 @@ const cartMenu = document.querySelector(".cart-product"); //cart
 
 const shoppingCart = document.querySelector(".cart-product");
 const cartNode = document.querySelectorAll(".cart-icon-container"); //lägg till varukorg-ikon
-const cartTest = document.querySelector(".check-out");
 
 const increaseEl = document.querySelector(".increase");
 const decreaseEl = document.querySelector(".decrease");
+
+const cartTest = document.querySelector(".check-out");
 
 const amountEl = document.querySelector(".amount");
 
@@ -37,24 +38,24 @@ cartTest.addEventListener("click", () => {
                   <p class="decrease">-</p>
                 </div>
               </div>`;
+});
 
-  increaseEl.addEventListener("click", () => {
-    // if (products.inStock >= amountOfUnits) { <==denna ska läggas till när stock har definierats.
-    amountOfUnits++;
+increaseEl.addEventListener("click", () => {
+  // if (products.inStock >= amountOfUnits) { <==denna ska läggas till när stock har definierats.
+  amountOfUnits++;
+  console.log(amountOfUnits);
+  amountEl.innerHTML = `<p>${amountOfUnits}</p>`;
+  return amountOfUnits;
+});
+decreaseEl.addEventListener("click", () => {
+  if (0 >= amountOfUnits) {
+    amountOfUnits--;
     console.log(amountOfUnits);
     amountEl.innerHTML = `<p>${amountOfUnits}</p>`;
     return amountOfUnits;
-  });
-  decreaseEl.addEventListener("click", () => {
-    if (0 >= amountOfUnits) {
-      amountOfUnits--;
-      console.log(amountOfUnits);
-      amountEl.innerHTML = `<p>${amountOfUnits}</p>`;
-      return amountOfUnits;
-    } else {
-      console.log("can't go so low");
-    }
-  });
+  } else {
+    console.log("can't go so low");
+  }
 });
 
 // funktion för att öka/minska antal i varukorgen
