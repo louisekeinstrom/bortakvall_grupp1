@@ -1,5 +1,6 @@
 export{};
 import "./fetch"
+import { IProducts } from "./interfaces";
 
 // klickar enbart på första knappen. Knyt läs-mer-knapp till produkt som ska visas? 
 // const readMoreButton = document.querySelectorAll('.read-more-btn');
@@ -7,33 +8,69 @@ const popupWrapper = document.querySelector('.popup-wrapper');
 const close = document.querySelector('.popup-close');
 const popup = document.querySelector('.popup');
 
-document.addEventListener('click', (e) => {
-	
-	if( (e.target as HTMLButtonElement).tagName === "BUTTON" && (e.target as HTMLButtonElement).dataset.productId || (e.target as HTMLButtonElement).tagName === "IMG" && (e.target as HTMLButtonElement).dataset.productId ){
-		// e.stopPropagation();
-		
-		(popupWrapper as HTMLElement).style.display = 'block'
+export const eventListeners = (data: any) => { //måste komma ihåg att kalla på denna funktion om den ska funka :)
+	document.addEventListener('click', (e) => {
 
-		const productId = (e.target as HTMLButtonElement).dataset.productId?
+		if( (e.target as HTMLButtonElement).tagName === "BUTTON" && (e.target as HTMLButtonElement).dataset.productId || (e.target as HTMLButtonElement).tagName === "IMG" && (e.target as HTMLButtonElement).dataset.productId ){
+			// e.stopPropagation();
 
-		console.log("You clicked 'Read more'")
+			
+			const productId = (e.target as HTMLButtonElement).dataset.productId
+			
+			console.log("You clicked 'Read more'");
+			
+			(popupWrapper as HTMLElement).style.display = 'block'
 
-	}
+			// funkar inte ännu eftersom jag måste få ut den specifika produkten på varje.
+			// koppla till dataset (productId). Kolla hur Linnea gjorde i fetch 
+			// funkar ej ännu
+			// använd .filter() ist för map för att filrera ut och rendera den product med id = productId(se const ovan)
+			popup!.innerHTML = data.data.map((data: any) => {
+                return `
+			<a href="kassa.html" class="popup-cart-sc text-secondary small">Gå till varukorgen <i
+          	class="fa-solid fa-cart-shopping"></i></a>
+      		<div class="popup-close text-light">
+      		  <i class="fa-solid fa-xmark"></i>
+      		</div>
+      		<div class="popup-content">
+      		  <div class="catalog row justify-content-center align-items-center">
+      		    <div class="col-xs-12 col-md-6">
+      		      <h2 class="candy-name mt-3">Candy Name</h2>
+      		      <p>Pris <span>${data.price}</span> kr</p>
+      		      <p class="popup-description">
+      		        ${data.description}
+      		      </p>
+      		    </div>
+      		    <div class="col-xs-12 col-md-6">
+      		      <img src="https://bortakvall.se${data.images.large}" alt="Produkt från Bortakväll" class="img-fluid m-3" />
+      		    </div>
+      		    <div class="col-xs-12 col-md-6">
+      		      <a href="#"><button class="btn btn-secondary">
+      		          Lägg till <i class="fa-solid fa-cart-plus"></i></button></a>
+      		    </div>
+      		  </div>
+      		</div>
+			`
+			}).join('')
+
+
+		}
 
 
 
-})
+	})
 
-close?.addEventListener('click', () => {
-	(popupWrapper as HTMLElement).style.display = 'none';
-});
+	close?.addEventListener('click', () => {
+		(popupWrapper as HTMLElement).style.display = 'none';
+	})
 
-popupWrapper?.addEventListener('click', () => {
+	popupWrapper?.addEventListener('click', () => {
 
-	(popupWrapper as HTMLElement).style.display = 'none';
-});
+		(popupWrapper as HTMLElement).style.display = 'none';
+	})
 
-popup?.addEventListener('click', (e) => {
+	popup?.addEventListener('click', (e) => {
 
-	e.stopPropagation();
-});
+		e.stopPropagation();
+	})
+}

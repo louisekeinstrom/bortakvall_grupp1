@@ -1,5 +1,6 @@
 //export { };
 import { IProducts } from "./interfaces";
+import { eventListeners } from "./popup";
 
 
 //fungerar bra
@@ -96,9 +97,14 @@ export const renderProducts = () => {
                 </div>
                   
                `
-            })
+            }).join('')
 
             console.log(products)
+            
+        })
+        .then(data => {
+            
+            eventListeners(data)
         })
         .catch(err => {
             console.log(err)
