@@ -95,7 +95,7 @@ export const renderProducts = () => {
           </div>
                   
                `
-            })
+            }).join('')
 
             console.log(products)
         })
