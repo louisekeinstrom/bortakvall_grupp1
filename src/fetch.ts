@@ -102,10 +102,6 @@ export const renderProducts = () => {
             console.log(products)
             
         })
-        .then((data: any) => {
-            
-            eventListeners(data)
-        })
         .catch(err => {
             console.log(err)
         })
