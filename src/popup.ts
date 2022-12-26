@@ -2,8 +2,6 @@ export{};
 import "./fetch"
 import { IProducts } from "./interfaces";
 
-// klickar enbart på första knappen. Knyt läs-mer-knapp till produkt som ska visas? 
-// const readMoreButton = document.querySelectorAll('.read-more-btn');
 const popupWrapper = document.querySelector('.popup-wrapper');
 const popup = document.querySelector('.popup');
 
@@ -58,23 +56,27 @@ document.addEventListener('click', (e) => {
 					`
 					
 					}
-					const close = popup?.querySelector('.popup-close');
-
-					close?.addEventListener('click', () => {
-						(popupWrapper as HTMLElement).style.display = 'none';
+					
+				}).join('')
+				// popup closing when clicking x-button
+				const close = document.querySelector('.popup-close');
+	
+				close?.addEventListener('click', () => {
+					(popupWrapper as HTMLElement).style.display = 'none';
 				})
-				}).join('');
 			})
 			.catch(err => {
 				console.log(err)
 			})
-	}
+	}	
+
 })
 
+// popup closing when clicking outside popup
 popupWrapper?.addEventListener('click', () => {
 	(popupWrapper as HTMLElement).style.display = 'none';
 })
+// stopping popup from closing when clicking inside popup
 popup?.addEventListener('click', (e) => {
 	e.stopPropagation();
 })
-// }
