@@ -1,4 +1,3 @@
-
 .body {
   display: flex;
   justify-content: center;
@@ -8,7 +7,7 @@
   background-size: cover;
 }
 
-h1{
+h1 {
   font-family: "Fredoka One", cursive;
   color: #ffb8d1;
   text-align: left;
@@ -17,7 +16,7 @@ h1{
   cursor: default;
 }
 @media screen and (max-width: 768px) {
-  h1{
+  h1 {
     font-size: 10vw;
   }
 }
@@ -25,7 +24,6 @@ h1{
 .color-change {
   color: #00a7e1;
 }
-
 
 .menu {
   display: flex;
@@ -67,6 +65,11 @@ h1{
   transition: 0.5s;
 }
 
+.shopping-cart-btn > a {
+  text-decoration: none;
+  color: #fff;
+}
+
 /* dropdown meny börjar här */
 
 .shopping-cart-btn:hover {
@@ -95,21 +98,35 @@ h1{
 
 .cart-product {
   display: flex;
-  flex-direction: row;
+  justify-content: start;
   align-items: flex-end;
+  flex-direction: row;
   padding: 10px;
   height: fit-content;
   width: 100%;
-  border-bottom: 0.5px gray solid;
+  flex-wrap: wrap;
+}
+
+.cart-product > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  padding: 5px;
+}
+
+.cart-image {
+  display: flex;
+  justify-content: start;
+  flex-wrap: wrap;
+  padding: 5px;
 }
 
 .cart-description {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
   padding: 10px;
-  height: 70%;
-  width: 100%;
   margin-left: 5px;
 }
 
@@ -166,6 +183,10 @@ h1{
   color: #00a7e1;
 }
 
+.total-amount {
+  text-align: end;
+}
+
 .check-out {
   bottom: 12px;
   right: 15px;
@@ -180,6 +201,11 @@ h1{
 
 .check-out:hover {
   background-color: #00a7e1;
+}
+
+.check-out > a {
+  text-decoration: none;
+  color: #fff;
 }
 
 /* dropdown meny slutar här */

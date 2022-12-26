@@ -56,43 +56,38 @@
       <!--Meny -->
       <nav class="menu navbar-expand navbar-nav">
         <div>
-          <a href="#" class="menu-btn">Hem</a>
-          <a href="#" class="menu-btn">Om oss</a>
-          <a href="kassa.html" class="menu-btn">Kassa</a>
+          <a href="index.html" class="menu-btn">Hem</a>
+          <a href="https://youtu.be/dQw4w9WgXcQ" class="menu-btn">Om oss</a>
+          <a href="#" class="menu-btn">Kassa</a>
         </div>
+        <div>
+          <button
+          class="shopping-cart-btn btn btn-secondary"
+          type="button"
+          aria-expanded="false"
+        ><a href="kassa.html">Gå till kassa</a>
+        </button>
         <button
           class="shopping-cart-btn btn btn-secondary dropdown-toggle"
           type="button"
           data-bs-toggle="dropdown"
           data-bs-auto-close="outside"
           aria-expanded="false"
-        >
-          Varukorg
+      
+        >Varukorg
         </button>
+        </div>
       </nav>
 
       <div class="container products-grid col-11 col-md-10 col-lg-12 py-3 mb-4">
         <!-- roll down menu varukorg -->
         <div class="shopping-cart-roll-down dropdown-menu fixed-top fixed-end">
           <div class="cart-product">
-            <img
-              class="cart-image"
-              src="https://picsum.photos/150"
-              alt="Produkt från Bortakväll"
-            />
-            <div class="cart-description">
-              <p class="product-name">Produktnamn</p>
-              <div class="show-amount-in-cart">
-                <p class="increase">+</p>
-                <input class="amount" />
-                <p class="decrease">-</p>
-              </div>
-            </div>
           </div>
 
-          <p class="total-amount"></p>
-          <button type="submit" class="check-out btn btn-secondary">
-            Gå till Kassan
+          <p class="total-amount">Totalt: 27 sek</p>
+          <button type="submit" class="check-out go-to-registry btn btn-secondary" >
+            <a href="#">Gå till Kassan</a>
           </button>
         </div>
 
@@ -206,7 +201,9 @@
     </div>
   </div>
   <script type="module" src="src/main.ts"></script>
+  <script type="module" src="src/varukorg.js"></script>
+  <!-- <script type="module" src="src/cart-menu-feature.js"></script> -->
   <script type="module" src="src/popup.ts"></script>
-  <script type="module" src="src/cart-menu-feature.js"></script>
+
 </body>
 </html>
