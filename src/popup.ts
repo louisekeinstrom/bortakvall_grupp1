@@ -8,14 +8,13 @@ const popupWrapper = document.querySelector('.popup-wrapper');
 const close = document.querySelector('.popup-close');
 const popup = document.querySelector('.popup');
 
-export const eventListeners = (data: any) => { //måste komma ihåg att kalla på denna funktion om den ska funka :)
+export const eventListeners = (data) => { //måste komma ihåg att kalla på denna funktion om den ska funka :)
 	document.addEventListener('click', (e) => {
 
 		if( (e.target as HTMLButtonElement).tagName === "BUTTON" && (e.target as HTMLButtonElement).dataset.productId || (e.target as HTMLButtonElement).tagName === "IMG" && (e.target as HTMLButtonElement).dataset.productId ){
 			// e.stopPropagation();
-
 			
-			const productId = (e.target as HTMLButtonElement).dataset.productId
+			const productId = Number((e.target as HTMLButtonElement).dataset.productId)
 			
 			console.log("You clicked 'Read more'");
 			
@@ -24,33 +23,37 @@ export const eventListeners = (data: any) => { //måste komma ihåg att kalla p�
 			// funkar inte ännu eftersom jag måste få ut den specifika produkten på varje.
 			// koppla till dataset (productId). Kolla hur Linnea gjorde i fetch 
 			// funkar ej ännu
+			// har lindat in mig(?) i callback-functions till fetch och renderProducts().
 			// använd .filter() ist för map för att filrera ut och rendera den product med id = productId(se const ovan)
-			popup!.innerHTML = data.data.map((data: any) => {
-                return `
-			<a href="kassa.html" class="popup-cart-sc text-secondary small">Gå till varukorgen <i
-          	class="fa-solid fa-cart-shopping"></i></a>
-      		<div class="popup-close text-light">
-      		  <i class="fa-solid fa-xmark"></i>
-      		</div>
-      		<div class="popup-content">
-      		  <div class="catalog row justify-content-center align-items-center">
-      		    <div class="col-xs-12 col-md-6">
-      		      <h2 class="candy-name mt-3">Candy Name</h2>
-      		      <p>Pris <span>${data.price}</span> kr</p>
-      		      <p class="popup-description">
-      		        ${data.description}
-      		      </p>
-      		    </div>
-      		    <div class="col-xs-12 col-md-6">
-      		      <img src="https://bortakvall.se${data.images.large}" alt="Produkt från Bortakväll" class="img-fluid m-3" />
-      		    </div>
-      		    <div class="col-xs-12 col-md-6">
-      		      <a href="#"><button class="btn btn-secondary">
-      		          Lägg till <i class="fa-solid fa-cart-plus"></i></button></a>
-      		    </div>
-      		  </div>
-      		</div>
-			`
+			// popup!.innerHTML = data.data.map((data: any) => {
+			popup!.innerHTML = data.data.filter((product: IProducts) => {
+				if(product.id === productId){
+					return  `
+				<a href="kassa.html" class="popup-cart-sc text-secondary small">Gå till varukorgen <i
+				  class="fa-solid fa-cart-shopping"></i></a>
+				  <div class="popup-close text-light">
+					<i class="fa-solid fa-xmark"></i>
+				  </div>
+				  <div class="popup-content">
+					<div class="catalog row justify-content-center align-items-center">
+					  <div class="col-xs-12 col-md-6">
+						<h2 class="candy-name mt-3">Candy Name</h2>
+						<p>Pris <span>${product.price}</span> kr</p>
+						<p class="popup-description">
+						  ${product.description}
+						</p>
+					  </div>
+					  <div class="col-xs-12 col-md-6">
+						<img src="https://bortakvall.se${product.images.large}" alt="Produkt från Bortakväll" class="img-fluid m-3" />
+					  </div>
+					  <div class="col-xs-12 col-md-6">
+						<a href="#"><button class="btn btn-secondary">
+							Lägg till <i class="fa-solid fa-cart-plus"></i></button></a>
+					  </div>
+					</div>
+				  </div>
+				`
+				}
 			}).join('')
 
 

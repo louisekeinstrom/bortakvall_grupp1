@@ -102,7 +102,7 @@ export const renderProducts = () => {
             console.log(products)
             
         })
-        .then(data => {
+        .then((data: any) => {
             
             eventListeners(data)
         })
