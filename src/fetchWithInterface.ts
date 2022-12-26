@@ -19,7 +19,8 @@ export const fetchProducts = async () => {
         throw new Error(`${res.status} ${res.statusText}`)
     }
     //return await res.json() as IProducts
-    await res.json() as IProducts["data"]
+    await res.json() as IProducts[]
+    console.log(res)
 }
 
 

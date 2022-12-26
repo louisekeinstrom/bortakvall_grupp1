@@ -8,13 +8,9 @@ import { fetchProducts } from "./fetchWithInterface";
 let interProducts: IProducts[] = []
 
 
-const getTodos = async () => {
-    // Fetch todos from server and update local copy
-    interProducts = await fetchProducts()
 
-    // Render todos
-    renderTodos()
-}
+fetchProducts()
+
 renderProducts()
 
 
