@@ -48,8 +48,8 @@ document.addEventListener('click', (e) => {
 							<img src="https://bortakvall.se${product.images.large}" alt="Produkt från Bortakväll" class="img-fluid m-3" />
 						  </div>
 						  <div class="col-xs-12 col-md-6">
-							<a href="#"><button class="btn btn-secondary">
-								Lägg till <i class="fa-solid fa-cart-plus"></i></button></a>
+							<button class="btn btn-secondary" data-current-product-id="${product.id}">
+								Lägg till <i class="fa-solid fa-cart-plus"></i></button>
 						  </div>
 						</div>
 					  </div>
