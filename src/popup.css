@@ -24,14 +24,20 @@ kan prova detta om tid finns*/
 .popup{
 	font-family: arial;
 	text-align: center;
-	width: 100%;
 	max-width: 600px;
+    max-height: 90vh;
 	margin: 10% auto;
 	padding: 20px;
     border-radius: 5px;
 	background: white;
 	position: relative;
     cursor: default;
+}
+
+@media screen and (max-width: 768px){
+    .popup-img{
+        max-height: 35vh;
+    }
 }
 
 .popup-close{
