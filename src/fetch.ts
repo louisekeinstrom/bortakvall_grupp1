@@ -1,4 +1,5 @@
-//export { };
+export { };
+
 import { IProducts } from "./interfaces";
 import { eventListeners } from "./popup";
 
@@ -60,8 +61,6 @@ export const fetchProducts = () => {
 */
 
 
-let products = {}
-
 //queryselectorn är inne i funktionen
 export const renderProducts = () => {
     fetch('https://bortakvall.se/api/products')
@@ -99,8 +98,6 @@ export const renderProducts = () => {
                `
             }).join('')
 
-            console.log(products)
-            
         })
         .catch(err => {
             console.log(err)
