@@ -3,6 +3,7 @@ import { IProducts } from "./interfaces";
 import { renderProducts } from "./fetch";
 import { fetchProducts } from "./fetchWithInterface";
 import { eventListeners } from "./popup";
+import { form } from "./submitForm"
 
 
 //fetchProducts()
@@ -11,10 +12,13 @@ let interProducts: IProducts[] = []
 
 
 
-fetchProducts()
+//fetchProducts()
 
 renderProducts()
 // eventListeners()
+
+
+
 
 
 
