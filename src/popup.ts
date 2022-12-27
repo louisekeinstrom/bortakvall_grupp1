@@ -45,11 +45,14 @@ document.addEventListener('click', (e) => {
 							</p>
 						  </div>
 						  <div class="col-xs-12 col-md-6">
-							<img src="https://bortakvall.se${product.images.large}" alt="Produkt från Bortakväll" class="img-fluid m-3" />
+							<img src="https://bortakvall.se${product.images.large}" alt="Produkt från Bortakväll" class="img-fluid mh-sm-50 m-3 popup-img" />
 						  </div>
-						  <div class="col-xs-12 col-md-6">
-							<button class="btn btn-secondary popup-add-to-cart" data-current-product-id="${product.id}">
-								Lägg till <i class="fa-solid fa-cart-plus"></i></button>
+
+						  <div class="row">
+							  <div class="col-12">
+								  <button class="btn btn-secondary popup-add-to-cart" data-current-product-id="${product.id}">
+								  Lägg till <i class="fa-solid fa-cart-plus"></i></button>
+							  </div>
 						  </div>
 						</div>
 					  </div>
