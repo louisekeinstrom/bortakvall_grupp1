@@ -59,7 +59,7 @@ interface IOrder {
     ]
 }
 
-//response
+//response vilken vi nog inte behöver
 
 interface IResponse {
     status: string,
