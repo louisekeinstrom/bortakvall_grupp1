@@ -48,21 +48,38 @@ document.addEventListener('click', (e) => {
 							<img src="https://bortakvall.se${product.images.large}" alt="Produkt från Bortakväll" class="img-fluid m-3" />
 						  </div>
 						  <div class="col-xs-12 col-md-6">
-							<button class="btn btn-secondary" data-current-product-id="${product.id}">
+							<button class="btn btn-secondary popup-add-to-cart" data-current-product-id="${product.id}">
 								Lägg till <i class="fa-solid fa-cart-plus"></i></button>
 						  </div>
 						</div>
 					  </div>
 					`
-					
 					}
-					
 				}).join('')
 				// popup closing when clicking x-button
 				const close = document.querySelector('.popup-close');
 	
 				close?.addEventListener('click', () => {
 					(popupWrapper as HTMLElement).style.display = 'none';
+				})
+
+				// I WANT TO ADD CURRENT PRODUCT TO MY CART
+				// adding product in popup to cart when clicking addToCartBtn
+				const addToCartBtn = document.querySelector('.popup-add-to-cart');
+				const currentProductId = Number((e.target as HTMLButtonElement).dataset.currentProductId)
+
+				addToCartBtn?.addEventListener('click', (e) => {
+					console.log('You clicked add to cart')
+					// if( (e.target as HTMLButtonElement).dataset.productId ){
+					// }
+					// 1. filtrera/map ut den som klickas på
+					const addToCartProduct: IProducts = data.data.filter((product: IProducts) => {
+						if(currentProductId === product.id){
+							return product
+						}
+					})
+					// 2.POST här?? annars kan jag inte använda arrayen utanför detta scope väl?
+					console.log(addToCartProduct)
 				})
 			})
 			.catch(err => {
@@ -79,4 +96,4 @@ popupWrapper?.addEventListener('click', () => {
 // stopping popup from closing when clicking inside popup
 popup?.addEventListener('click', (e) => {
 	e.stopPropagation();
-})
+})	
