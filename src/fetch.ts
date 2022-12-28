@@ -93,8 +93,7 @@ export const renderProducts = () => {
                   </div>
                   <p class="description-text">description</p>
                   <button class="read-more-btn btn btn-secondary" data-product-id="${product.id}">Läs mer</button>
-                </div>
-                  
+                </div>   
                `
             }).join('')
 
