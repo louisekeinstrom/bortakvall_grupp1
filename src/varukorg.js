@@ -31,7 +31,7 @@ cartTest.addEventListener("click", () => {
               />
               <div class="cart-description">
                 <h4 class="product-name">Produktnamn</h4>
-                <p>Pris</p>
+                <p>Pris</p> 
                 <div class="show-amount-in-cart">
                   <p class="increase">+</p>
                   <div class="amount"></div>
