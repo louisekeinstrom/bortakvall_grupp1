@@ -41,7 +41,7 @@ export interface IProducts {
 */
 //för POST kundinfo + orderinfo
 
-interface IOrder {
+export interface IOrder {
     customer_first_name: string,
     customer_last_name: string,
     customer_address: string,

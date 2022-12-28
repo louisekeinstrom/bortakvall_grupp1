@@ -1,4 +1,5 @@
 export { }
+import { IOrder } from "./interfaces"
 //DOM ref till formuläret
 export const form = document.querySelector('.customerInfo') as HTMLFormElement;
 
@@ -15,7 +16,7 @@ const tel = document.querySelector('#tel') as HTMLInputElement
 const email = document.querySelector('#email') as HTMLInputElement
 
 
-
+//försök med klass
 class Customer {
     customer_first_name: string;
     customer_last_name: string;
@@ -44,6 +45,9 @@ class Customer {
 }
 
 
+//tom array där kundinfo ska sparas
+let values: IOrder[] = []
+
 //submit form eventlistener
 
 form.addEventListener('submit', (e: Event) => {
@@ -59,14 +63,42 @@ form.addEventListener('submit', (e: Event) => {
         tel.value,
         email.value
     )*/
-    const kund = new Customer(
+    /*const kund = new Customer(
         firstName.value,
         lastName.value,
         adress.value,
         postcode.value,
         city.value,
         email.value
-    )
-    console.log(kund)
+    )*/
+    const kund: IOrder = {
+        customer_first_name: firstName.value,
+        customer_last_name: lastName.value,
+        customer_address: adress.value,
+        customer_postcode: postcode.value,
+        customer_city: city.value,
+        customer_email: email.value,
+        order_total: 0,
+        order_items: [{
+            product_id: 6545,
+            qty: 3,
+            item_price: 8,
+            item_total: 24
+        }]
+    }
+    /*const order = [
+
+        [{
+            product_id: 6545,
+            qty: 3,
+            item_price: 8,
+            item_total: 24
+        }]
+    ]*/
+    //console.log(kund)
+    values.push(kund)
+
+    console.log(values)
 
 })
+
