@@ -185,6 +185,7 @@ h1 {
 
 .total-amount {
   text-align: end;
+  color: dimgray;
 }
 
 .check-out {

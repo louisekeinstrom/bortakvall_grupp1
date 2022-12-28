@@ -3,27 +3,36 @@ import "./interfaces"
 import "./fetch"
 import "./popup"
 import { IProducts } from "./interfaces";
-import { IOrder } from "./interfaces";
+import "./main"
+import { fetchProducts } from "./fetchWithInterface";
+// import { IOrder } from "./interfaces";
 
-const cartMenu = document.querySelector(".cart-product")
 
 document.addEventListener('click', (e) => {
-	if( (e.target as HTMLButtonElement).tagName === "I" && (e.target as HTMLButtonElement).dataset.productId)
-console.log("du har klickat på I-elementet")
+	if( (e.target as HTMLButtonElement).tagName === "I" && (e.target as HTMLButtonElement).dataset.productId){
+        fetch('https://bortakvall.se/api/products')
+        .then(res => {
+            if (!res.ok) {
+                throw new Error(`${res.status} ${res.statusText}`)
+            }
+            return res.json()
+        })
+        .then(data => {
+        console.log("du har klickat på I-elementet")
+    const productId = Number((e.target as HTMLButtonElement).dataset.productId)
+    console.log('You clicked add to cart with ', productId)
+    // if( (e.target as HTMLButtonElement).dataset.productId ){
+    // }
+    // 1. filtrera/map ut den som klickas på
+    // const addToCartProduct = 
+            console.log(data.data)
+     const addNewProduct  = data.data.find((product: IProducts) => {
+        return product.id === productId 
+    }) 
+    console.log(addNewProduct)
+    
+    localStorage.setItem('products_in_cart', JSON.stringify(addNewProduct))
+    }
+)}
+    })
 
-const addedProducts: [] = []
-console.log(product : IProducts)
-console.log(addedProducts)
-cartMenu?.innerHTML += `<div class="cart-product">
-<img
-src="https://bortakvall.se${product.images.thumbnail}"
-alt="Produkt från Bortakväll"
-class="product-img img-fluid mx-1"
-data-product-id="${product.id}">
-<span class="candy-name">${product.name}</span>
-                    <span class="candy-price-container">
-                      <span class="candy-price">${product.price}</span> kr
-                    </span>
-</div> `
-return addedProducts
-});
