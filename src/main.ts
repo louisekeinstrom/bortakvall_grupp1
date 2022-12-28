@@ -1,4 +1,4 @@
-export { };
+ export { };
 import { IProducts } from "./interfaces";
 import { renderProducts } from "./fetch";
 import { fetchProducts } from "./fetchWithInterface";
