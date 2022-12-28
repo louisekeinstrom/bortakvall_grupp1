@@ -1,6 +1,7 @@
 export{};
 import "./fetch"
 import { IProducts } from "./interfaces";
+import { IOrder } from "./interfaces";
 
 const popupWrapper = document.querySelector('.popup-wrapper');
 const popup = document.querySelector('.popup');
@@ -25,7 +26,7 @@ document.addEventListener('click', (e) => {
 				return res.json()
 			})
 			.then(data => {
-				console.log(data.data)
+				// console.log(data.data)
 			
 				popup!.innerHTML = data.data.map((product: IProducts) => {
 					if(product.id === productId){
@@ -71,18 +72,35 @@ document.addEventListener('click', (e) => {
 				const addToCartBtn = document.querySelector('.popup-add-to-cart');
 				const currentProductId = Number((e.target as HTMLButtonElement).dataset.currentProductId)
 
-				addToCartBtn?.addEventListener('click', (e) => {
+				addToCartBtn?.addEventListener('click', () => {
 					console.log('You clicked add to cart')
 					// if( (e.target as HTMLButtonElement).dataset.productId ){
 					// }
 					// 1. filtrera/map ut den som klickas på
-					const addToCartProduct: IProducts = data.data.filter((product: IProducts) => {
-						if(currentProductId === product.id){
-							return product
+					// const addToCartProduct = 
+				 	const addToCartProduct : IOrder["order_items"] = data.data.filter((product: IProducts) => {
+						if(product.id === currentProductId){
+							return `[
+								{
+									product_id: product.id,
+									qty: 1,
+									item_price: product.price,
+									item_total: 1
+								}
+							]`
 						}
-					})
+					}) 
+					
+				/* 	const addToCartProduct: IProducts = data.data.find((product: IProducts) => {
+						return product.id === currentProductId
+						// if(product.id === currentProductId){
+						// 	return product
+						// }
+					}) */
 					// 2.POST här?? annars kan jag inte använda arrayen utanför detta scope väl?
+					// eller localStorage()
 					console.log(addToCartProduct)
+					// const addToCartProduct: IOrder["order_items"] to localstorage
 				})
 			})
 			.catch(err => {
