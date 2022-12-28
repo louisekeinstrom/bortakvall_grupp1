@@ -70,37 +70,35 @@ document.addEventListener('click', (e) => {
 				// I WANT TO ADD CURRENT PRODUCT TO MY CART
 				// adding product in popup to cart when clicking addToCartBtn
 				const addToCartBtn = document.querySelector('.popup-add-to-cart');
-				const currentProductId = Number((e.target as HTMLButtonElement).dataset.currentProductId)
-
-				addToCartBtn?.addEventListener('click', () => {
-					console.log('You clicked add to cart')
+				
+				addToCartBtn?.addEventListener('click', (e) => {
+					const currentProductId = Number((e.target as HTMLButtonElement).dataset.currentProductId)
+					console.log('You clicked add to cart with ', currentProductId)
 					// if( (e.target as HTMLButtonElement).dataset.productId ){
 					// }
 					// 1. filtrera/map ut den som klickas på
 					// const addToCartProduct = 
-				 	const addToCartProduct : IOrder["order_items"] = data.data.filter((product: IProducts) => {
-						if(product.id === currentProductId){
-							return `[
-								{
-									product_id: product.id,
-									qty: 1,
-									item_price: product.price,
-									item_total: 1
-								}
-							]`
-						}
-					}) 
-					
-				/* 	const addToCartProduct: IProducts = data.data.find((product: IProducts) => {
+				 	const addToCartProduct  = data.data.find((product: IProducts) => {
 						return product.id === currentProductId
-						// if(product.id === currentProductId){
-						// 	return product
+						
+					}) 
+					/*  : IOrder["order_items"] */
+					//  if(product.id === currentProductId){
+						// 	console.log(product.id)
+						// 	return [
+						// 		{
+						// 			product_id: product.id,
+						// 			qty: 1,
+						// 			item_price: product.price,
+						// 			item_total: 1
+						// 		}
+						// 	]
 						// }
-					}) */
-					// 2.POST här?? annars kan jag inte använda arrayen utanför detta scope väl?
-					// eller localStorage()
+					
 					console.log(addToCartProduct)
-					// const addToCartProduct: IOrder["order_items"] to localstorage
+					
+					localStorage.setItem('products_in_cart', JSON.stringify(addToCartProduct))
+
 				})
 			})
 			.catch(err => {
