@@ -5,7 +5,7 @@ import { IOrder } from "./interfaces";
 
 const popupWrapper = document.querySelector('.popup-wrapper');
 const popup = document.querySelector('.popup');
-
+let productsInCart: IProducts[] /* change to: IOrder["order_items"]  */ = []
 
 document.addEventListener('click', (e) => {
 	if( (e.target as HTMLButtonElement).tagName === "BUTTON" && (e.target as HTMLButtonElement).dataset.productId || (e.target as HTMLButtonElement).tagName === "IMG" && (e.target as HTMLButtonElement).dataset.productId ){
@@ -74,30 +74,32 @@ document.addEventListener('click', (e) => {
 				addToCartBtn?.addEventListener('click', (e) => {
 					const currentProductId = Number((e.target as HTMLButtonElement).dataset.currentProductId)
 					console.log('You clicked add to cart with ', currentProductId)
-					// if( (e.target as HTMLButtonElement).dataset.productId ){
-					// }
-					// 1. filtrera/map ut den som klickas på
-					// const addToCartProduct = 
-				 	const addToCartProduct  = data.data.find((product: IProducts) => {
+				
+					// find product being added to cart 
+				 	const addNewProduct: IProducts = data.data.find((product: IProducts) => {
 						return product.id === currentProductId
-						
 					}) 
-					/*  : IOrder["order_items"] */
-					//  if(product.id === currentProductId){
-						// 	console.log(product.id)
-						// 	return [
-						// 		{
-						// 			product_id: product.id,
-						// 			qty: 1,
-						// 			item_price: product.price,
-						// 			item_total: 1
-						// 		}
-						// 	]
-						// }
+					console.log('Product to be added to cart: ', addNewProduct)
 					
-					console.log(addToCartProduct)
+					// addNewProduct.map()
 					
-					localStorage.setItem('products_in_cart', JSON.stringify(addToCartProduct))
+					// // translate data from the former array into the new interface
+					// const productsInCart: any /* IOrder["order_items"]  */ = 
+					// 	{
+					// 		product_id: product.id,
+					// 		qty: 1,
+					// 		item_price: product.price,
+					// 		item_total: 1
+					// 	}
+					
+
+					// add product to an array
+					// gör en ifsats och byt qty ist för att pusha om prod redan finns i cart
+					productsInCart.push(addNewProduct)
+
+					localStorage.setItem('products_in_cart', JSON.stringify(productsInCart))
+
+					console.log(productsInCart)
 
 				})
 			})
