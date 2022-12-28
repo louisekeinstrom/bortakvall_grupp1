@@ -1,5 +1,6 @@
 export { }
 import { IOrder } from "./interfaces"
+import { postOrder } from "./post";
 //DOM ref till formuläret
 export const form = document.querySelector('.customerInfo') as HTMLFormElement;
 
@@ -46,11 +47,16 @@ class Customer {
 
 
 //tom array där kundinfo ska sparas
-let values: IOrder[] = []
+//let fullOrder: IOrder[] = []
+
+
+
+
+
 
 //submit form eventlistener
 
-form.addEventListener('submit', (e: Event) => {
+form.addEventListener('submit', async (e: Event) => {
     e.preventDefault();
 
     //kontroll
@@ -71,7 +77,7 @@ form.addEventListener('submit', (e: Event) => {
         city.value,
         email.value
     )*/
-    const kund: IOrder = {
+    /*const kund: IOrder = {
         customer_first_name: firstName.value,
         customer_last_name: lastName.value,
         customer_address: adress.value,
@@ -85,7 +91,35 @@ form.addEventListener('submit', (e: Event) => {
             item_price: 8,
             item_total: 24
         }]
-    }
+    }*/
+    /*const kund = {
+        customer_first_name: firstName.value,
+        customer_last_name: lastName.value,
+        customer_address: adress.value,
+        customer_postcode: postcode.value,
+        customer_city: city.value,
+        customer_email: email.value,
+        order_total: 0,
+
+    }*/
+    /*
+        const kund  = {
+            customer_first_name: firstName.value,
+            customer_last_name: lastName.value,
+            customer_address: adress.value,
+            customer_postcode: postcode.value,
+            customer_city: city.value,
+            customer_email: email.value,
+            order_total: 1,
+            order_items: [ {
+                product_id: 6545,
+                qty: 3,
+                item_price: 8,
+                item_total: 24
+            }]
+        }
+    */
+
     /*const order = [
 
         [{
@@ -95,10 +129,39 @@ form.addEventListener('submit', (e: Event) => {
             item_total: 24
         }]
     ]*/
-    //console.log(kund)
-    values.push(kund)
+    /*const order: IOrder["order_items"] = [
+        {
+            product_id: 6545,
+            qty: 3,
+            item_price: 8,
+            item_total: 24
+        }
+    ]*/
 
-    console.log(values)
+    //console.log(kund)
+    //fullOrder.push(kund, order)
+    const fullOrder: IOrder = {
+        customer_first_name: firstName.value,
+        customer_last_name: lastName.value,
+        customer_address: adress.value,
+        customer_postcode: postcode.value,
+        customer_city: city.value,
+        customer_email: email.value,
+        order_total: 24,
+        order_items: [
+            {
+                product_id: 6545,
+                qty: 3,
+                item_price: 8,
+                item_total: 24
+            },
+        ]
+    }
+
+    console.log(fullOrder)
+
+    await postOrder(fullOrder)
+
 
 })
 
