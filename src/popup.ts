@@ -5,7 +5,7 @@ import { IOrder } from "./interfaces";
 
 const popupWrapper = document.querySelector('.popup-wrapper');
 const popup = document.querySelector('.popup');
-let productsInCart: IProducts[] /* change to: IOrder["order_items"]  */ = []
+let productsInCart: IProducts[] /* change to: IOrder["order_items"]  */ = [] 
 
 document.addEventListener('click', (e) => {
 	if( (e.target as HTMLButtonElement).tagName === "BUTTON" && (e.target as HTMLButtonElement).dataset.productId || (e.target as HTMLButtonElement).tagName === "IMG" && (e.target as HTMLButtonElement).dataset.productId ){
@@ -80,27 +80,45 @@ document.addEventListener('click', (e) => {
 						return product.id === currentProductId
 					}) 
 					console.log('Product to be added to cart: ', addNewProduct)
-					
-					// addNewProduct.map()
-					
-					// // translate data from the former array into the new interface
-					// const productsInCart: any /* IOrder["order_items"]  */ = 
-					// 	{
-					// 		product_id: product.id,
-					// 		qty: 1,
-					// 		item_price: product.price,
-					// 		item_total: 1
-					// 	}
+
+					// hittar ifall produkten redan finns i arrayen
+					// const foundProductInCart = productsInCart.find(product => product.id === currentProductId)
+					// const stock_quantity = foundProductInCart?.stock_quantity
 					
 
-					// add product to an array
-					// gör en ifsats och byt qty ist för att pusha om prod redan finns i cart
 					productsInCart.push(addNewProduct)
 
-					localStorage.setItem('products_in_cart', JSON.stringify(productsInCart))
+					/* // add product to an array
+					// gör en ifsats och byt qty ist för att pusha om prod redan finns i cart
+					let productQty = 0
+					if(foundProductInCart && stock_quantity){
+						productQty += 1
+						// itemTotal ?
+					}else if(!foundProductInCart && stock_quantity){
+						productsInCart.push(addNewProduct)
+						productQty = 1
+						// itemTotal ?
+					} */
+					console.log('Products currently in cart: ', productsInCart)
 
-					console.log(productsInCart)
+					// // translate data from the former array into the new interface
+					// det blir en array i en array i en array, men funkar (: lös detta 
+					const formattedProductsInCart:  any /* IOrder["order_items"]  */ = productsInCart.map(product => {
+						return [
+							{
+								product_id: product.id,
+								qty: 1 /* productQty */,
+								item_price: product.price,
+								item_total: 1
+							}
+						]
+					})
 
+					localStorage.setItem('products_in_cart', JSON.stringify(formattedProductsInCart))
+
+					console.log('Products in formatted cart: ', formattedProductsInCart)
+
+					
 				})
 			})
 			.catch(err => {
