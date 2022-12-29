@@ -32,14 +32,14 @@ export interface IProductsExt {
     },
     stock_status: string,
     stock_quantity: number,
-    order_items: [
+    order_items: 
         {
             product_id: number,
-            qty: number,
+            qty: number | undefined,
             item_price: number,
-            item_total: number
+            item_total: number | undefined
         },
-    ]
+    
 
 }
 
