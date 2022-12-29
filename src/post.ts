@@ -20,6 +20,9 @@ export const postOrder = async (fullOrder: IOrder) => {
 export const confirm = document.querySelector('#confirmation')!
 export const contact = document.querySelector('.contact')!
 
+
+
+
 export const postOrder = async (fullOrder: IOrder) => {
     const res = await fetch('https://bortakvall.se/api/orders', {
         method: 'POST',
@@ -39,18 +42,21 @@ export const postOrder = async (fullOrder: IOrder) => {
 
     }
 
-    //const response = await res.json() as IResponse
-    return await res.json() //as IResponse
+    const response = await res.json() as IResponse
 
-        .then(data => {
-            console.log(data.data)
+    confirm.innerHTML = `<div>
+<h2>Tack ${response.data.customer_first_name}!:)</h2>
+<p>
+  Din order med ordernr ${response.data.id} har gått igenom. Leverans inom 2
+  vardagar
+</p>
+</div>`
+    //return await res.json() //as IResponse
 
-            data.data.map((order: { id: number }) => {
 
-                console.log('id', order.id)
-            })
-        })
-    //.data.id)
+    //console.log(response.data)
+    console.log(`id${response.data.id}, namn ${response.data.customer_first_name} ${response.data.customer_last_name}`)
+
 
 
 }
