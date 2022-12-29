@@ -2,6 +2,7 @@ export{};
 import "./fetch"
 import { IProducts } from "./interfaces";
 import { IOrder } from "./interfaces";
+import { IProductsExt } from "./interfaces";
 
 const popupWrapper = document.querySelector('.popup-wrapper');
 const popup = document.querySelector('.popup');
@@ -73,7 +74,7 @@ document.addEventListener('click', (e) => {
 				
 				addToCartBtn?.addEventListener('click', (e) => {
 					const currentProductId = Number((e.target as HTMLButtonElement).dataset.currentProductId)
-					console.log('You clicked add to cart with ', currentProductId)
+					console.log('You clicked add to cart for product with product.id: ', currentProductId)
 				
 					// find product being added to cart 
 				 	const addNewProduct: IProducts = data.data.find((product: IProducts) => {
@@ -81,43 +82,61 @@ document.addEventListener('click', (e) => {
 					}) 
 					console.log('Product to be added to cart: ', addNewProduct)
 
-					// hittar ifall produkten redan finns i arrayen
-					// const foundProductInCart = productsInCart.find(product => product.id === currentProductId)
-					// const stock_quantity = foundProductInCart?.stock_quantity
-					
+			/* 		// hittar ifall produkten redan finns i arrayen
+					const foundProductInCart = productsInCart.find(product => product.id === currentProductId)
+					const stock_quantity = foundProductInCart?.stock_quantity
+					 */
 
-					productsInCart.push(addNewProduct)
+					 // kommentera tillbaks nedan kod för att få det att funka 
+					// igen att lägga till produkter i varukorgen
+					 productsInCart.push(addNewProduct) 
 
-					/* // add product to an array
+
+
+				/* 	 // add product to an array
 					// gör en ifsats och byt qty ist för att pusha om prod redan finns i cart
 					let productQty = 0
-					if(foundProductInCart && stock_quantity){
-						productQty += 1
-						// itemTotal ?
-					}else if(!foundProductInCart && stock_quantity){
+					if(!foundProductInCart && stock_quantity){
 						productsInCart.push(addNewProduct)
 						productQty = 1
 						// itemTotal ?
+					} else if(foundProductInCart && stock_quantity){
+						productQty += 1
+						// itemTotal ?
 					} */
+
 					console.log('Products currently in cart: ', productsInCart)
 
-					// // translate data from the former array into the new interface
-					// det blir en array i en array i en array, men funkar (: lös detta 
-					const formattedProductsInCart:  any /* IOrder["order_items"]  */ = productsInCart.map(product => {
-						return [
-							{
-								product_id: product.id,
-								qty: 1 /* productQty */,
-								item_price: product.price,
-								item_total: 1
-							}
-						]
-					})
+					// istället för ovan kod, använd IProductsEtx och sätt in data där
+					// se todos för hur en sådan push() ska funka:
+					/* // push todo into list of todos
+						const newTodo: Todo = {
+							id: maxId + 1,
+							title: newTodoTitle,
+							completed: false,
+						}
+						todos.push(newTodo) */
 
-					localStorage.setItem('products_in_cart', JSON.stringify(formattedProductsInCart))
+					// // // translate data from the former array into the new interface
+					// // det blir en array i en array i en array, men funkar (: 
+					// // tror att nedan info får man nog uppdatera senare och 
+					// // använda IProductsEtx ist. Vi vill ju ha kvar produktnamnet 
+					// // att rendera ut i srop down varukorgen och den finns inte 
+					// // med i nedan kod
+					// const formattedProductsInCart:  any /* IOrder["order_items"]  */ = productsInCart.map(product => {
+					// 	return [
+					// 		{
+					// 			product_id: product.id,
+					// 			qty: /* 1 */ productQty ,
+					// 			item_price: product.price,
+					// 			item_total: /* 1 */ productsInCart.length
+					// 		}
+					// 	]
+					// })
 
-					console.log('Products in formatted cart: ', formattedProductsInCart)
+					localStorage.setItem('products_in_cart', JSON.stringify(productsInCart))
 
+					// console.log('Products in formatted cart: ', formattedProductsInCart)
 					
 				})
 			})
