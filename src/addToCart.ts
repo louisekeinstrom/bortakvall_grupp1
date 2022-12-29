@@ -11,8 +11,12 @@ const showCart = document.querySelector(".added-to-cart")
 
 let cart: [] = []
 
-function addToCart(product: any){
-    cart.push(product)
+function addToCart(product: Array){
+    if(cart.some((product) => product === product)){
+        alert("already in cart")
+    }else{
+
+    cart.push({...product, numberOfUnits: 1,})
 
     showCart!.innerHTML += `
     <div class="cart-product">
@@ -22,10 +26,12 @@ function addToCart(product: any){
     <h4 class="candy-name mt-3">${product.name}</h4></div>
 							<div>
                             <p>Pris <span>${product.price}</span> kr</p>
+                            <p>Antal <span>${product.numberOfUnits}</span></p>
 						  </div>
 
           </div>
     `
+    }
 }
 
 document.addEventListener('click', (e) => {
