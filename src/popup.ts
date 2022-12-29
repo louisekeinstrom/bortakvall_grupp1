@@ -6,8 +6,9 @@ import { IProductsExt } from "./interfaces";
 
 const popupWrapper = document.querySelector('.popup-wrapper');
 const popup = document.querySelector('.popup');
-let productsInCart: IProductsExt[] /* change to: IOrder["order_items"]  */ = [] 
+let productsInCart: IProductsExt[] = [] 
 let foundProductInCart: any
+let allProductsArr: IProductsExt[] = [] 
 
 document.addEventListener('click', (e) => {
 	if( (e.target as HTMLButtonElement).tagName === "BUTTON" && (e.target as HTMLButtonElement).dataset.productId || (e.target as HTMLButtonElement).tagName === "IMG" && (e.target as HTMLButtonElement).dataset.productId ){
@@ -29,12 +30,33 @@ document.addEventListener('click', (e) => {
 			})
 			.then(data => {
 				// console.log(data.data)
-				/* kan man göra en variabel för en ny array där man mappar över data.data som IProductsExt så att man får in alla variabler 
-				vi behöver istället för att göra det flera ggr nedan?
-				gör detta imorgon 30/12
-				 */
 			
-				popup!.innerHTML = data.data.map((product: IProducts) => {
+				allProductsArr = data.data.map((product: any) => {
+					return {
+						id: product.id,
+						name: product.name,
+						description: product.description,
+						price: product.price,
+						on_sale: product.on_sale,
+						images: {
+							thumbnail: product.images.thumbnail,
+							large: product.images.large
+						},
+						stock_status: product.stock_status,
+						stock_quantity: product.stock_quantity,
+						order_items: 
+						{
+							product_id: product.id,
+							qty: 0, 
+							item_price: product.price,
+							item_total: 0
+						},	
+					}
+				})
+
+				console.log("allProductsArr: ", allProductsArr)
+			
+				popup!.innerHTML = allProductsArr.map((product: IProductsExt) => {
 					if(product.id === productId){
 						return  `
 					<a href="kassa.html" class="popup-cart-sc text-secondary small">Gå till kassan <i
@@ -81,84 +103,35 @@ document.addEventListener('click', (e) => {
 					const currentProductId = Number((e.target as HTMLButtonElement).dataset.currentProductId)
 					console.log('You clicked add to cart for product with product.id: ', currentProductId)
 				
-					// hittar ifall produkten redan finns i arrayen
+					
+					// finding if product is already in cart
 					foundProductInCart = productsInCart.find(product => product.id === currentProductId)
-					if(foundProductInCart){
-						foundProductInCart = {
-							id: foundProductInCart?.id,
-							name: foundProductInCart?.name,
-							description: foundProductInCart?.description,
-							price: foundProductInCart?.price,
-							on_sale: foundProductInCart?.on_sale,
-							images: {
-								thumbnail: foundProductInCart?.images.thumbnail,
-								large: foundProductInCart?.images.large
-							},
-							stock_status: foundProductInCart?.stock_status,
-							stock_quantity: foundProductInCart?.stock_quantity,
-							order_items: 
-							{
-								product_id: foundProductInCart?.id,
-								qty: foundProductInCart.order_items.qty, /*(foundProductInCart?.order_items.qty ? ++ : 1), //tänkte en ternary operator här. if product found in cart = plussa på 1, annars 1st(den första produkten av sitt slag) */
-								item_price: foundProductInCart?.price,
-								item_total: undefined //ändra detta senare
-							},	
-						}
-					
-				   } 
 
-					// find product being added to cart 
-				 	let addNewProduct: IProductsExt = data.data.find((product: any) => product.id === currentProductId) 
+					// getting new product to be added to cart
+				 	let addNewProduct: IProductsExt = allProductsArr.find((product: any) => product.id === currentProductId) 
 
-					 addNewProduct = {
-						id: addNewProduct.id,
-						name: addNewProduct.name,
-						description: addNewProduct.description,
-						price: addNewProduct.price,
-						on_sale: addNewProduct.on_sale,
-						images: {
-							thumbnail: addNewProduct.images.thumbnail,
-							large: addNewProduct.images.large
-						},
-						stock_status: addNewProduct.stock_status,
-						stock_quantity: addNewProduct.stock_quantity,
-						order_items: 
-						{
-							product_id: addNewProduct.id,
-							qty: 0, /*(foundProductInCart?.order_items.qty ? ++ : 1), //tänkte en ternary operator här. if product found in cart = plussa på 1, annars 1st(den första produkten av sitt slag) */
-							item_price: addNewProduct.price,
-							item_total: 0
-						},	
-					
-				   } 
 
 				 	if(!foundProductInCart){
 						productsInCart.push(addNewProduct)
 						addNewProduct.order_items.qty = 1
-						addNewProduct.stock_quantity -- //här behöver jag nog productsInCart.stock_quantity. därför behlver jag den arrayen i formatet IProductsExt
-						// itemTotal ? fixa denna! productsInCart.item_total = productsInCart.length
+						addNewProduct.stock_quantity -- //här behöver jag nog productsInCart(.map?).stock_quantity. (se funktion nedan: productsInCart.map(foundProduct => { etc) därför behöver jag den arrayen i formatet IProductsExt
+						// item_total? fixa
 					} else if(foundProductInCart && foundProductInCart.stock_quantity){
-						foundProductInCart.order_items.qty ++
-						foundProductInCart.stock_quantity --
-						/* productsInCart.map(foundProduct => {
-							if(foundProduct = foundProductInCart){
-								return foundProduct.order_items.qty ++ //måste ändra productsInCart till IProductsExt om detta ska funka
-								
+					/* 	foundProductInCart.order_items.qty ++
+						foundProductInCart.stock_quantity -- */
+						 productsInCart.map(foundProduct => {
+							if(foundProduct = foundProductInCart){ 
+								foundProduct.order_items.qty! ++
+								foundProduct.stock_quantity --
+								// item_total? fixa
+								return foundProduct								
 							} 
-						})*/
-						foundProductInCart.stock_quantity -- //samma här behöver jag nog productsInCart.stock_quantity
-						// itemTotal ? fixa denna!
-					} //if(!foundProductInCart.stock_quantity || !addNewProduct.stock_quantity){disable button och skriv "slut i lager"}
+						})
+					} //else if(!foundProductInCart.stock_quantity || !addNewProduct.stock_quantity){disable button och skriv "slut i lager"}
 							
 					
-					console.log('Product to be added to cart: ', addNewProduct)
+				// 	console.log('Product to be added to cart: ', addNewProduct)
 					
-
-
-				/* 	 // kommentera tillbaks nedan kod för att få det att funka 
-					// igen att lägga till produkter i varukorgen
-					 productsInCart.push(addNewProduct)  */
-
 
 					console.log('Products currently in cart: ', productsInCart)
 
