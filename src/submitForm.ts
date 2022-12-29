@@ -1,6 +1,6 @@
 export { }
 import { IOrder } from "./interfaces"
-import { postOrder } from "./post";
+import { postOrder, confirm } from "./post";
 //DOM ref till formuläret
 export const form = document.querySelector('.customerInfo') as HTMLFormElement;
 
@@ -17,7 +17,7 @@ const tel = document.querySelector('#tel') as HTMLInputElement
 const email = document.querySelector('#email') as HTMLInputElement
 
 
-//försök med klass
+//försök med klass andvänds INTE NU
 class Customer {
     customer_first_name: string;
     customer_last_name: string;
@@ -46,12 +46,9 @@ class Customer {
 }
 
 
+
 //tom array där kundinfo ska sparas
 //let fullOrder: IOrder[] = []
-
-
-
-
 
 
 //submit form eventlistener

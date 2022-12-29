@@ -61,7 +61,7 @@ export interface IOrder {
 
 //response vilken vi nog inte behöver
 
-interface IResponse {
+export interface IResponse {
     status: string,
     data: {
         id: number,
