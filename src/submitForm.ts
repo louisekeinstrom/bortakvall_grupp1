@@ -148,7 +148,7 @@ form.addEventListener('submit', async (e: Event) => {
         order_items: [
             {
                 product_id: 6545,
-                qty: 3,
+                qty: 3,//3
                 item_price: 8,
                 item_total: 24
             },
@@ -157,7 +157,9 @@ form.addEventListener('submit', async (e: Event) => {
 
     console.log(fullOrder)
 
+
     await postOrder(fullOrder)
+
 
 
 })

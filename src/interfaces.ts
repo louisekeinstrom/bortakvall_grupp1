@@ -63,6 +63,7 @@ export interface IOrder {
 
 export interface IResponse {
     status: string,
+    message?: string,
     data: {
         id: number,
         order_date: string,
@@ -86,6 +87,16 @@ export interface IResponse {
             }
         ]
 
+    }
+}
+
+export interface IError {
+    status: string,
+    message: string,
+    data: {
+        order_items: [
+            string
+        ]
     }
 }
 
