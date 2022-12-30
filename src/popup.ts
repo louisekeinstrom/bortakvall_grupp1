@@ -54,7 +54,10 @@ document.addEventListener('click', (e) => {
 					}
 				})
 
-				console.log("allProductsArr: ", allProductsArr)
+				// const disableAddToCartBtn = () => {
+
+				// }
+				// console.log("allProductsArr: ", allProductsArr)
 			
 				popup!.innerHTML = allProductsArr.map((product: IProductsExt) => {
 					if(product.id === productId){
@@ -111,10 +114,10 @@ document.addEventListener('click', (e) => {
 				 	let addNewProduct: IProductsExt = allProductsArr.find((product: any) => product.id === currentProductId) 
 
 				 	if(!foundProductInCart) { // addNewProduct.stcok_quantity > 0
-						productsInCart.push(addNewProduct)
 						addNewProduct.order_items.qty = 1
 						addNewProduct.stock_quantity -- //här behöver jag nog productsInCart(.map?).stock_quantity. (se funktion nedan: productsInCart.map(foundProduct => { etc) därför behöver jag den arrayen i formatet IProductsExt
-						// item_total? fixa
+						addNewProduct.order_items.item_total = addNewProduct.order_items.qty * addNewProduct.price 
+						productsInCart.push(addNewProduct)
 					} else if(foundProductInCart && foundProductInCart.stock_quantity > 0){
 					/* 	foundProductInCart.order_items.qty ++
 						foundProductInCart.stock_quantity -- */
