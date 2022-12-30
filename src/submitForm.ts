@@ -53,7 +53,7 @@ class Customer {
 
 //submit form eventlistener
 
-form.addEventListener('submit', async (e: Event) => {
+form?.addEventListener('submit', async (e: Event) => {
     e.preventDefault();
 
     //kontroll
