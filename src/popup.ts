@@ -6,7 +6,7 @@ import { IProductsExt } from "./interfaces";
 
 const popupWrapper = document.querySelector('.popup-wrapper');
 const popup = document.querySelector('.popup');
-let productsInCart: IProductsExt[] = [] 
+let productsInCart: IProductsExt[] = [] //ska detta eg vara en array hämtad från localStorage(), som även kan vara tom? typ = sncb ?? '[]' 
 let foundProductInCart: any
 let allProductsArr: IProductsExt[] = [] 
 
@@ -49,7 +49,7 @@ document.addEventListener('click', (e) => {
 							product_id: product.id,
 							qty: 0, 
 							item_price: product.price,
-							item_total: 0
+							item_total: (product.order_items.qty*product.order_items.item_price)
 						},	
 					}
 				})
@@ -110,21 +110,20 @@ document.addEventListener('click', (e) => {
 					// getting new product to be added to cart
 				 	let addNewProduct: IProductsExt = allProductsArr.find((product: any) => product.id === currentProductId) 
 
-
-				 	if(!foundProductInCart){
+				 	if(!foundProductInCart) { // addNewProduct.stcok_quantity > 0
 						productsInCart.push(addNewProduct)
 						addNewProduct.order_items.qty = 1
 						addNewProduct.stock_quantity -- //här behöver jag nog productsInCart(.map?).stock_quantity. (se funktion nedan: productsInCart.map(foundProduct => { etc) därför behöver jag den arrayen i formatet IProductsExt
 						// item_total? fixa
-					} else if(foundProductInCart && foundProductInCart.stock_quantity){
+					} else if(foundProductInCart && foundProductInCart.stock_quantity > 0){
 					/* 	foundProductInCart.order_items.qty ++
 						foundProductInCart.stock_quantity -- */
 						 productsInCart.map(foundProduct => {
-							if(foundProduct = foundProductInCart){ 
+							if(foundProduct.id === foundProductInCart.id){ //prova med currentProductId
 								foundProduct.order_items.qty! ++
 								foundProduct.stock_quantity --
 								// item_total? fixa
-								return foundProduct								
+								return foundProduct							
 							} 
 						})
 					} //else if(!foundProductInCart.stock_quantity || !addNewProduct.stock_quantity){disable button och skriv "slut i lager"}
