@@ -14,7 +14,37 @@ export interface IProducts {
         large: string
     },
     stock_status: string,
-    stock_quantity: null | number
+    stock_quantity: number
+}
+
+
+
+
+// tänkte här att man kunde göra en extended Interface för att få med 
+// IOrder["order_items"] och senare ta ut dem när man order?
+export interface IProductsExt {
+
+    id: number,
+    name: string,
+    description: string,
+    price: number,
+    on_sale: boolean,
+    images: {
+        thumbnail: string,
+        large: string
+    },
+    stock_status: string,
+    stock_quantity: number,
+    order_items: 
+        {
+            product_id: number,
+            qty: number | undefined,
+            item_price: number,
+            item_total: number | undefined
+        },
+    
+
+
 }
 
 /*
@@ -32,7 +62,7 @@ export interface IProducts {
                 large: string
             },
             stock_status: string,
-            stock_quantity: null
+            stock_quantity: null | number
 
 
         }
@@ -40,6 +70,7 @@ export interface IProducts {
 }
 */
 //för POST kundinfo + orderinfo
+
 
 export interface IOrder {
     customer_first_name: string,
