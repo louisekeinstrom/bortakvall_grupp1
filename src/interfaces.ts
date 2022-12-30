@@ -35,14 +35,14 @@ export interface IProductsExt {
     },
     stock_status: string,
     stock_quantity: number,
-    order_items: 
-        {
-            product_id: number,
-            qty: number | undefined,
-            item_price: number,
-            item_total: number | undefined
-        },
-    
+    order_items:
+    {
+        product_id: number,
+        qty: number | undefined,
+        item_price: number,
+        item_total: number | undefined
+    },
+
 
 
 }
@@ -71,7 +71,24 @@ export interface IProducts {
 */
 //för POST kundinfo + orderinfo
 
-
+/*
+export interface IOrder {
+    customer_first_name: string,
+    customer_last_name: string,
+    customer_address: string,
+    customer_postcode: string,
+    customer_city: string,
+    customer_email: string,
+    order_total: number,
+    order_items: [
+        {
+            product_id: number,
+            qty: number,
+            item_price: number,
+            item_total: number
+        },
+    ]
+}*/
 export interface IOrder {
     customer_first_name: string,
     customer_last_name: string,
@@ -90,7 +107,7 @@ export interface IOrder {
     ]
 }
 
-//response vilken vi nog inte behöver
+
 
 export interface IResponse {
     status: string,

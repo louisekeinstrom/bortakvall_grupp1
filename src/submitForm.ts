@@ -34,15 +34,7 @@ class Customer {
         this.customer_city = c;
         this.customer_email = e;
     }
-    /*
-        format() {
-            return `förnamn ${this.customer_first_name}
-            efternamn ${this.customer_last_name}
-            adress ${this.customer_address}
-            postnr ${this.customer_postcode}
-            stad ${this.customer_city}
-            email ${this.customer_email}`
-        }*/
+
 }
 
 
@@ -89,7 +81,7 @@ form?.addEventListener('submit', async (e: Event) => {
             item_total: 24
         }]
     }*/
-    /*const kund = {
+    const kund = {
         customer_first_name: firstName.value,
         customer_last_name: lastName.value,
         customer_address: adress.value,
@@ -98,7 +90,7 @@ form?.addEventListener('submit', async (e: Event) => {
         customer_email: email.value,
         order_total: 0,
 
-    }*/
+    }
     /*
         const kund  = {
             customer_first_name: firstName.value,
@@ -117,26 +109,35 @@ form?.addEventListener('submit', async (e: Event) => {
         }
     */
 
-    /*const order = [
 
-        [{
-            product_id: 6545,
-            qty: 3,
-            item_price: 8,
-            item_total: 24
-        }]
-    ]*/
-    /*const order: IOrder["order_items"] = [
+    const order: IOrder["order_items"] = [
         {
             product_id: 6545,
             qty: 3,
             item_price: 8,
             item_total: 24
         }
-    ]*/
+    ]
 
     //console.log(kund)
     //fullOrder.push(kund, order)
+    /*const fullOrder: IOrder = {
+         customer_first_name: firstName.value,
+         customer_last_name: lastName.value,
+         customer_address: adress.value,
+         customer_postcode: postcode.value,
+         customer_city: city.value,
+         customer_email: email.value,
+         order_total: 24,
+         order_items: [
+             {
+                 product_id: 6545,
+                 qty: 3,//3
+                 item_price: 8,
+                 item_total: 24
+             },
+         ]
+     }*/
     const fullOrder: IOrder = {
         customer_first_name: firstName.value,
         customer_last_name: lastName.value,
@@ -154,11 +155,17 @@ form?.addEventListener('submit', async (e: Event) => {
             },
         ]
     }
+    //fullOrder.push(kund, order)
+
 
     console.log(fullOrder)
+    console.log(kund, order)
+
 
 
     await postOrder(fullOrder)
+    //await postOrder(kund, order)
+
 
 
 
