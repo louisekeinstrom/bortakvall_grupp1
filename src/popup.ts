@@ -6,7 +6,7 @@ import { IProductsExt } from "./interfaces";
 
 const popupWrapper = document.querySelector('.popup-wrapper');
 const popup = document.querySelector('.popup');
-let productsInCart: IProductsExt[] = [] //ska detta eg vara en array hämtad från localStorage(), som även kan vara tom? typ = sncb ?? '[]' 
+let productsInCart: IProductsExt[] = [] //ska detta eg vara en array hämtad från localStorage(), som även kan vara tom? typ = sncb ?? '[' 
 let foundProductInCart: any
 let allProductsArr: IProductsExt[] = [] 
 
@@ -49,7 +49,7 @@ document.addEventListener('click', (e) => {
 							product_id: product.id,
 							qty: 0, 
 							item_price: product.price,
-							item_total: (product.order_items.qty*product.order_items.item_price)
+							item_total: 0
 						},	
 					}
 				})
