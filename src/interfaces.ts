@@ -17,6 +17,9 @@ export interface IProducts {
     stock_quantity: number
 }
 
+
+
+
 // tänkte här att man kunde göra en extended Interface för att få med 
 // IOrder["order_items"] och senare ta ut dem när man order?
 export interface IProductsExt {
@@ -41,6 +44,7 @@ export interface IProductsExt {
         },
     
 
+
 }
 
 /*
@@ -58,7 +62,7 @@ export interface IProducts {
                 large: string
             },
             stock_status: string,
-            stock_quantity: null
+            stock_quantity: null | number
 
 
         }
@@ -86,10 +90,11 @@ export interface IOrder {
     ]
 }
 
-//response
+//response vilken vi nog inte behöver
 
-interface IResponse {
+export interface IResponse {
     status: string,
+    message?: string,
     data: {
         id: number,
         order_date: string,
@@ -113,6 +118,16 @@ interface IResponse {
             }
         ]
 
+    }
+}
+
+export interface IError {
+    status: string,
+    message: string,
+    data: {
+        order_items: [
+            string
+        ]
     }
 }
 
