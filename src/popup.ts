@@ -101,14 +101,14 @@ document.addEventListener('click', (e) => {
 				// adding product in popup to cart when clicking addToCartBtn
 				const addToCartBtn = document.querySelector('.popup-add-to-cart');
 
-			 	// disabling button if product is out of stock
+		/* 	 	// disabling button if product is out of stock
 				productsInCart.map(product => {
 					if(product.stock_quantity <= 0){
 						addToCartBtn!.setAttribute('disabled', 'disabled')
 						addToCartBtn!.innerHTML = `Slut i lager`
 					}
 
-				}) 
+				})  */ // disabling all buttons atm :/ måste fixa denna i renderingen tror jag????? FIXA DETTA SEN
 				
 				addToCartBtn?.addEventListener('click', (e) => {
 					const currentProductId = Number((e.target as HTMLButtonElement).dataset.currentProductId)
