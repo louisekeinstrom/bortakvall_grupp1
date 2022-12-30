@@ -1,228 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bortakväll</title>
-    <!--bootstrap-->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
-      crossorigin="anonymous"
-    />
-    <!-- font -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap"
-      rel="stylesheet"
-    />
-    <!--css-->
-    <link rel="stylesheet" href="src/kassa.css" />
-  </head>
 
-  <body>
-    <div class="container-fluid justify-content-center">
-      <!--menyn med hem-länk till katalogsidan-->
-      <h1 class="mt-4">BORTA<span class="color-change">KVÄLL</span></h1>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bortakväll</title>
+  <!--bootstrap-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
+  <!-- font -->
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet" />
+  <!--css-->
+  <link rel="stylesheet" href="src/kassa.css" />
+</head>
 
-      <!--Meny -->
-      <nav class="menu navbar-expand navbar-nav">
-        <div>
-          <a href="index.html" class="menu-btn">Hem</a>
-          <a href="https://youtu.be/dQw4w9WgXcQ" class="menu-btn">Om oss</a>
-        </div>
-      </nav>
+<body>
+  <div class="container-fluid justify-content-center">
+    <!--menyn med hem-länk till katalogsidan-->
+    <h1 class="mt-4">BORTA<span class="color-change">KVÄLL</span></h1>
 
-      <!-- lägg in dropdown menyn till varukorgen här, när den är klar -->
+    <!--Meny -->
+    <nav class="menu navbar-expand navbar-nav">
+      <div>
+        <a href="index.html" class="menu-btn">Hem</a>
+        <a href="https://youtu.be/dQw4w9WgXcQ" class="menu-btn">Om oss</a>
+      </div>
+    </nav>
 
-      <!--div där varukorgen visas-->
-      <div class="container-fluid justify-content-center mb-4">
-        <div class="chosen-products my-4">
-          <h2>Produkter i varukorgen</h2>
-          <div class="container">
-            <div class="row product-overview-header">
-              <div class="col-6">
-                <h6 class="product-list">Produkt</h6>
-              </div>
-              <div class="col-2">
-                <h6 class="product-list">á pris</h6>
-              </div>
-              <div class="col-2">
-                <h6 class="product-list">Antal</h6>
-              </div>
-              <div class="col-2">
-                <h6 class="product-list">Summa</h6>
-              </div>
+    <!-- lägg in dropdown menyn till varukorgen här, när den är klar -->
+
+    <!--div där varukorgen visas-->
+    <div class="container-fluid justify-content-center mb-4">
+      <div class="chosen-products my-4">
+        <h2>Produkter i varukorgen</h2>
+        <div class="container">
+          <div class="row product-overview-header">
+            <div class="col-6">
+              <h6 class="product-list">Produkt</h6>
             </div>
-
-            <div class="row"><hr /></div>
-            <!-- enskild produkt -->
-            <div class="row product-in-overview">
-              <div class="col-6">
-                <p class="product-list">
-                  <span id="product-name"
-                    >godis godis godis godis godis godis</span
-                  >
-                </p>
-              </div>
-              <div class="col-2">
-                <p class="product-list">
-                  <i><span id="product-price">x</span> kr</i>
-                </p>
-              </div>
-              <div class="col-2">
-                <p class="product-list">
-                  <span id="product-amount">x</span> st
-                </p>
-              </div>
-              <div class="col-2">
-                <p class="product-list">
-                  <span id="product-price-total">x</span> kr
-                </p>
-              </div>
+            <div class="col-2">
+              <h6 class="product-list">á pris</h6>
             </div>
-
-            <div class="row"><hr /></div>
-
-            <div class="row">
-              <div class="col-10">
-                <h6>Summa total</h6>
-              </div>
-              <div class="col-2">
-                <h6><span id="sum-total">x</span> kr</h6>
-              </div>
+            <div class="col-2">
+              <h6 class="product-list">Antal</h6>
+            </div>
+            <div class="col-2">
+              <h6 class="product-list">Summa</h6>
             </div>
           </div>
-        </div>
 
-        <div class="customer-container mt-4 p-5">
-          <!--hide class="customer-container"-->
-          <h2 class="text-center">Kontaktuppgifter</h2>
-
-          <form>
-            <div class="row justify-content-center mx-auto">
-              <div class="col-25">
-                <label for="firstName">Förnamn:</label>
-              </div>
-              <div class="col-75">
-                <input
-                  type="text"
-                  id="firstName"
-                  name="firstName"
-                  placeholder="Förnamn"
-                  autofocus
-                  required
-                />
-              </div>
-              <div class="col-25">
-                <label for="lastName">Efternamn:</label>
-              </div>
-              <div class="col-75">
-                <input
-                  type="text"
-                  id="lastName"
-                  name="lastName"
-                  placeholder="Efternamn"
-                  required
-                />
-              </div>
-              <div class="col-25">
-                <label for="adress">Adress:</label>
-              </div>
-              <div class="col-75">
-                <input
-                  type="adress"
-                  id="adress"
-                  name="adress"
-                  placeholder="Adress"
-                  required
-                />
-              </div>
-              <div class="col-25">
-                <label for="postcode">Postnr:</label>
-              </div>
-              <div class="col-75">
-                <input
-                  type="postcode"
-                  id="postcode"
-                  name="postcode"
-                  placeholder="Postnr"
-                  required
-                />
-              </div>
-              <div class="col-25">
-                <label for="city">Stad:</label>
-              </div>
-              <div class="col-75">
-                <input
-                  type="city"
-                  id="city"
-                  name="city"
-                  placeholder="Stad"
-                  required
-                />
-              </div>
-              <div class="col-25">
-                <label for="tel">Telefonnr:</label>
-              </div>
-              <div class="col-75">
-                <input type="tel" id="tel" name="tel" placeholder="Telefonnr" />
-              </div>
-              <div class="col-25">
-                <label for="email">Email:</label>
-              </div>
-              <div class="col-75">
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  placeholder="Email"
-                  required
-                />
-              </div>
-            </div>
-
-            <div class="row justify-content-center p-4 mx-auto" id="submitBtn">
-              <button type="submit" class="btn btn-outline-primary">
-                submit
-              </button>
-            </div>
-          </form>
-        </div>
-
-        <!--div med bokningsbekräftelse som göms till efter att
-    kunduppgifterna submittas om beställningen går igenom.
-ordernr + tackmeddelande -->
-        <div
-          class="container text-center mt-4 p-5 text-white rounded hide"
-          id="confirmation"
-        >
-          <!--mx-auto m-3 p-3"-->
-          <div>
-            <h2>Tack! :)</h2>
-            <!--kundnamn här-->
-            <p>
-              Din order med ordernr xxx har gått igenom. Leverans inom 2
-              vardagar
-            </p>
-            <!--ordernr-->
+          <div class="row">
+            <hr />
           </div>
-        </div>
+          <!-- enskild produkt -->
+          <div class="row product-in-overview">
+            <div class="col-6">
+              <p class="product-list">
+                <span id="product-name">godis godis godis godis godis godis</span>
+              </p>
+            </div>
+            <div class="col-2">
+              <p class="product-list">
+                <i><span id="product-price">x</span> kr</i>
+              </p>
+            </div>
+            <div class="col-2">
+              <p class="product-list">
+                <span id="product-amount">x</span> st
+              </p>
+            </div>
+            <div class="col-2">
+              <p class="product-list">
+                <span id="product-price-total">x</span> kr
+              </p>
+            </div>
+          </div>
 
-        <!--div som göms med felmeddelande visas beställningen inte går igenom-->
-        <div
-          class="container text-center mt-4 p-5 text-white rounded hide"
-          id="wrong"
-        >
-          <div>
-            <h2>Något gick fel! :(</h2>
-            <p>Vänligen kontrollera din order och dina uppgifter</p>
-            <!--click-event som backar till kunduppgiftena-->
-            <button class="back btn btn-secondary">Tillbaka</button>
+          <div class="row">
+            <hr />
+          </div>
+
+          <div class="row">
+            <div class="col-10">
+              <h6>Summa total</h6>
+            </div>
+            <div class="col-2">
+              <h6><span id="sum-total">x</span> kr</h6>
+            </div>
           </div>
         </div>
       </div>
+
+      <div class="customer-container mt-4 p-5 contact">
+        <!--hide class="customer-container"-->
+        <h2 class="text-center">Kontaktuppgifter</h2>
+
+        <form class="customerInfo">
+          <div class="row justify-content-center mx-auto">
+            <div class="col-25">
+              <label for="firstName">Förnamn:</label>
+            </div>
+            <div class="col-75">
+              <input type="text" id="firstName" name="firstName" placeholder="Förnamn" autofocus required />
+            </div>
+            <div class="col-25">
+              <label for="lastName">Efternamn:</label>
+            </div>
+            <div class="col-75">
+              <input type="text" id="lastName" name="lastName" placeholder="Efternamn" required />
+            </div>
+            <div class="col-25">
+              <label for="adress">Adress:</label>
+            </div>
+            <div class="col-75">
+              <input type="text" id="adress" name="adress" placeholder="Adress" required />
+            </div>
+            <div class="col-25">
+              <label for="postcode">Postnr:</label>
+            </div>
+            <div class="col-75">
+              <input type="text" id="postcode" name="postcode" placeholder="Postnr" required />
+            </div>
+            <div class="col-25">
+              <label for="city">Stad:</label>
+            </div>
+            <div class="col-75">
+              <input type="text" id="city" name="city" placeholder="Stad" required />
+            </div>
+            <div class="col-25">
+              <label for="tel">Telefonnr:</label>
+            </div>
+            <div class="col-75">
+              <input type="tel" id="tel" name="tel" placeholder="Telefonnr" />
+            </div>
+            <div class="col-25">
+              <label for="email">Email:</label>
+            </div>
+            <div class="col-75">
+              <input type="email" id="email" name="email" placeholder="Email" required />
+            </div>
+          </div>
+
+          <div class="row justify-content-center p-4 mx-auto" id="submitBtn">
+            <button type="submit" class="btn btn-outline-primary">
+              submit
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!--div med bokningsbekräftelse som göms till efter att
+    kunduppgifterna submittas om beställningen går igenom.
+ordernr + tackmeddelande -->
+      <div class="container text-center mt-4 p-5 text-white rounded hide" id="confirmation">
+        <!--mx-auto m-3 p-3"-->
+        <div>
+          <h2>Tack! :)</h2>
+          <!--kundnamn här-->
+          <p>
+            Din order med ordernr xxx har gått igenom. Leverans inom 2
+            vardagar
+          </p>
+          <!--ordernr-->
+        </div>
+      </div>
+
+      <!--div som göms med felmeddelande visas beställningen inte går igenom-->
+      <div class="container text-center mt-4 p-5 text-white rounded hide" id="wrong">
+        <div>
+          <h2>Något gick fel! :(</h2>
+          <p>Vänligen kontrollera din order och dina uppgifter</p>
+          <!--click-event som backar till kunduppgiftena-->
+          <button class="back btn btn-secondary">Tillbaka</button>
+        </div>
+      </div>
     </div>
-  </body>
+  </div>
+  <script type="module" src="src/main.ts"></script>
+
+</body>
+
 </html>
