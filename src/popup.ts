@@ -111,10 +111,6 @@ document.addEventListener('click', (e) => {
 
 				}) */
 				
-
-
-
-				
 				addToCartBtn?.addEventListener('click', (e) => {
 					const currentProductId = Number((e.target as HTMLButtonElement).dataset.currentProductId)
 					console.log('You clicked add to cart for product with product.id: ', currentProductId)
@@ -125,7 +121,7 @@ document.addEventListener('click', (e) => {
 					// getting new product to be added to cart
 				 	let addNewProduct: IProductsExt = allProductsArr.find((product: any) => product.id === currentProductId) 
 
-				 	if(!foundProductInCart) { // addNewProduct.stcok_quantity > 0
+				 	if(!foundProductInCart) { // addNewProduct.stock_quantity > 0
 						addNewProduct.order_items.qty = 1 
 						addNewProduct.stock_quantity -- //här behöver jag nog productsInCart(.map?).stock_quantity. (se funktion nedan: productsInCart.map(foundProduct => { etc) därför behöver jag den arrayen i formatet IProductsExt
 						if(addNewProduct.stock_quantity <= 0 ){
@@ -152,8 +148,6 @@ document.addEventListener('click', (e) => {
 					console.log('Products currently in cart: ', productsInCart)
 
 					localStorage.setItem('products_in_cart', JSON.stringify(productsInCart))
-
-					console.log(foundProductInCart)
 
 					if(foundProductInCart?.stock_quantity <= 0 || addNewProduct?.stock_quantity <= 0){
 
