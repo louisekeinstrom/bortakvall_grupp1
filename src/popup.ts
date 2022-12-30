@@ -101,15 +101,14 @@ document.addEventListener('click', (e) => {
 				// adding product in popup to cart when clicking addToCartBtn
 				const addToCartBtn = document.querySelector('.popup-add-to-cart');
 
-			/* 	// disabling button if product is out of stock
+			 	// disabling button if product is out of stock
 				productsInCart.map(product => {
-					if(){
-	
-						addToCartBtn.setAttribute('disabled', 'disabled')
-						addToCartBtn.innerHTML = `Slut i lager`
+					if(product.stock_quantity <= 0){
+						addToCartBtn!.setAttribute('disabled', 'disabled')
+						addToCartBtn!.innerHTML = `Slut i lager`
 					}
 
-				}) */
+				}) 
 				
 				addToCartBtn?.addEventListener('click', (e) => {
 					const currentProductId = Number((e.target as HTMLButtonElement).dataset.currentProductId)
