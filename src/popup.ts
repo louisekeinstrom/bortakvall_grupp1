@@ -116,7 +116,7 @@ document.addEventListener('click', (e) => {
 				 	if(!foundProductInCart) { // addNewProduct.stcok_quantity > 0
 						addNewProduct.order_items.qty = 1
 						addNewProduct.stock_quantity -- //här behöver jag nog productsInCart(.map?).stock_quantity. (se funktion nedan: productsInCart.map(foundProduct => { etc) därför behöver jag den arrayen i formatet IProductsExt
-						addNewProduct.order_items.item_total = addNewProduct.order_items.qty * addNewProduct.price 
+						// addNewProduct.order_items.item_total = addNewProduct.order_items.qty * addNewProduct.price 
 						productsInCart.push(addNewProduct)
 					} else if(foundProductInCart && foundProductInCart.stock_quantity > 0){
 					/* 	foundProductInCart.order_items.qty ++
