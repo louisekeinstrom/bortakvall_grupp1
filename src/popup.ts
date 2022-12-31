@@ -4,9 +4,12 @@ import { IProducts } from "./interfaces";
 import { IOrder } from "./interfaces";
 import { IProductsExt } from "./interfaces";
 
+/* hämta localStorage här */
+
+
 const popupWrapper = document.querySelector('.popup-wrapper');
 const popup = document.querySelector('.popup');
-let productsInCart: IProductsExt[] = [] //ska detta eg vara en array hämtad från localStorage(), som även kan vara tom? typ = sncb ?? '[]' 
+let productsInCart: IProductsExt[] = JSON.parse(localStorage.getItem('products_in_cart')?? '[]') 
 let foundProductInCart: any
 let allProductsArr: IProductsExt[] = [] 
 
@@ -19,6 +22,7 @@ document.addEventListener('click', (e) => {
 		console.log("You clicked 'Read more'");
 		
 		(popupWrapper as HTMLElement).style.display = 'block'
+
 		/* trying this block of code below.
 		can try to make it nicer with callback functions and async and await but rn just happy that it works */
 		fetch('https://bortakvall.se/api/products')
@@ -61,13 +65,13 @@ document.addEventListener('click', (e) => {
 
 						// en if-sats om btn ska vara abled eller disabled. inspirerad av johans todos-27 script.js:47
 
-						// standard-utskrift:
+						// standard-rendering:
 						let disableBtn = ''
 						let btnInner = 'Lägg till <i class="fa-solid fa-cart-plus">'
 
 						productsInCart.map(productInCart => {
 
-							// utskrift OM produkten är slut i stock
+							// rendering OM produkten är slut i stock
 							if(product.id === productInCart.id && productInCart.stock_status === "outofstock"){
 								disableBtn = 'disabled'
 								btnInner = 'Slut i lager'
