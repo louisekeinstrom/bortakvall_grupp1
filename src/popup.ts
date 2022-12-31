@@ -66,6 +66,7 @@ document.addEventListener('click', (e) => {
 						// en if-sats om btn ska vara abled eller disabled. inspirerad av johans todos-27 script.js:47
 
 						// standard-rendering:
+						let stockQtyInner = `Antal produkter i lager: ${product.stock_quantity} st`
 						let disableBtn = ''
 						let btnInner = 'Lägg till <i class="fa-solid fa-cart-plus">'
 
@@ -75,8 +76,11 @@ document.addEventListener('click', (e) => {
 							if(product.id === productInCart.id && productInCart.stock_status === "outofstock"){
 								disableBtn = 'disabled'
 								btnInner = 'Slut i lager'
+								stockQtyInner = `Antal produkter i lager: ${productInCart.stock_quantity} st` 
 
-								return disableBtn && btnInner
+								return disableBtn && btnInner && stockQtyInner
+							}else if(product.id === productInCart.id){
+								return stockQtyInner = `Antal produkter i lager: ${productInCart.stock_quantity} st`
 							}
 
 						})
@@ -95,6 +99,7 @@ document.addEventListener('click', (e) => {
 							<p class="popup-description">
 								${product.description}
 							</p>
+							<p class="small stock-qty">${stockQtyInner}</p>
 						  </div>
 						  <div class="col-xs-12 col-md-6">
 							<img src="https://bortakvall.se${product.images.large}" alt="Produkt från Bortakväll" class="img-fluid mh-sm-50 m-3 popup-img" />
@@ -131,7 +136,7 @@ document.addEventListener('click', (e) => {
 					// finding if product is already in cart
 					foundProductInCart = productsInCart.find(product => product.id === currentProductId)
 
-					// getting new product to be added to cart
+					// otherwise getting new product to be added to cart
 				 	let addNewProduct: IProductsExt = allProductsArr.find((product: any) => product.id === currentProductId) 
 
 				 	if(!foundProductInCart) { // addNewProduct.stock_quantity > 0
@@ -141,7 +146,7 @@ document.addEventListener('click', (e) => {
 							addNewProduct.stock_status = "outofstock"
 						}
 						addNewProduct!.order_items.item_total = addNewProduct!.order_items.qty * addNewProduct!.price 
-						productsInCart.push(addNewProduct)
+						productsInCart.push(addNewProduct);
 					}else if(foundProductInCart && foundProductInCart.stock_quantity > 0){
 						productsInCart.map(foundProduct => {
 							if(foundProduct.id === foundProductInCart.id){
@@ -151,16 +156,26 @@ document.addEventListener('click', (e) => {
 									return foundProduct.stock_status = "outofstock"
 								}
 								foundProduct.order_items.item_total = foundProduct.order_items.qty! * foundProduct.price 
-								return foundProduct		
+								return foundProduct	
 							} 
-						
+						// (stockQtyEl as HTMLElement)!.innerHTML = `Antal produkter i lager: ${foundProduct.stock_quantity} st`
 						})
 					}		
 
 					console.log('Products currently in cart: ', productsInCart)
 
-					localStorage.setItem('products_in_cart', JSON.stringify(productsInCart))
+					localStorage.setItem('products_in_cart', JSON.stringify(productsInCart));
 
+					// rendera det uppdaterade stock_quantity varje gång 
+					let productUpdate = productsInCart.map(product => {
+						if(product.id === currentProductId){
+							return product.stock_quantity
+						}
+					}).join('')
+					const stockQtyEl = document.querySelector('.stock-qty');
+					(stockQtyEl as HTMLElement)!.innerHTML = `Antal produkter i lager: ${productUpdate} st`
+
+					// disable button om produkten är slut i lager
 					if(foundProductInCart?.stock_quantity <= 0 || addNewProduct?.stock_quantity <= 0){
 
 						addToCartBtn.setAttribute('disabled', 'disabled')
