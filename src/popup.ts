@@ -59,7 +59,7 @@ document.addEventListener('click', (e) => {
 				popup!.innerHTML = allProductsArr.map((product: IProductsExt) => {
 					if(product.id === productId){ 
 
-						// en if-sats om btn ska vara abled eller disabled. inspirerad av todos-27 script.js:47
+						// en if-sats om btn ska vara abled eller disabled. inspirerad av johans todos-27 script.js:47
 
 						// standard-utskrift:
 						let disableBtn = ''
@@ -136,19 +136,20 @@ document.addEventListener('click', (e) => {
 						if(addNewProduct!.stock_quantity <= 0 ){
 							addNewProduct.stock_status = "outofstock"
 						}
-						// item_total? fixa. typ addNewProduct.order_items.item_total = addNewProduct!.order_items.qty * addNewProduct!.price 
+						addNewProduct!.order_items.item_total = addNewProduct!.order_items.qty * addNewProduct!.price 
 						productsInCart.push(addNewProduct)
 					}else if(foundProductInCart && foundProductInCart.stock_quantity > 0){
-						 productsInCart.map(foundProduct => {
+						productsInCart.map(foundProduct => {
 							if(foundProduct.id === foundProductInCart.id){
 								foundProduct.order_items.qty! ++
 								foundProduct.stock_quantity --
 								if(foundProduct.stock_quantity <= 0 ){
 									return foundProduct.stock_status = "outofstock"
 								}
-								// item_total? fixa
+								foundProduct.order_items.item_total = foundProduct.order_items.qty! * foundProduct.price 
 								return foundProduct		
 							} 
+						
 						})
 					}		
 
