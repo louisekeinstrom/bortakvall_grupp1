@@ -6,7 +6,7 @@ import { IProductsExt } from "./interfaces";
 
 const popupWrapper = document.querySelector('.popup-wrapper');
 const popup = document.querySelector('.popup');
-let productsInCart: IProductsExt[] = [] //ska detta eg vara en array hämtad från localStorage(), som även kan vara tom? typ = sncb ?? '[' 
+let productsInCart: IProductsExt[] = [] //ska detta eg vara en array hämtad från localStorage(), som även kan vara tom? typ = sncb ?? '[]' 
 let foundProductInCart: any
 let allProductsArr: IProductsExt[] = [] 
 
@@ -55,9 +55,28 @@ document.addEventListener('click', (e) => {
 				})
 
 				// console.log("allProductsArr: ", allProductsArr)
-			
+
 				popup!.innerHTML = allProductsArr.map((product: IProductsExt) => {
-					if(product.id === productId){ //eller gör en if-sats här om btn ska vara abled eller disabled
+					if(product.id === productId){ 
+
+						// en if-sats om btn ska vara abled eller disabled. inspirerad av todos-27 script.js:47
+
+						// standard-utskrift:
+						let disableBtn = ''
+						let btnInner = 'Lägg till <i class="fa-solid fa-cart-plus">'
+
+						productsInCart.map(productInCart => {
+
+							// utskrift OM produkten är slut i stock
+							if(product.id === productInCart.id && productInCart.stock_status === "outofstock"){
+								disableBtn = 'disabled'
+								btnInner = 'Slut i lager'
+
+								return disableBtn && btnInner
+							}
+
+						})
+
 						return  `
 					<a href="kassa.html" class="popup-cart-sc text-secondary small">Gå till kassan <i
 					  class="fa-solid fa-cart-shopping"></i></a>
@@ -79,8 +98,8 @@ document.addEventListener('click', (e) => {
 
 						  <div class="row">
 							  <div class="col-12">
-								  <button class="btn btn-secondary popup-add-to-cart" data-current-product-id="${product.id}">
-								  Lägg till <i class="fa-solid fa-cart-plus"></i></button>
+								  <button ${disableBtn} class="btn btn-secondary popup-add-to-cart" data-current-product-id="${product.id}">
+								  ${btnInner}</i></button>
 							  </div>
 						  </div>
 						</div>
@@ -101,15 +120,6 @@ document.addEventListener('click', (e) => {
 				// adding product in popup to cart when clicking addToCartBtn
 				const addToCartBtn = document.querySelector('.popup-add-to-cart');
 
-		/* 	 	// disabling button if product is out of stock
-				productsInCart.map(product => {
-					if(product.stock_quantity <= 0){
-						addToCartBtn!.setAttribute('disabled', 'disabled')
-						addToCartBtn!.innerHTML = `Slut i lager`
-					}
-
-				})  */ // disabling all buttons atm :/ måste fixa denna i renderingen tror jag????? FIXA DETTA SEN
-				
 				addToCartBtn?.addEventListener('click', (e) => {
 					const currentProductId = Number((e.target as HTMLButtonElement).dataset.currentProductId)
 					console.log('You clicked add to cart for product with product.id: ', currentProductId)
@@ -121,12 +131,12 @@ document.addEventListener('click', (e) => {
 				 	let addNewProduct: IProductsExt = allProductsArr.find((product: any) => product.id === currentProductId) 
 
 				 	if(!foundProductInCart) { // addNewProduct.stock_quantity > 0
-						addNewProduct.order_items.qty = 1 
-						addNewProduct.stock_quantity -- //här behöver jag nog productsInCart(.map?).stock_quantity. (se funktion nedan: productsInCart.map(foundProduct => { etc) därför behöver jag den arrayen i formatet IProductsExt
-						if(addNewProduct.stock_quantity <= 0 ){
+						addNewProduct!.order_items.qty = 1 
+						addNewProduct!.stock_quantity -- //här behöver jag nog productsInCart(.map?).stock_quantity. (se funktion nedan: productsInCart.map(foundProduct => { etc) därför behöver jag den arrayen i formatet IProductsExt
+						if(addNewProduct!.stock_quantity <= 0 ){
 							addNewProduct.stock_status = "outofstock"
 						}
-						// item_total? fixa. typ addNewProduct.order_items.item_total = addNewProduct.order_items.qty * addNewProduct.price 
+						// item_total? fixa. typ addNewProduct.order_items.item_total = addNewProduct!.order_items.qty * addNewProduct!.price 
 						productsInCart.push(addNewProduct)
 					}else if(foundProductInCart && foundProductInCart.stock_quantity > 0){
 						 productsInCart.map(foundProduct => {
@@ -141,8 +151,6 @@ document.addEventListener('click', (e) => {
 							} 
 						})
 					}		
-
-					// stock_status: uppdatera på ngt sätt. kanske en if-sats om stock_quantity <= 0
 
 					console.log('Products currently in cart: ', productsInCart)
 
