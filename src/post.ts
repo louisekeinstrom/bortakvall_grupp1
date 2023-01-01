@@ -123,7 +123,7 @@ export const postOrder = async (testOrder: IOrder) => {
           vardagar
         </p>
         </div>`
-        console.log('WORKS??')
+        console.log(`total ${testOrder.order_total}`)
 
     }
 

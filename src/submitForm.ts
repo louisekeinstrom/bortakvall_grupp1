@@ -110,7 +110,16 @@ form?.addEventListener('submit', async (e: Event) => {
     */
 
 
-    const order: IOrder["order_items"] = [
+    /*const order: IOrder["order_items"] = [
+        {
+            product_id: 6545,
+            qty: 3,
+            item_price: 8,
+            item_total: 24
+        }
+    ]*/
+
+    const order = [
         {
             product_id: 6545,
             qty: 3,
@@ -118,7 +127,10 @@ form?.addEventListener('submit', async (e: Event) => {
             item_total: 24
         }
     ]
-
+    const totalPrice = order.reduce((sum, items) => {
+        return sum + items.item_total * (order.length)
+    }, 0)
+    console.log(totalPrice)
     //console.log(kund)
     //fullOrder.push(kund, order)
     const testOrder = {
@@ -128,15 +140,11 @@ form?.addEventListener('submit', async (e: Event) => {
         customer_postcode: postcode.value,
         customer_city: city.value,
         customer_email: email.value,
-        order_total: 0,
-        order_items: [
-            {
-
-            },
-        ]
+        order_total: totalPrice,
+        order_items: order
     }
 
-    testOrder.order_items.push(order)
+    //testOrder.order_items.push(order)
 
     console.log(testOrder)
 
@@ -160,11 +168,13 @@ form?.addEventListener('submit', async (e: Event) => {
             },
         ]
     }
+    /*
+        const totalPrice = fullOrder.order_items.reduce((sum, items) => {
+            return sum + items.item_total * (fullOrder.order_items.length)
+        }, 0)*/
 
-    const totalPrice = fullOrder.order_items.reduce((sum, items) => {
-        return sum + items.item_total * (fullOrder.order_items.length)
-    }, 0)
-    console.log(totalPrice)
+    //console.log(totalPrice)
+
 
     /*product_id: 6545,
                     qty: 3,//3
@@ -177,7 +187,9 @@ form?.addEventListener('submit', async (e: Event) => {
 
 
 
-    await postOrder(fullOrder)
+    //await postOrder(fullOrder)
+    await postOrder(testOrder)
+
     //await postOrder(kund, order)
 
 
