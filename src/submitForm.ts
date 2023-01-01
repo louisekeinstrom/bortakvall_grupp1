@@ -121,23 +121,28 @@ form?.addEventListener('submit', async (e: Event) => {
 
     //console.log(kund)
     //fullOrder.push(kund, order)
-    /*const fullOrder: IOrder = {
-         customer_first_name: firstName.value,
-         customer_last_name: lastName.value,
-         customer_address: adress.value,
-         customer_postcode: postcode.value,
-         customer_city: city.value,
-         customer_email: email.value,
-         order_total: 24,
-         order_items: [
-             {
-                 product_id: 6545,
-                 qty: 3,//3
-                 item_price: 8,
-                 item_total: 24
-             },
-         ]
-     }*/
+    const testOrder = {
+        customer_first_name: firstName.value,
+        customer_last_name: lastName.value,
+        customer_address: adress.value,
+        customer_postcode: postcode.value,
+        customer_city: city.value,
+        customer_email: email.value,
+        order_total: 0,
+        order_items: [
+            {
+
+            },
+        ]
+    }
+
+    testOrder.order_items.push(order)
+
+    console.log(testOrder)
+
+
+
+
     const fullOrder: IOrder = {
         customer_first_name: firstName.value,
         customer_last_name: lastName.value,
@@ -145,18 +150,27 @@ form?.addEventListener('submit', async (e: Event) => {
         customer_postcode: postcode.value,
         customer_city: city.value,
         customer_email: email.value,
-        order_total: 24,
+        order_total: 8,//24 
         order_items: [
             {
-                product_id: 6545,
-                qty: 3,//3
-                item_price: 8,
-                item_total: 24
+                product_id: 6604,
+                qty: 2,
+                item_price: 4,
+                item_total: 8
             },
         ]
     }
-    //fullOrder.push(kund, order)
 
+    const totalPrice = fullOrder.order_items.reduce((sum, items) => {
+        return sum + items.item_total * (fullOrder.order_items.length)
+    }, 0)
+    console.log(totalPrice)
+
+    /*product_id: 6545,
+                    qty: 3,//3
+                    item_price: 8,
+                    item_total: 24*/
+    // product_id: 6604, qty: 2, item_price: 4, item_total: 8
 
     console.log(fullOrder)
     console.log(kund, order)
