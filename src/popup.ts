@@ -4,9 +4,12 @@ import { IProducts } from "./interfaces";
 import { IOrder } from "./interfaces";
 import { IProductsExt } from "./interfaces";
 
+/* hämta localStorage här */
+
+
 const popupWrapper = document.querySelector('.popup-wrapper');
 const popup = document.querySelector('.popup');
-let productsInCart: IProductsExt[] = [] //ska detta eg vara en array hämtad från localStorage(), som även kan vara tom? typ = sncb ?? '[' 
+let productsInCart: IProductsExt[] = JSON.parse(localStorage.getItem('products_in_cart')?? '[]') 
 let foundProductInCart: any
 let allProductsArr: IProductsExt[] = [] 
 
@@ -19,6 +22,7 @@ document.addEventListener('click', (e) => {
 		console.log("You clicked 'Read more'");
 		
 		(popupWrapper as HTMLElement).style.display = 'block'
+
 		/* trying this block of code below.
 		can try to make it nicer with callback functions and async and await but rn just happy that it works */
 		fetch('https://bortakvall.se/api/products')
@@ -55,9 +59,32 @@ document.addEventListener('click', (e) => {
 				})
 
 				// console.log("allProductsArr: ", allProductsArr)
-			
+
 				popup!.innerHTML = allProductsArr.map((product: IProductsExt) => {
-					if(product.id === productId){ //eller gör en if-sats här om btn ska vara abled eller disabled
+					if(product.id === productId){ 
+
+						// en if-sats om btn ska vara abled eller disabled. inspirerad av johans todos-27 script.js:47
+
+						// standard-rendering:
+						let stockQtyInner = `Antal produkter i lager: ${product.stock_quantity} st`
+						let disableBtn = ''
+						let btnInner = 'Lägg till <i class="fa-solid fa-cart-plus">'
+
+						productsInCart.map(productInCart => {
+
+							// rendering OM produkten är slut i stock
+							if(product.id === productInCart.id && productInCart.stock_status === "outofstock"){
+								disableBtn = 'disabled'
+								btnInner = 'Slut i lager'
+								stockQtyInner = `Antal produkter i lager: ${productInCart.stock_quantity} st` 
+
+								return disableBtn && btnInner && stockQtyInner
+							}else if(product.id === productInCart.id){
+								return stockQtyInner = `Antal produkter i lager: ${productInCart.stock_quantity} st`
+							}
+
+						})
+
 						return  `
 					<a href="kassa.html" class="popup-cart-sc text-secondary small">Gå till kassan <i
 					  class="fa-solid fa-cart-shopping"></i></a>
@@ -72,6 +99,7 @@ document.addEventListener('click', (e) => {
 							<p class="popup-description">
 								${product.description}
 							</p>
+							<p class="small stock-qty">${stockQtyInner}</p>
 						  </div>
 						  <div class="col-xs-12 col-md-6">
 							<img src="https://bortakvall.se${product.images.large}" alt="Produkt från Bortakväll" class="img-fluid mh-sm-50 m-3 popup-img" />
@@ -79,8 +107,8 @@ document.addEventListener('click', (e) => {
 
 						  <div class="row">
 							  <div class="col-12">
-								  <button class="btn btn-secondary popup-add-to-cart" data-current-product-id="${product.id}">
-								  Lägg till <i class="fa-solid fa-cart-plus"></i></button>
+								  <button ${disableBtn} class="btn btn-secondary popup-add-to-cart" data-current-product-id="${product.id}">
+								  ${btnInner}</i></button>
 							  </div>
 						  </div>
 						</div>
@@ -101,15 +129,6 @@ document.addEventListener('click', (e) => {
 				// adding product in popup to cart when clicking addToCartBtn
 				const addToCartBtn = document.querySelector('.popup-add-to-cart');
 
-			 	// disabling button if product is out of stock
-				productsInCart.map(product => {
-					if(product.stock_quantity <= 0){
-						addToCartBtn!.setAttribute('disabled', 'disabled')
-						addToCartBtn!.innerHTML = `Slut i lager`
-					}
-
-				}) 
-				
 				addToCartBtn?.addEventListener('click', (e) => {
 					const currentProductId = Number((e.target as HTMLButtonElement).dataset.currentProductId)
 					console.log('You clicked add to cart for product with product.id: ', currentProductId)
@@ -117,37 +136,46 @@ document.addEventListener('click', (e) => {
 					// finding if product is already in cart
 					foundProductInCart = productsInCart.find(product => product.id === currentProductId)
 
-					// getting new product to be added to cart
+					// otherwise getting new product to be added to cart
 				 	let addNewProduct: IProductsExt = allProductsArr.find((product: any) => product.id === currentProductId) 
 
 				 	if(!foundProductInCart) { // addNewProduct.stock_quantity > 0
-						addNewProduct.order_items.qty = 1 
-						addNewProduct.stock_quantity -- //här behöver jag nog productsInCart(.map?).stock_quantity. (se funktion nedan: productsInCart.map(foundProduct => { etc) därför behöver jag den arrayen i formatet IProductsExt
-						if(addNewProduct.stock_quantity <= 0 ){
+						addNewProduct!.order_items.qty = 1 
+						addNewProduct!.stock_quantity -- //här behöver jag nog productsInCart(.map?).stock_quantity. (se funktion nedan: productsInCart.map(foundProduct => { etc) därför behöver jag den arrayen i formatet IProductsExt
+						if(addNewProduct!.stock_quantity <= 0 ){
 							addNewProduct.stock_status = "outofstock"
 						}
-						// item_total? fixa. typ addNewProduct.order_items.item_total = addNewProduct.order_items.qty * addNewProduct.price 
-						productsInCart.push(addNewProduct)
+						addNewProduct!.order_items.item_total = addNewProduct!.order_items.qty * addNewProduct!.price 
+						productsInCart.push(addNewProduct);
 					}else if(foundProductInCart && foundProductInCart.stock_quantity > 0){
-						 productsInCart.map(foundProduct => {
+						productsInCart.map(foundProduct => {
 							if(foundProduct.id === foundProductInCart.id){
 								foundProduct.order_items.qty! ++
 								foundProduct.stock_quantity --
 								if(foundProduct.stock_quantity <= 0 ){
 									return foundProduct.stock_status = "outofstock"
 								}
-								// item_total? fixa
-								return foundProduct		
+								foundProduct.order_items.item_total = foundProduct.order_items.qty! * foundProduct.price 
+								return foundProduct	
 							} 
+						// (stockQtyEl as HTMLElement)!.innerHTML = `Antal produkter i lager: ${foundProduct.stock_quantity} st`
 						})
 					}		
 
-					// stock_status: uppdatera på ngt sätt. kanske en if-sats om stock_quantity <= 0
-
 					console.log('Products currently in cart: ', productsInCart)
 
-					localStorage.setItem('products_in_cart', JSON.stringify(productsInCart))
+					localStorage.setItem('products_in_cart', JSON.stringify(productsInCart));
 
+					// rendera det uppdaterade stock_quantity varje gång 
+					let productUpdate = productsInCart.map(product => {
+						if(product.id === currentProductId){
+							return product.stock_quantity
+						}
+					}).join('')
+					const stockQtyEl = document.querySelector('.stock-qty');
+					(stockQtyEl as HTMLElement)!.innerHTML = `Antal produkter i lager: ${productUpdate} st`
+
+					// disable button om produkten är slut i lager
 					if(foundProductInCart?.stock_quantity <= 0 || addNewProduct?.stock_quantity <= 0){
 
 						addToCartBtn.setAttribute('disabled', 'disabled')
