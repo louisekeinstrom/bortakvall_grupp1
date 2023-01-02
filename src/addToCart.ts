@@ -11,7 +11,21 @@ const showCart = document.querySelector(".added-to-cart")
 
 let cart: [] = []
 
-function addToCart(product: Array){
+function addToCart(product: {
+    id: number,
+    order_date: string,
+    customer_first_name: string,
+    customer_last_name: string,
+    customer_address: string,
+    customer_postcode: string,
+    customer_city: string,
+    customer_email: string,
+    customer_phone: null,
+    order_total: number,
+    created_at: string,
+    updated_at: string,
+    numberOfUnits: number,
+}){
     if(cart.some((product) => product === product)){
         alert("already in cart")
     }else{
