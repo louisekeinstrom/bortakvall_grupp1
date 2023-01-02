@@ -10,7 +10,6 @@ import { getAllProducts } from "./externalFetch";
 let productsInCart: IProductsExt[] = JSON.parse(localStorage.getItem('products_in_cart')?? '[]') 
 let foundProductInCart: any
 let allProductsArr: IProductsExt[] = [] 
-const addToCartBtn = document.querySelector('.cart-icon-container')
 
 /* addClasslist="hide" kan jag göra i renderingen i fetch.ts om producten är slut i lager. hämta då localStorage() för att */
 
@@ -90,8 +89,11 @@ const addToCart = (data: any, productId: number) => {
 	
 	// hide button om produkten är slut i lager
 	if(foundProductInCart && foundProductInCart?.stock_quantity <= 0){
-		(addToCartBtn as HTMLElement)!.classList!.add('hide')!
-        console.log('Slut på produkten')
+        const addToCartBtn: HTMLElement = document.querySelector('.cart-icon-container')!;
+        alert('Slut på produkten'); 
+        // jag lyckas ej med nedan kod?!?!? gör en alert() på den sålänge
+		addToCartBtn!.setAttribute('disabled', 'disabled')
+		addToCartBtn!.classList.add('hide')
 	}
 		
 }
@@ -118,7 +120,7 @@ document.addEventListener('click', async (e) => {
         }
     }
             
-    })
+})
 
 
 
