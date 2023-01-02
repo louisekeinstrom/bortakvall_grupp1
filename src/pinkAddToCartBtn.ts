@@ -51,7 +51,7 @@ const addToCart = (data: any, productId: number) => {
 	// OM produkten INTE hittas i varukorgen:
 	if(!foundProductInCart) { // addNewProduct.stock_quantity > 0
 		// lägg produkten som den första av sitt slag
-		addNewProduct!.order_items.qty = 1 
+		addNewProduct!.order_items.qty ++ 
 		// minska antal i lager med -1
 		addNewProduct!.stock_quantity -- 
 		// om lagerantalet blir 0, ändra lagerstatus till "outofstock"
