@@ -258,6 +258,10 @@ h1 {
   transition: all 0.1s ease-in-out;
 }
 
+.cart-icon-hide{
+  display: none;
+}
+
 .description-text {
   font-size: 14px;
   cursor: default;

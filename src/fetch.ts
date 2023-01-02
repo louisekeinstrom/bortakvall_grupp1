@@ -1,4 +1,5 @@
-//export { };
+export { };
+
 import { IProducts } from "./interfaces";
 import { eventListeners } from "./popup";
 
@@ -60,8 +61,6 @@ export const fetchProducts = () => {
 */
 
 
-let products = {}
-
 //queryselectorn är inne i funktionen
 export const renderProducts = () => {
     fetch('https://bortakvall.se/api/products')
@@ -74,7 +73,7 @@ export const renderProducts = () => {
         .then(data => {
             console.log(data.data)
 
-            document.querySelector('.rendering')!.innerHTML = data.data.map((product: any) => {
+            document.querySelector('.rendering')!.innerHTML = data.data.map((product: IProducts) => {
                 return `
                 <div class="product-container m-3 col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center flex-column">
                   <i class="cart-icon-container text-light fa-solid fa-cart-plus" data-product-id="${product.id}"></i>
@@ -94,13 +93,10 @@ export const renderProducts = () => {
                   </div>
                   <p class="description-text">description</p>
                   <button class="read-more-btn btn btn-secondary" data-product-id="${product.id}">Läs mer</button>
-                </div>
-                  
+                </div>   
                `
             }).join('')
 
-            console.log(products)
-            
         })
         .catch(err => {
             console.log(err)

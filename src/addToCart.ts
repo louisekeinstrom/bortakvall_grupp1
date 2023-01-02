@@ -1,4 +1,5 @@
 export { }
 import "./interfaces"
-import "./fetch"
+// import "./fetch"
+import "./popup"
 
