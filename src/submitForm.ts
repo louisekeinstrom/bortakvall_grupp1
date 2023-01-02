@@ -1,6 +1,6 @@
 export { }
-import { IOrder } from "./interfaces"
-import { postOrder, confirm } from "./post";
+import { IOrder, IProductsExt } from "./interfaces"
+import { postOrder } from "./post";
 //DOM ref till formuläret
 export const form = document.querySelector('.customerInfo') as HTMLFormElement;
 
@@ -18,6 +18,7 @@ const email = document.querySelector('#email') as HTMLInputElement
 
 
 //försök med klass andvänds INTE NU
+/*
 class Customer {
     customer_first_name: string;
     customer_last_name: string;
@@ -35,37 +36,38 @@ class Customer {
         this.customer_email = e;
     }
 
-}
+}*/
 
 
 
 //tom array där kundinfo ska sparas
-//let fullOrder: IOrder[] = []
+//let fullOrder: IOrder["order_items"] = []
+const getOrder = localStorage.getItem('products_in_cart') ?? '[]'
 
+//const localOrder: IOrder = JSON.parse(getOrder)
+const productsArray = JSON.parse(localStorage.getItem('products_in_cart') ?? '[]');
+const orderItems = productsArray.map((product: { order_items: any; }) => product.order_items);
+
+/*
+
+let fullOrder = JSON.parse(getOrder)//[]
+
+
+let workOrder: IOrder["order_items"] = []
+
+workOrder.push(fullOrder.product_id, fullOrder.qty, fullOrder.item_price, fullOrder.item_total)
+*/
 
 //submit form eventlistener
 
 form?.addEventListener('submit', async (e: Event) => {
     e.preventDefault();
 
-    //kontroll
-    /*console.log(
-        firstName.value,
-        lastName.value,
-        adress.value,
-        postcode.value,
-        city.value,
-        tel.value,
-        email.value
-    )*/
-    /*const kund = new Customer(
-        firstName.value,
-        lastName.value,
-        adress.value,
-        postcode.value,
-        city.value,
-        email.value
-    )*/
+    //console.log(fullOrder)
+    console.log(orderItems)
+
+
+
     /*const kund: IOrder = {
         customer_first_name: firstName.value,
         customer_last_name: lastName.value,
@@ -91,23 +93,6 @@ form?.addEventListener('submit', async (e: Event) => {
         order_total: 0,
 
     }
-    /*
-        const kund  = {
-            customer_first_name: firstName.value,
-            customer_last_name: lastName.value,
-            customer_address: adress.value,
-            customer_postcode: postcode.value,
-            customer_city: city.value,
-            customer_email: email.value,
-            order_total: 1,
-            order_items: [ {
-                product_id: 6545,
-                qty: 3,
-                item_price: 8,
-                item_total: 24
-            }]
-        }
-    */
 
 
     const order: IOrder["order_items"] = [
@@ -116,32 +101,8 @@ form?.addEventListener('submit', async (e: Event) => {
             qty: 3,
             item_price: 8,
             item_total: 24
-        }/*, {
-            product_id: 6604,
-            qty: 2,
-            item_price: 4,
-            item_total: 8
-        }*/
+        }
     ]
-
-    /*const order = [
-        {
-            product_id: 6545,
-            qty: 3,
-            item_price: 8,
-            item_total: 24
-        }
-    ]*/
-    /*
-    const order = [
-        {
-            product_id: 6545,
-            qty: 3,
-            item_price: 8,
-            item_total: 24
-        }
-
-    ]*/
 
     order.push({
         product_id: 6604,
@@ -150,10 +111,12 @@ form?.addEventListener('submit', async (e: Event) => {
         item_total: 8
     })
 
-    const totalPrice = order.reduce((sum, items) => {
-        return sum + items.item_total
-    }, 0)
-    console.log(totalPrice)
+    /*
+        const totalPrice = order.reduce((sum, items) => {
+            return sum + items.item_total
+        }, 0) */
+
+    //console.log(totalPrice)
 
     /*const testOrder: IOrder = { //IOrder 
         customer_first_name: firstName.value,
@@ -172,8 +135,8 @@ form?.addEventListener('submit', async (e: Event) => {
         customer_postcode: postcode.value,
         customer_city: city.value,
         customer_email: email.value,
-        order_total: totalPrice,
-        order_items: order //order
+        order_total: 32,//totalPrice,
+        order_items: orderItems//workOrder//order
 
     }
     /*order.push({
@@ -208,7 +171,7 @@ form?.addEventListener('submit', async (e: Event) => {
         }
         */
     /*
-        const totalPrice = fullOrder.order_items.reduce((sum, items) => {
+        const totalPrice = order_items.reduce((sum, items) => {
             return sum + items.item_total * (fullOrder.order_items.length)
         }, 0)*/
 
