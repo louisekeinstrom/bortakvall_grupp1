@@ -15,7 +15,6 @@ let allProductsArr: IProductsExt[] = []
 
 document.addEventListener('click', (e) => {
 	if( (e.target as HTMLButtonElement).tagName === "BUTTON" && (e.target as HTMLButtonElement).dataset.productId || (e.target as HTMLButtonElement).tagName === "IMG" && (e.target as HTMLButtonElement).dataset.productId ){
-		// e.stopPropagation();
 		
 		const productId = Number((e.target as HTMLButtonElement).dataset.productId)
 		
@@ -66,8 +65,8 @@ document.addEventListener('click', (e) => {
 						// en if-sats om btn ska vara abled eller disabled. inspirerad av johans todos-27 script.js:47
 
 						// standard-rendering:
-						let stockQtyInner = `Antal produkter i lager: ${product.stock_quantity} st`
-						let disableBtn = ''
+						let stockQtyInner = `Antal produkter i lager: ${product.stock_quantity} st` //rendering om produkten inte finns i varukorgen
+						let disableBtn = '' //disabla INTE knappen
 						let btnInner = 'Lägg till <i class="fa-solid fa-cart-plus">'
 
 						productsInCart.map(productInCart => {
@@ -79,6 +78,8 @@ document.addEventListener('click', (e) => {
 								stockQtyInner = `Antal produkter i lager: ${productInCart.stock_quantity} st` 
 
 								return disableBtn && btnInner && stockQtyInner
+
+								// rendering om produkten finns i lager och redan är i varukorgen
 							}else if(product.id === productInCart.id){
 								return stockQtyInner = `Antal produkter i lager: ${productInCart.stock_quantity} st`
 							}
@@ -138,27 +139,38 @@ document.addEventListener('click', (e) => {
 
 					// otherwise getting new product to be added to cart
 				 	let addNewProduct: IProductsExt = allProductsArr.find((product: any) => product.id === currentProductId) 
-
+					// OM produkten INTE hittas i varukorgen:
 				 	if(!foundProductInCart) { // addNewProduct.stock_quantity > 0
+						// lägg produkten som den första av sitt slag
 						addNewProduct!.order_items.qty = 1 
-						addNewProduct!.stock_quantity -- //här behöver jag nog productsInCart(.map?).stock_quantity. (se funktion nedan: productsInCart.map(foundProduct => { etc) därför behöver jag den arrayen i formatet IProductsExt
+						// minska antal i lager med -1
+						addNewProduct!.stock_quantity -- 
+						// om lagerantalet blir 0, ändra lagerstatus till "outofstock"
 						if(addNewProduct!.stock_quantity <= 0 ){
-							addNewProduct.stock_status = "outofstock"
+							addNewProduct!.stock_status = "outofstock"
 						}
+						// räkna ut total kostnad för produkten 
 						addNewProduct!.order_items.item_total = addNewProduct!.order_items.qty * addNewProduct!.price 
-						productsInCart.push(addNewProduct);
+						// pusha produkten till arrayen productsInCart
+						productsInCart.push(addNewProduct!);
+						// OM produkten hittas
 					}else if(foundProductInCart && foundProductInCart.stock_quantity > 0){
+						// uppdatera följande egenskaper
 						productsInCart.map(foundProduct => {
 							if(foundProduct.id === foundProductInCart.id){
+								// addera 1 av produkten
 								foundProduct.order_items.qty! ++
+								// minska 1 i lager
 								foundProduct.stock_quantity --
+								// OM produkten då tar slut i lager, ändra status
 								if(foundProduct.stock_quantity <= 0 ){
 									return foundProduct.stock_status = "outofstock"
 								}
+								// uppdatera totala summan för denna produkt
 								foundProduct.order_items.item_total = foundProduct.order_items.qty! * foundProduct.price 
+								// återkom med den uppdaterade produkten
 								return foundProduct	
 							} 
-						// (stockQtyEl as HTMLElement)!.innerHTML = `Antal produkter i lager: ${foundProduct.stock_quantity} st`
 						})
 					}		
 
