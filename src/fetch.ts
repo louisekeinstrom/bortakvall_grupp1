@@ -73,6 +73,16 @@ export const renderProducts = () => {
         .then(data => {
             console.log(data.data)
 
+            data.data.sort((a: IProducts, b: IProducts) => {
+                if (a.name < b.name) {
+                    return -1;
+                }
+                if (a.name > b.name) {
+                    return 1;
+                }
+                return 0;
+            });
+
             document.querySelector('.rendering')!.innerHTML = data.data.map((product: IProducts) => {
                 return `
                 <div class="product-container m-3 col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center flex-column">
