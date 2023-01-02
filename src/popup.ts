@@ -15,7 +15,6 @@ let allProductsArr: IProductsExt[] = []
 
 document.addEventListener('click', (e) => {
 	if( (e.target as HTMLButtonElement).tagName === "BUTTON" && (e.target as HTMLButtonElement).dataset.productId || (e.target as HTMLButtonElement).tagName === "IMG" && (e.target as HTMLButtonElement).dataset.productId ){
-		// e.stopPropagation();
 		
 		const productId = Number((e.target as HTMLButtonElement).dataset.productId)
 		
@@ -148,12 +147,12 @@ document.addEventListener('click', (e) => {
 						addNewProduct!.stock_quantity -- 
 						// om lagerantalet blir 0, ändra lagerstatus till "outofstock"
 						if(addNewProduct!.stock_quantity <= 0 ){
-							addNewProduct.stock_status = "outofstock"
+							addNewProduct!.stock_status = "outofstock"
 						}
 						// räkna ut total kostnad för produkten 
 						addNewProduct!.order_items.item_total = addNewProduct!.order_items.qty * addNewProduct!.price 
 						// pusha produkten till arrayen productsInCart
-						productsInCart.push(addNewProduct);
+						productsInCart.push(addNewProduct!);
 						// OM produkten hittas
 					}else if(foundProductInCart && foundProductInCart.stock_quantity > 0){
 						// uppdatera följande egenskaper
