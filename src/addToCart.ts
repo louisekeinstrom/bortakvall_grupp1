@@ -6,14 +6,34 @@ import { fetchProducts } from "./fetchWithInterface"
 import { IProductsExt } from "./interfaces";
 
 const cartEL = document.querySelector(".cart-product")
+const TotalAmountEL = document.querySelector(".total-amount")
 
-   let cartItem = JSON.parse(localStorage.getItem("products_in_cart"))
+let cartItem = JSON.parse(localStorage.getItem("products_in_cart"))
 
-   console.log(cartItem)
+console.log(cartItem)
 
-   let showCartItems = () => {
+// array för mängd produkter i cart
+let amountOfProductsInCart = cartItem.map((product:number) => {
+    return product.order_items.qty
+})
+
+// array för priserna
+let totalPrice = cartItem.map((product:any) => {
+    return product.price
+})
+
+//räknar ihop priset på varorna
+let sum = 0
+
+for (let i = 0; i < totalPrice.length; i++) {
+    sum += totalPrice[i] * amountOfProductsInCart[i];
+}
+
+
+
+// funktion för att synligt rendera ut produkten i varukorgen
+
    cartItem.forEach((product:any) => {
-    console.log(product.name)
     cartEL!.innerHTML += `
     <div>
         <img src="https://bortakvall.se${product.images.large}" alt="Produkt från Bortakväll" class="img-fluid mh-sm-50 m-3 popup-img" />
@@ -21,54 +41,36 @@ const cartEL = document.querySelector(".cart-product")
 				<p>Pris <span>${product.price}</span> kr</p>
                     <div>
                         <p class ="increase">+</p>
-                        <p class ="showAmount"></p>
+                        <p class ="showAmount">${product.order_items.qty}</p>
                         <p class ="decrease">-</p>
 					</div>
     </div>
-    `
-    return {
-        id: product.id,
-        name: product.name,
-        description: product.description,
-        price: product.price,
-        on_sale: product.on_sale,
-        images: {
-            thumbnail: product.images.thumbnail,
-            large: product.images.large
-        },
-        stock_status: product.stock_status,
-        stock_quantity: product.stock_quantity,
-        order_items: 
-        {
-            product_id: product.id,
-            qty: 0, 
-            item_price: product.price,
-            item_total: 0
-        },	
-    }
+    `   
    });
-   }
-
-   showCartItems()
+   
+   TotalAmountEL!.innerHTML += `Totalt: ${sum} kr`
 
    const increaseEl = Array.from(document.querySelectorAll(".increase"))
    console.log(increaseEl)
 
    const decreaseEl = Array.from(document.querySelectorAll(".decrease"))
 
-   let cartAmount: IProductsExt 
-   
-//    för att öka produkter i varukorg
-   increaseEl!.forEach((e) => {
-    e.addEventListener("click", () => {
-    console.log("yay u clicked")
-    cartAmount.order_items.qty! ++
-    console.log(cartAmount.order_items.qty)
-    return cartAmount
-    })
+   console.log(decreaseEl)
+
+
+   let amountOfProducts = cartItem.map((product:number) => {
+    return product.order_items.qty
    })
+   console.log(amountOfProducts)
 
-
+//    för att öka produkter i varukorg
+increaseEl.forEach(()=> {
+    addEventListener("click", (product) => {
+    console.log("yay u increased")
+    product.order_items.qty[i]++
+    console.log(product.order_items.qty)
+    })
+})
    //    för att minska produkter i varukorg
    decreaseEl!.forEach((e) => {
     e.addEventListener("click", () => {
