@@ -6,8 +6,7 @@ import { fetchProducts } from "./fetchWithInterface"
 import { IProductsExt } from "./interfaces";
 
 const cartEL = document.querySelector(".cart-product")
-const TotalAmountEL = document.querySelector(".total-amount")
-
+const cartIconEl = Array.from(document.querySelectorAll(".cart-icon-container"))
 let cartItem = JSON.parse(localStorage.getItem("products_in_cart"))
 
 console.log(cartItem)
@@ -29,11 +28,8 @@ for (let i = 0; i < totalPrice.length; i++) {
     sum += totalPrice[i] * amountOfProductsInCart[i];
 }
 
-
-
-// funktion för att synligt rendera ut produkten i varukorgen
-
-   cartItem.forEach((product:any) => {
+// funktion för att synligt rendera ut produkten i varukorgen   
+    cartItem.forEach((product:any) => {
     cartEL!.innerHTML += `
     <div>
         <img src="https://bortakvall.se${product.images.large}" alt="Produkt från Bortakväll" class="img-fluid mh-sm-50 m-3 popup-img" />
@@ -47,8 +43,8 @@ for (let i = 0; i < totalPrice.length; i++) {
     </div>
     `   
    });
-   
-   TotalAmountEL!.innerHTML += `Totalt: ${sum} kr`
+
+   document.querySelector(".total-amount").innerHTML += `Totalt: ${sum} kr`
 
    const increaseEl = Array.from(document.querySelectorAll(".increase"))
    console.log(increaseEl)
