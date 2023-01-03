@@ -210,7 +210,7 @@ h1 {
 
 /* dropdown meny slutar här */
 
-.product-img{
+.product-img {
   cursor: pointer;
 }
 
@@ -258,7 +258,7 @@ h1 {
   transition: all 0.1s ease-in-out;
 }
 
-.cart-icon-hide{
+.cart-icon-hide {
   display: none;
 }
 

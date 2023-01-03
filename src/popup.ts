@@ -213,3 +213,4 @@ popupWrapper?.addEventListener('click', () => {
 popup?.addEventListener('click', (e) => {
 	e.stopPropagation();
 })	
+
