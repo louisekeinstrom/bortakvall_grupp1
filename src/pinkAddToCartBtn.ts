@@ -26,14 +26,14 @@ const addToCart = (data: any, productId: number) => {
             thumbnail: product.images.thumbnail,
             large: product.images.large
         },
-        stock_status: product.stock_status,
-        stock_quantity: product.stock_quantity,
+        stock_status: product.stock_status, //rendera annorlunda if products is in cart
+        stock_quantity: product.stock_quantity, //rendera annorlunda if products is in cart
         order_items: 
         {
             product_id: product.id,
-            qty: 0, 
+            qty: 0, //rendera annorlunda if products is in cart
             item_price: product.price,
-            item_total: 0
+            item_total: 0 //rendera annorlunda if products is in cart
         },	
     }
     })
@@ -103,17 +103,18 @@ document.addEventListener('click', async (e) => {
     if( (e.target as HTMLButtonElement).tagName === "I" && (e.target as HTMLButtonElement).dataset.productId ) {
         
         const productId = Number((e.target as HTMLButtonElement).dataset.productId)
-            // console.log("You clicked pink 'Add to cart'-button for product with id: ", productId)
+        
+		// console.log("You clicked pink 'Add to cart'-button for product with id: ", productId)
             
-            /* get allProductsArr from externalFetch instead of fetching here*/
-            console.log('Searching for products')
-            try {
-                const data = await getAllProducts()
-                
-                // console.log("Found all products from API: ", data.data)
-
-            // add clicked product to cart-function
-            addToCart(data, productId)
+        /* get allProductsArr from externalFetch instead of fetching here*/
+        console.log('Searching for products')
+        try {
+            const data = await getAllProducts()
+		
+            // console.log("Found all products from API: ", data.data)
+		
+        	// add clicked product to cart-function
+        	addToCart(data, productId)
 
         } catch (e) {
            console.log("Something went wrong: ", e)
