@@ -1,4 +1,5 @@
 export{}
+import { IProductsExt } from "./interfaces"
 
 /* hämta från localStorage() */
 let productsInCart: IProductsExt[] = JSON.parse(localStorage.getItem('products_in_cart')?? '[]') 

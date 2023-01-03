@@ -15,6 +15,15 @@ let allProductsArr: IProductsExt[] = []
 
 const addToCart = (data: any, productId: number) => {
     allProductsArr = data.data.map((product: IProductsExt)=> {
+
+		// is product in cart?
+		let isFound: any = productsInCart.find((foundProductInCart: any) => {
+			if(product.id === foundProductInCart.id){
+				return foundProductInCart
+			}
+		})
+		// if product is in cart, use its qty, item total, stock_quantity and stock_status. if not use original
+
         // mappa ut array i nytt format
        return {
         id: product.id,
@@ -26,17 +35,18 @@ const addToCart = (data: any, productId: number) => {
             thumbnail: product.images.thumbnail,
             large: product.images.large
         },
-        stock_status: product.stock_status, //rendera annorlunda if products is in cart
-        stock_quantity: product.stock_quantity, //rendera annorlunda if products is in cart
+        stock_status: isFound ? isFound!.stock_status : product.stock_status, 
+        stock_quantity: isFound ? isFound!.stock_quantity : product.stock_quantity, 
         order_items: 
         {
             product_id: product.id,
-            qty: 0, //rendera annorlunda if products is in cart
+            qty: isFound ? isFound!.order_items.qty : 0, 
             item_price: product.price,
-            item_total: 0 //rendera annorlunda if products is in cart
+            item_total: isFound ? isFound!.order_items.item_total : 0, 
         },	
-    }
-    })
+	}
+
+})
     
     // console.log("Products from API mapped in a new array: ", allProductsArr)
     // console.log("You clicked pink 'Add to cart'-button for product with id: ", productId)
