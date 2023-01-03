@@ -15,6 +15,7 @@ h1 {
   font-size: 70px;
   cursor: default;
 }
+
 @media screen and (max-width: 768px) {
   h1 {
     font-size: 10vw;
@@ -65,7 +66,7 @@ h1 {
   transition: 0.5s;
 }
 
-.shopping-cart-btn > a {
+.shopping-cart-btn>a {
   text-decoration: none;
   color: #fff;
 }
@@ -80,10 +81,10 @@ h1 {
   display: flex;
   flex-direction: column;
   background-color: #fff;
-  left: 64%;
+  left: 10%;
   top: -120%;
   height: 600px;
-  width: 400px;
+  width: 300px;
   overflow: scroll;
   padding: 10px;
   box-shadow: 2px 5px 10px 0px;
@@ -92,9 +93,19 @@ h1 {
   transition: 0.3s;
 }
 
+
 .shopping-cart-roll-down.active {
+  /*top: 0;*/
   top: 0;
+  margin-top: 55%;
+  /*kanske*/
+
 }
+
+/* test
+.active {
+  top: 0;
+}*/
 
 .cart-product {
   display: flex;
@@ -107,7 +118,7 @@ h1 {
   flex-wrap: wrap;
 }
 
-.cart-product > div {
+.cart-product>div {
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -203,7 +214,7 @@ h1 {
   background-color: #00a7e1;
 }
 
-.check-out > a {
+.check-out>a {
   text-decoration: none;
   color: #fff;
 }
@@ -294,4 +305,44 @@ h1 {
 
 .product-name-price-container {
   font-weight: 600;
+}
+
+@media screen and (min-width: 767px) {
+  .shopping-cart-roll-down {
+    left: 55%;
+  }
+
+  .shopping-cart-roll-down.active {
+    margin-top: 35%;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .shopping-cart-roll-down {
+    left: 64%;
+  }
+
+  .shopping-cart-roll-down.active {
+    margin-top: 25%;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .shopping-cart-roll-down {
+    left: 70%;
+  }
+
+  .shopping-cart-roll-down.active {
+    margin-top: 25%;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .shopping-cart-roll-down {
+    left: 70%;
+  }
+
+  .shopping-cart-roll-down.active {
+    margin-top: 20%;
+  }
 }
