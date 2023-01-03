@@ -7,7 +7,7 @@ import { IProductsExt } from "./interfaces";
 import { getAllProducts } from "./externalFetch";
 
 
-let productsInCart: IProductsExt[] = JSON.parse(localStorage.getItem('products_in_cart')?? '[]') 
+let productsInCart: IProductsExt[] = JSON.parse(localStorage.getItem('products_in_cart') ?? '[]') 
 let foundProductInCart: any
 let allProductsArr: IProductsExt[] = [] 
 
@@ -15,33 +15,44 @@ let allProductsArr: IProductsExt[] = []
 
 const addToCart = (data: any, productId: number) => {
     allProductsArr = data.data.map((product: IProductsExt)=> {
-        // mappa ut array i nytt format
-       return {
-        id: product.id,
-        name: product.name,
-        description: product.description,
-        price: product.price,
-        on_sale: product.on_sale,
-        images: {
-            thumbnail: product.images.thumbnail,
-            large: product.images.large
-        },
-        stock_status: product.stock_status, //rendera annorlunda if products is in cart
-        stock_quantity: product.stock_quantity, //rendera annorlunda if products is in cart
-        order_items: 
-        {
-            product_id: product.id,
-            qty: 0, //rendera annorlunda if products is in cart
-            item_price: product.price,
-            item_total: 0 //rendera annorlunda if products is in cart
-        },	
-    }
-    })
+
+		
+		// is product in cart?
+		foundProductInCart = productsInCart.find((foundProductInCart: any) => {
+			if(product.id === foundProductInCart.id){
+				return foundProductInCart
+			}
+		})
+		
+		// if product is in cart, use its qty, item total, stock_quantity and stock_status. if not use original data
+		return {
+			id: product.id,
+			name: product.name,
+			description: product.description,
+			price: product.price,
+			on_sale: product.on_sale,
+			images: {
+				thumbnail: product.images.thumbnail,
+				large: product.images.large
+			},
+			stock_status: foundProductInCart ? foundProductInCart.stock_status : product.stock_status, 
+			stock_quantity: foundProductInCart ? foundProductInCart.stock_quantity : product.stock_quantity, 
+			order_items: 
+			{
+				product_id: product.id,
+				qty: foundProductInCart ? foundProductInCart.order_items.qty : 0, 
+				item_price: product.price,
+				item_total: foundProductInCart ? foundProductInCart.order_items.item_total : 0, 
+			},	
+		}
+		
+	})
+	// localStorage.setItem('products_in_cart', JSON.stringify(productsInCart))
+	productsInCart = JSON.parse(localStorage.getItem('products_in_cart')?? '[]') 
     
     // console.log("Products from API mapped in a new array: ", allProductsArr)
     // console.log("You clicked pink 'Add to cart'-button for product with id: ", productId)
     
-   
 	// finding if product is already in cart
 	foundProductInCart = productsInCart.find(product => product.id === productId)
 
@@ -49,7 +60,7 @@ const addToCart = (data: any, productId: number) => {
 	let addNewProduct: any = allProductsArr.find((product: any) => product.id === productId) 
 
 	// OM produkten INTE hittas i varukorgen:
-	if(!foundProductInCart) { // addNewProduct.stock_quantity > 0
+	if(!foundProductInCart) { 
 		// lägg produkten som den första av sitt slag
 		addNewProduct!.order_items.qty ++ 
 		// minska antal i lager med -1
@@ -101,7 +112,9 @@ const addToCart = (data: any, productId: number) => {
 document.addEventListener('click', async (e) => {
     
     if( (e.target as HTMLButtonElement).tagName === "I" && (e.target as HTMLButtonElement).dataset.productId ) {
-        
+        // getting localStorage
+		productsInCart = JSON.parse(localStorage.getItem('products_in_cart') ?? '[]') 
+		
         const productId = Number((e.target as HTMLButtonElement).dataset.productId)
         
 		// console.log("You clicked pink 'Add to cart'-button for product with id: ", productId)
