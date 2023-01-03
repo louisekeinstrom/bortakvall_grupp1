@@ -103,17 +103,18 @@ document.addEventListener('click', async (e) => {
     if( (e.target as HTMLButtonElement).tagName === "I" && (e.target as HTMLButtonElement).dataset.productId ) {
         
         const productId = Number((e.target as HTMLButtonElement).dataset.productId)
-            // console.log("You clicked pink 'Add to cart'-button for product with id: ", productId)
+        
+		// console.log("You clicked pink 'Add to cart'-button for product with id: ", productId)
             
-            /* get allProductsArr from externalFetch instead of fetching here*/
-            console.log('Searching for products')
-            try {
-                const data = await getAllProducts()
-                
-                // console.log("Found all products from API: ", data.data)
-
-            // add clicked product to cart-function
-            addToCart(data, productId)
+        /* get allProductsArr from externalFetch instead of fetching here*/
+        console.log('Searching for products')
+        try {
+            const data = await getAllProducts()
+		
+            // console.log("Found all products from API: ", data.data)
+		
+        	// add clicked product to cart-function
+        	addToCart(data, productId)
 
         } catch (e) {
            console.log("Something went wrong: ", e)
