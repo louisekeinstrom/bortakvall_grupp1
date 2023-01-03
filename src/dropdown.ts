@@ -39,7 +39,7 @@ dropdownTrigger.addEventListener("click", (e: Event) => {
 })
 
 
-
+/*
 cartTest.addEventListener("click", () => {
     console.log("yay you clicked");
     shoppingCart.innerHTML += `<img
@@ -56,7 +56,7 @@ cartTest.addEventListener("click", () => {
                     <p class="decrease">-</p>
                   </div>
                 </div>`
-});
+});*/
 
 
 
