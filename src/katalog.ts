@@ -7,22 +7,31 @@ import { getAllProducts } from "./externalFetch";
 
 const renderCatalouge = (data: any) => {
 
-        console.log(data.data)
+  console.log(data.data)
 
-        // visa antal produkter som renderas varav hur många i lager.
-        // behöver även uppdateras när man tar slut på produkter
-        // kan man göra det genom att mappa över productsInCart och uppdatera status på allproducts?
-        // gör detta i klick-eventen när man lägger till/tar bort från cart.
-        // kanske i en funktion som kan exporteras och återanvändas?
-        let arrayLength: number = data.data.length
-        let inStock: number = data.data.filter((product: any) => product.stock_status === "instock").length
-        // console.log(inStock)
+  data.data.sort((a: IProducts, b: IProducts) => {
+    if (a.name < b.name) {
+      return -1;
+    }
+    if (a.name > b.name) {
+      return 1;
+    }
+    return 0;
+  })
+  // visa antal produkter som renderas varav hur många i lager.
+  // behöver även uppdateras när man tar slut på produkter
+  // kan man göra det genom att mappa över productsInCart och uppdatera status på allproducts?
+  // gör detta i klick-eventen när man lägger till/tar bort från cart.
+  // kanske i en funktion som kan exporteras och återanvändas?
+  let arrayLength: number = data.data.length
+  let inStock: number = data.data.filter((product: any) => product.stock_status === "instock").length
+  // console.log(inStock)
 
-        document.querySelector('.render-stock-status')!.innerHTML = `Visar ${arrayLength} produkter varav ${inStock} är i lager`
+  document.querySelector('.render-stock-status')!.innerHTML = `Visar ${arrayLength} produkter varav ${inStock} är i lager`
 
-        /* ändra ursprunglig array? eler gör en if sats vad som ska renderas om product in stock status ändras medan man klickar? */
-        document.querySelector('.rendering')!.innerHTML = data.data.map((product: IProducts) => {
-            return `
+  /* ändra ursprunglig array? eler gör en if sats vad som ska renderas om product in stock status ändras medan man klickar? */
+  document.querySelector('.rendering')!.innerHTML = data.data.map((product: IProducts) => {
+    return `
             <div class="product-container m-3 col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center flex-column">
               <i class="cart-icon-container text-light fa-solid fa-cart-plus" data-product-id="${product.id}"></i>
               <img
@@ -43,23 +52,23 @@ const renderCatalouge = (data: any) => {
               <button class="read-more-btn btn btn-secondary" data-product-id="${product.id}">Läs mer</button>
             </div>   
            `
-        }).join('')
+  }).join('')
 
 }
 
 const fetchProducts = async () => {
 
-    try {
-        const data = await getAllProducts()
-    
-        // console.log("Found all products from API: ", data.data)
-    
-        // add clicked product to cart-function
-        renderCatalouge(data)
-    
-    } catch (e) {
-       console.log("Something went wrong: ", e)
-    }
+  try {
+    const data = await getAllProducts()
+
+    // console.log("Found all products from API: ", data.data)
+
+    // add clicked product to cart-function
+    renderCatalouge(data)
+
+  } catch (e) {
+    console.log("Something went wrong: ", e)
+  }
 }
 
 fetchProducts()
