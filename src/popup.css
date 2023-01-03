@@ -14,17 +14,30 @@
     font-size: 14px;
 }
 
+/* funkar bara där beskrivning av produkten finns (t ex inte på chokladpopcorn), eftersom man annars targetar fel <p>
+hade kanske kunnat göra en if-sats för info-column.toLowercase().includes(toLowercase('Innehållsförteckning')) och då classList.add() 
+kan prova detta om tid finns*/
+.info-column p:nth-of-type(4){
+    font-size: 12px;
+}
+
 .popup{
 	font-family: arial;
 	text-align: center;
-	width: 100%;
 	max-width: 600px;
+    max-height: 90vh;
 	margin: 10% auto;
 	padding: 20px;
     border-radius: 5px;
 	background: white;
 	position: relative;
     cursor: default;
+}
+
+@media screen and (max-width: 768px){
+    .popup-img{
+        max-height: 35vh;
+    }
 }
 
 .popup-close{
@@ -39,6 +52,7 @@
     padding: 8px;
 	cursor: pointer;
     transition: all .1s ease-in-out;
+    z-index: 1;
 }
 @media (hover: hover) and (pointer: fine){
     .popup-close:hover{
