@@ -9,6 +9,15 @@ const cartEL = document.querySelector(".cart-product")
 const cartIconEl = Array.from(document.querySelectorAll(".cart-icon-container"))
 let cartItem = JSON.parse(localStorage.getItem("products_in_cart"))
 
+const cartBtn = document.querySelector(".shopping-cart-btn"); //knapp för cart
+const cartMenu = document.querySelector(".cart-product"); //cart
+
+//  visar/döljer shoppingvagnen
+cartBtn!.addEventListener("click", (e) => {
+    cartMenu!.classList.toggle("active");
+    e.preventDefault;
+  });
+
 console.log(cartItem)
 
 // array för mängd produkter i cart
