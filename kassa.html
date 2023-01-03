@@ -59,41 +59,48 @@
             <div class="row">
               <hr />
             </div>
-            <!-- enskild produkt. renderas i renderKassa.ts -->
-            <!-- <div class="row product-in-overview">
-            <div class="col-6">
-              <p class="product-list">
-                <span id="product-name">godis godis godis godis godis godis</span>
-              </p>
+            <div class="row product-in-overview">
+              <!-- var enskild produkt. renderas i renderKassa.ts -->
+              <!-- 
+              <div class="col-6">
+                <p class="product-list">
+                  <span id="product-name">godis godis godis godis godis godis</span>
+                </p>
+              </div>
+              <div class="col-2">
+                <p class="product-list">
+                  <i><span id="product-price">x</span> kr</i>
+                </p>
+              </div>
+              <div class="col-2">
+                <p class="product-list">
+                  <span id="product-amount">x</span> st
+                </p>
+              </div>
+              <div class="col-2">
+                <p class="product-list">
+                  <span id="product-price-total">x</span> kr
+                </p>
+              </div>
+              -->
             </div>
-            <div class="col-2">
-              <p class="product-list">
-                <i><span id="product-price">x</span> kr</i>
-              </p>
-            </div>
-            <div class="col-2">
-              <p class="product-list">
-                <span id="product-amount">x</span> st
-              </p>
-            </div>
-            <div class="col-2">
-              <p class="product-list">
-                <span id="product-price-total">x</span> kr
-              </p>
-            </div>
-          </div> -->
 
             <div class="row">
               <hr />
             </div>
-
-            <div class="row">
-              <div class="col-10">
-                <h6>Summa total</h6>
+            <div class="row products-total">
+              <!-- rendera ut totalen i kassa.ts -->
+              <!-- 
+              <div class="col-8">
+                <h6>Total</h6>
               </div>
               <div class="col-2">
-                <h6><span id="sum-total">x</span> kr</h6>
+                <h6>x st</h6>
               </div>
+              <div class="col-2">
+                <h6>x kr</h6>
+              </div> 
+              -->
             </div>
           </div>
         </div>
@@ -227,5 +234,6 @@ ordernr + tackmeddelande -->
       </div>
     </div>
     <script type="module" src="src/main.ts"></script>
+    <script type="module" src="src/kassa.ts"></script>
   </body>
 </html>

@@ -14,7 +14,8 @@ let interProducts: IProducts[] = []
 
 //fetchProducts()
 
-renderProducts()
+// renderProducts() //utkommenterad sålänge eftersom produkterna nu renderas med en extern fetch från externalFetch.ts i katalog.ts
+
 // eventListeners()
 
 form
