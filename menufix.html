@@ -62,31 +62,33 @@
         <a href="#" class="menu-btn">Kassa</a>
       </div>
       <div>
-        <button class="shopping-cart-btn btn btn-secondary" type="button" aria-expanded="false">
-          <!--<a href="kassa.html">Gå till kassa</a>-->
-        </button>
+        <!--<button class="shopping-cart-btn btn btn-secondary" type="button" aria-expanded="false">
+         <a href="kassa.html">Gå till kassa</a>
+        </button>-->
         <button class="shopping-cart-btn btn btn-secondary dropdown-toggle dropdown-trigger" type="button"
           data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
           Varukorg
         </button>
       </div>
-    </nav>
 
+    </nav>
+    <div class="shopping-cart-roll-down dropdown-menu ">
+      <div class="cart-product"></div>
+      <p class="total-amount">Totalt: 27 sek</p>
+      <button type="submit" class="check-out go-to-registry btn btn-secondary">
+        <a href="#">Gå till Kassan</a>
+      </button>
+    </div>
     <div class="container products-grid col-11 col-md-10 col-lg-12 py-3 mb-4">
       <!-- roll down menu varukorg fixed-top fixed-end-->
-      <div class="shopping-cart-roll-down dropdown-menu ">
-        <div class="cart-product"></div>
 
-        <p class="total-amount">Totalt: 27 sek</p>
-        <button type="submit" class="check-out go-to-registry btn btn-secondary">
-          <a href="#">Gå till Kassan</a>
-        </button>
-      </div>
       <!--</div>--><!--problemet är här!-->
       <!--<button type="submit" class="check-out btn btn-secondary">
         Gå till Kassan
       </button> -->
+
     </div>
+
     <!-- KATALOGEN -->
     <div class="container products-grid col-11 col-md-10 col-lg-12 py-3 mb-4">
       <div class="render-stock-status row justify-content-center">Rendering stock status...</div>
@@ -113,12 +115,16 @@
       </div>
     </div>
   </div>
-  <script type="module" src="src/dropdown.ts"></script>
+
   <script type="module" src="src/externalFetch.ts"></script>
   <script type="module" src="src/main.ts"></script>
+
   <!--<script type="module" src="src/varukorg.js"></script>-->
   <script type="module" src="src/popup.ts"></script>
+
   <script type="module" src="src/pinkAddToCartBtn.ts"></script>
+  <script type="module" src="src/dropdown.ts"></script>
+
 </body>
 
 </html>

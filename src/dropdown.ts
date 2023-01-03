@@ -8,8 +8,8 @@ const cartNode = document.querySelectorAll(".cart-icon-container"); //lägg till
 const increaseEl = document.querySelector(".increase");
 const decreaseEl = document.querySelector(".decrease");
 
-//const cartTest = document.querySelector(".check-out");
-const cartTest: HTMLButtonElement = document.querySelector('.cart-test')!
+const cartTest = document.querySelector(".check-out")
+//const cartTest: HTMLButtonElement = document.querySelector('.cart-test')!
 
 
 const amountEl = document.querySelector(".amount");
@@ -23,13 +23,20 @@ let cartIconEl = Array.prototype.slice.call(cartNode); //gör om nodelist till a
 const cartBtn: HTMLButtonElement = document.querySelector('.shopping-cart-btn') as HTMLButtonElement
 const cartMenu: HTMLDivElement = document.querySelector('.shopping-cart-roll-down') as HTMLDivElement;
 
-const dropdownTrigger: HTMLButtonElement = document.querySelector('.dropdown-trigger') as HTMLButtonElement
+//const dropdownTrigger: HTMLButtonElement = document.querySelector('.dropdown-trigger') as HTMLButtonElement
 
 //  visar/döljer shoppingvagnen
+/*
 dropdownTrigger.addEventListener("click", (e: Event) => {
     cartMenu.classList.toggle("active");
     e.preventDefault();
-});
+});*/
+const dropdownTrigger: HTMLButtonElement = document.querySelector('.dropdown-trigger') as HTMLButtonElement
+
+dropdownTrigger.addEventListener("click", (e: Event) => {
+    cartMenu.classList.toggle("active");
+    e.preventDefault();
+})
 
 
 
@@ -48,7 +55,7 @@ cartTest.addEventListener("click", () => {
                     <div class="amount"></div>
                     <p class="decrease">-</p>
                   </div>
-                </div>`;
+                </div>`
 });
 
 

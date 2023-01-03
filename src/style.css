@@ -93,15 +93,15 @@ h1 {
   transition: 0.3s;
 }
 
-/*
+
 .shopping-cart-roll-down.active {
   top: 0;
-}*/
+}
 
-/* test*/
+/* test
 .active {
   top: 0;
-}
+}*/
 
 .cart-product {
   display: flex;
