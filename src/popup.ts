@@ -9,18 +9,18 @@ const popupWrapper = document.querySelector('.popup-wrapper');
 const popup = document.querySelector('.popup');
 let foundProductInCart: any
 let allProductsArr: IProductsExt[] = [] 
-let productsInCart: IProductsExt[] = JSON.parse(localStorage.getItem('products_in_cart')?? '[]') 
+let productsInCart: IProductsExt[] = JSON.parse(localStorage.getItem('products_in_cart') ?? '[]') 
 
 const popupFunc = (data: any, productId: number) => {
 	allProductsArr = data.data.map((product: IProductsExt) => {
 
-			// is product in cart?
-			let isFound: any = productsInCart.find((foundProductInCart: any) => {
-				if(product.id === foundProductInCart.id){
-					return foundProductInCart
-				}
-			})
-			// if product is in cart, use its qty, item total, stock_quantity and stock_status. if not use original
+		// is product in cart?
+		foundProductInCart = productsInCart.find((foundProductInCart: any) => {
+			if(product.id === foundProductInCart.id){
+				return foundProductInCart
+			}
+		})
+		// if product is in cart, use its qty, item total, stock_quantity and stock_status. if not use original
 	
 		return {
 			id: product.id,
@@ -32,14 +32,14 @@ const popupFunc = (data: any, productId: number) => {
 				thumbnail: product.images.thumbnail,
 				large: product.images.large
 			},
-			stock_status: isFound ? isFound.stock_status : product.stock_status, 
-			stock_quantity: isFound ? isFound.stock_quantity : product.stock_quantity, 
+			stock_status: foundProductInCart ? foundProductInCart.stock_status : product.stock_status, 
+			stock_quantity: foundProductInCart ? foundProductInCart.stock_quantity : product.stock_quantity, 
 			order_items: 
 			{
 				product_id: product.id,
-				qty: isFound ? isFound.order_items.qty : 0, 
+				qty: foundProductInCart ? foundProductInCart.order_items.qty : 0, 
 				item_price: product.price,
-				item_total: isFound ? isFound.order_items.item_total : 0, 
+				item_total: foundProductInCart ? foundProductInCart.order_items.item_total : 0, 
 			},	
 		}
 	})
@@ -47,6 +47,8 @@ const popupFunc = (data: any, productId: number) => {
 	// console.log("allProductsArr: ", allProductsArr)
 
 	popup!.innerHTML = allProductsArr.map((product: IProductsExt) => {
+		// getting localStorage
+		productsInCart = JSON.parse(localStorage.getItem('products_in_cart') ?? '[]') 
 		if(product.id === productId){ 
 
 			// en if-sats om btn ska vara abled eller disabled. inspirerad av johans todos-27 script.js:47
@@ -112,12 +114,14 @@ const popupFunc = (data: any, productId: number) => {
 
 	close?.addEventListener('click', () => {
 		(popupWrapper as HTMLElement).style.display = 'none';
+		productsInCart = JSON.parse(localStorage.getItem('products_in_cart') ?? '[]') 
 	})
 
 	// popup closing if clicking outside but not on it
 	// popup closing when clicking outside popup
 	popupWrapper?.addEventListener('click', () => {
 		(popupWrapper as HTMLElement).style.display = 'none';
+		productsInCart = JSON.parse(localStorage.getItem('products_in_cart') ?? '[]') 
 	})
 
 	// stopping popup from closing when clicking inside popup
@@ -129,7 +133,11 @@ const popupFunc = (data: any, productId: number) => {
 	const addToCartBtn = document.querySelector('.popup-add-to-cart');
 
 	addToCartBtn?.addEventListener('click', (e) => {
+		// getting localStorage
+		productsInCart = JSON.parse(localStorage.getItem('products_in_cart') ?? '[]') 
+
 		const currentProductId = Number((e.target as HTMLButtonElement).dataset.currentProductId)
+		
 		console.log('You clicked add to cart for product with product.id: ', currentProductId)
 	
 		// finding if product is already in cart
