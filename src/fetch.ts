@@ -60,6 +60,7 @@
 // }
 // */
 
+/* KOD NEDAN ÄR VAD VI ANVÄNT TILL NYLIGEN (3/1) */
 
 // //queryselectorn är inne i funktionen
 // export const renderProducts = () => {
