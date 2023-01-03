@@ -26,14 +26,14 @@ const addToCart = (data: any, productId: number) => {
             thumbnail: product.images.thumbnail,
             large: product.images.large
         },
-        stock_status: product.stock_status,
-        stock_quantity: product.stock_quantity,
+        stock_status: product.stock_status, //rendera annorlunda if products is in cart
+        stock_quantity: product.stock_quantity, //rendera annorlunda if products is in cart
         order_items: 
         {
             product_id: product.id,
-            qty: 0, 
+            qty: 0, //rendera annorlunda if products is in cart
             item_price: product.price,
-            item_total: 0
+            item_total: 0 //rendera annorlunda if products is in cart
         },	
     }
     })
