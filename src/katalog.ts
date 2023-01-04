@@ -48,7 +48,7 @@ const renderCatalouge = (data: any) => {
                   <span class="candy-price">${product.price}</span> kr
                 </span>
               </div>
-              <p class="description-text">description</p>
+              <!--<p class="description-text">${product.description.slice(0,30)}...</p>-->
               <button class="read-more-btn btn btn-secondary" data-product-id="${product.id}">Läs mer</button>
             </div>   
            `
