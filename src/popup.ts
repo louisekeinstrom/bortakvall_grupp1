@@ -4,12 +4,21 @@ import { IProducts } from "./interfaces";
 import { IOrder } from "./interfaces";
 import { IProductsExt } from "./interfaces";
 import { getAllProducts } from "./externalFetch";
+import { renderCatalouge } from "./katalog";
+ 
+
 
 const popupWrapper = document.querySelector('.popup-wrapper');
 const popup = document.querySelector('.popup');
 let foundProductInCart: any
 let allProductsArr: IProductsExt[] = [] 
 let productsInCart: IProductsExt[] = JSON.parse(localStorage.getItem('products_in_cart') ?? '[]') 
+
+/* const renderCatalouge = () => {
+	få in hela funktionen här på ngt sätt. försök importera så att jag kan 
+	använda renderCatalouge() längst ner i klickeventet när product is outofstock
+	googla hur importera functioner i typescript och kolla johans videos ang moduler
+} */
 
 const popupFunc = (data: any, productId: number) => {
 	allProductsArr = data.data.map((product: IProductsExt) => {
@@ -41,12 +50,19 @@ const popupFunc = (data: any, productId: number) => {
 				item_price: product.price,
 				item_total: foundProductInCart ? foundProductInCart.order_items.item_total : 0, 
 			},	
-		}
+		} 
 	})
 
 	// console.log("allProductsArr: ", allProductsArr)
 
-	popup!.innerHTML = allProductsArr.map((product: IProductsExt) => {
+	popup!.innerHTML = allProductsArr.map((product: any) => {
+		// is product in cart?
+		foundProductInCart = productsInCart.find((foundProductInCart: any) => {
+			if(product.id === foundProductInCart.id){
+				return foundProductInCart
+			}
+		})
+		
 		// getting localStorage
 		productsInCart = JSON.parse(localStorage.getItem('products_in_cart') ?? '[]') 
 		if(product.id === productId){ 
@@ -58,25 +74,46 @@ const popupFunc = (data: any, productId: number) => {
 			let disableBtn = '' //disabla INTE knappen
 			let btnInner = 'Lägg till <i class="fa-solid fa-cart-plus">'
 
-			productsInCart.map(productInCart => {
+			console.log('Rendering default option for popupbtn')
 
-				// rendering OM produkten är slut i stock
-				if(product.id === productInCart.id && productInCart.stock_status === "outofstock"){
-					disableBtn = 'disabled'
-					btnInner = 'Slut i lager'
-					stockQtyInner = `Antal produkter i lager: ${productInCart.stock_quantity} st` 
+			// rendera som nedan ifall produkten finns i varukorgen
+			if(foundProductInCart){
+				productsInCart.map(productInCart => {
 
-					return disableBtn && btnInner && stockQtyInner
+					// rendering OM produkten är slut i stock
+					if(product.id === productInCart.id && productInCart.stock_status === "outofstock" || product.id === productId && product.stock_quantity <= 0 ){
+						disableBtn = 'disabled'
+						btnInner = 'Slut i lager'
+						stockQtyInner = `Antal produkter i lager: 0 st`
 
-					// rendering om produkten finns i lager och redan är i varukorgen
-				}else if(product.id === productInCart.id){
-					return stockQtyInner = `Antal produkter i lager: ${productInCart.stock_quantity} st`
-				}
+						console.log('Rendering if-option for popupbtn productsInCart') 
 
-			})
-			/* MÅSTE HÄMTA INFO FRÅN products_in_cart localStorage() och inte rendera ut lägg till knapp
-			just nu startas räkningen om när man klickar på popup. Den tar inte hänsyn till om 
-			man gjort slut på produkterna med pink add to cart btn  */
+						return disableBtn && btnInner && stockQtyInner
+
+					}
+
+				})
+
+			// rendera som nedan ifall produkten inte finns i varukorgen
+			}else if(!foundProductInCart) {
+				
+				allProductsArr.map(newProduct => {
+
+					// rendering OM produkten är slut i stock
+					if(product.id === newProduct.id && newProduct.stock_status === "outofstock" || product.id === productId && product.stock_quantity <= 0 ){
+						disableBtn = 'disabled'
+						btnInner = 'Slut i lager'
+						stockQtyInner = `Antal produkter i lager: 0 st`
+	
+						console.log('Rendering if-option for popupbtn newProduct') 
+	
+						return disableBtn && btnInner && stockQtyInner
+	
+					}
+	
+				})
+			}				
+			
 			return  `
 		<a href="kassa.html" class="popup-cart-sc text-secondary small">Gå till kassan <i
 		  class="fa-solid fa-cart-shopping"></i></a>
@@ -121,7 +158,7 @@ const popupFunc = (data: any, productId: number) => {
 	// popup closing when clicking outside popup
 	popupWrapper?.addEventListener('click', () => {
 		(popupWrapper as HTMLElement).style.display = 'none';
-		productsInCart = JSON.parse(localStorage.getItem('products_in_cart') ?? '[]') 
+		// productsInCart = JSON.parse(localStorage.getItem('products_in_cart') ?? '[]')
 	})
 
 	// stopping popup from closing when clicking inside popup
@@ -196,15 +233,21 @@ const popupFunc = (data: any, productId: number) => {
 
 		// disable button om produkten är slut i lager
 		if(foundProductInCart?.stock_quantity <= 0 || addNewProduct?.stock_quantity <= 0){
-			// updating product overview //måste ju eg koppla denna till en uppdaterad allProductsArr
+
+			// kalla på importerad renderStockStatus() här ist
+
+			/* // updating product overview //måste ju eg koppla denna till en uppdaterad allProductsArr
 			// kanske göra en funktion på allProductsArr ovan att kalla på här igen?
 			let arrayLength: number = allProductsArr.length
 			let inStock: number = allProductsArr.filter((product: any) => product.stock_status === "instock").length
 			document.querySelector('.render-stock-status')!.innerHTML = `Visar ${arrayLength} produkter varav ${inStock} är i lager`
-		  
+		   */
+			
 			addToCartBtn.setAttribute('disabled', 'disabled')
 			addToCartBtn.innerHTML = `Slut i lager`
 		}
+		renderCatalouge(data)
+		
 	})
 } 
 
