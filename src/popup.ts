@@ -20,8 +20,8 @@ const popupFunc = (data: any, productId: number) => {
 				return foundProductInCart
 			}
 		})
+		
 		// if product is in cart, use its qty, item total, stock_quantity and stock_status. if not use original
-	
 		return {
 			id: product.id,
 			name: product.name,
@@ -145,6 +145,7 @@ const popupFunc = (data: any, productId: number) => {
 
 		// otherwise getting new product to be added to cart
 		 let addNewProduct: any = allProductsArr.find((product: any) => product.id === currentProductId) 
+
 		// OM produkten INTE hittas i varukorgen:
 		if(!foundProductInCart) { // addNewProduct.stock_quantity > 0
 			// lägg produkten som den första av sitt slag
@@ -195,7 +196,12 @@ const popupFunc = (data: any, productId: number) => {
 
 		// disable button om produkten är slut i lager
 		if(foundProductInCart?.stock_quantity <= 0 || addNewProduct?.stock_quantity <= 0){
-
+			// updating product overview //måste ju eg koppla denna till en uppdaterad allProductsArr
+			// kanske göra en funktion på allProductsArr ovan att kalla på här igen?
+			let arrayLength: number = allProductsArr.length
+			let inStock: number = allProductsArr.filter((product: any) => product.stock_status === "instock").length
+			document.querySelector('.render-stock-status')!.innerHTML = `Visar ${arrayLength} produkter varav ${inStock} är i lager`
+		  
 			addToCartBtn.setAttribute('disabled', 'disabled')
 			addToCartBtn.innerHTML = `Slut i lager`
 		}
