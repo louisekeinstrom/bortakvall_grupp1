@@ -15,7 +15,7 @@ const cartMenu = document.querySelector(".cart-product"); //cart
 //  visar/döljer shoppingvagnen
 cartBtn!.addEventListener("click", (e) => {
     cartMenu!.classList.toggle("active");
-    e.preventDefault;
+   // e.preventDefault;
   });
 
 console.log(cartItem)
@@ -41,6 +41,7 @@ for (let i = 0; i < totalPrice.length; i++) {
     cartItem.forEach((product:any) => {
     cartEL!.innerHTML += `
     <div>
+    <i class="fa-solid fa-xmark deleteBtn" data-product-id="${product.id}"></i>
         <img src="https://bortakvall.se${product.images.large}" alt="Produkt från Bortakväll" class="img-fluid mh-sm-50 m-3 popup-img" />
             <h2 class="candy-name mt-3">${product.name}</h2>
 				<p>Pris <span>${product.price}</span> kr</p>
@@ -53,7 +54,7 @@ for (let i = 0; i < totalPrice.length; i++) {
     `   
    });
 
-   document.querySelector(".total-amount").innerHTML += `Totalt: ${sum} kr`
+  // document.querySelector(".total-amount").innerHTML += `Totalt: ${sum} kr`
 
    const increaseEl = Array.from(document.querySelectorAll(".increase"))
    console.log(increaseEl)
@@ -72,8 +73,8 @@ for (let i = 0; i < totalPrice.length; i++) {
 increaseEl.forEach(()=> {
     addEventListener("click", (product) => {
     console.log("yay u increased")
-    product.order_items.qty[i]++
-    console.log(product.order_items.qty)
+   // product.order_items.qty[i]++
+   // console.log(product.order_items.qty)
     })
 })
    //    för att minska produkter i varukorg
@@ -84,6 +85,38 @@ increaseEl.forEach(()=> {
    })
 
 
+
+   const deleteProductFromCart = (productId: string) => {
+    // hitta rätt produkt som ska tas bort
+    const productIndex = cartItem.findIndex((product) => product.id === productId);
+  
+    // ta bort från cart(synns inte ännu , men i console)
+    cartItem.splice(productIndex, 1);
+  
+    // Updatera local storage
+    localStorage.setItem('products_in_cart', JSON.stringify(cartItem));
+    console.log('deletefromcart')
+  }
+
+
+  
+
+
+
+
+
+   const deleteBtns = document.querySelectorAll('.fa-solid.fa-xmark[data-product-id]');
+
+   deleteBtns.forEach((deleteBtn) => {
+       deleteBtn.addEventListener('click', (event) => {
+           //const productId = event.target.dataset.productId!;
+           //deleteProductFromCart(productId);
+           console.log('works?')
+           deleteProductFromCart('p')
+   
+   
+       });
+   });
 //    productsInCart.map(productInCart => {
 
 //     // rendering OM produkten är slut i stock
