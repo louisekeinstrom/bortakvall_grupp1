@@ -39,6 +39,7 @@ export const postOrder = async (fullOrder: IOrder) => {
     }
     if (response.status === 'fail') {
         console.log('error')
+        const orderItems0 = response.data.order_items; //.0
 
         //för att visa felmeddelande
         contact.classList.add('hide');
@@ -47,7 +48,7 @@ export const postOrder = async (fullOrder: IOrder) => {
 
         wrong.innerHTML = `<div>
          <h2>Något gick fel! :(</h2>
-         <p>${res.status} ${response.message}</p>
+         <p>${response.message} ${orderItems0}</p>
          <p>Vänligen kontrollera din order och dina uppgifter</p>
          </div>`
         /*<!--click-event som backar till kunduppgiftena-->
