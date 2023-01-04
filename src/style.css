@@ -1,0 +1,360 @@
+.body {
+  display: flex;
+  justify-content: center;
+  background-image: url("../bortakvall-assets/pexels-polina-tankilevitch-5469042.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+h1 {
+  font-family: "Fredoka One", cursive;
+  color: #ffb8d1;
+  text-align: left;
+  padding: 20px 30px;
+  font-size: 70px;
+  cursor: default;
+}
+
+@media screen and (max-width: 768px) {
+  h1 {
+    font-size: 10vw;
+  }
+}
+
+.color-change {
+  color: #00a7e1;
+}
+
+.menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #00a7e1;
+  width: 100%;
+  padding: 20px;
+  margin: 2px 0px;
+  font-size: 20px;
+}
+
+.menu-btn {
+  color: #fff;
+  box-shadow: none;
+  border-style: none;
+  margin: 0px;
+  padding: 20px;
+  transition: 0.5s;
+}
+
+.menu-btn:hover {
+  color: #ffb8d1;
+  text-decoration: none;
+}
+
+.container {
+  background-color: #fff;
+  border-radius: 5px;
+  height: 100%;
+  margin: 0px;
+}
+
+.shopping-cart-btn {
+  background-color: #ffb8d1;
+  padding: 15px;
+  box-shadow: none;
+  border-style: none;
+  transition: 0.5s;
+}
+
+.shopping-cart-btn > a {
+  text-decoration: none;
+  color: #fff;
+}
+
+/* dropdown meny börjar här */
+
+.shopping-cart-btn:hover {
+  background-color: #fcd757;
+}
+
+.shopping-cart-roll-down {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  top: -120%;
+  height: 600px;
+  width: 300px;
+  overflow: scroll;
+  padding: 10px;
+  box-shadow: 2px 5px 10px 0px;
+  z-index: 10;
+  position: absolute;
+  transition: 0.3s;
+}
+
+.shopping-cart-roll-down.active {
+  /*top: 0;*/
+  top: 0;
+  margin-top: 55%;
+  /*kanske*/
+}
+
+.decide-amount {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+}
+
+.decide-amount > p {
+  display: flex;
+  align-items: center;
+}
+
+/* test
+.active {
+  top: 0;
+}*/
+
+.cart-product {
+  display: flex;
+  justify-content: start;
+  align-items: flex-end;
+  flex-direction: row;
+  padding: 10px;
+  height: fit-content;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.cart-product > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  padding: 5px;
+}
+
+.cart-image {
+  display: flex;
+  justify-content: start;
+  flex-wrap: wrap;
+  padding: 5px;
+}
+
+.cart-description {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  margin-left: 5px;
+}
+
+.product-name {
+  font-size: 20px;
+}
+
+.show-amount-in-cart {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 15px;
+  width: fit-content;
+}
+
+.increase {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  padding: 10px;
+  font-size: 20px;
+  cursor: pointer;
+  margin: 10px 0px;
+  width: 30px;
+  height: 30px;
+  transition: 0.5s;
+}
+
+.increase:hover {
+  color: #00a7e1;
+}
+
+.amount {
+  border: none;
+  padding: 0px 10px;
+  width: 30px;
+  height: 30px;
+}
+
+.decrease {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  padding: 10px;
+  font-size: 20px;
+  cursor: pointer;
+  margin: 10px 0px;
+  width: 30px;
+  height: 30px;
+  transition: 0.5s;
+}
+
+.decrease:hover {
+  color: #00a7e1;
+}
+
+.total-amount {
+  text-align: end;
+}
+
+.check-out {
+  bottom: 12px;
+  right: 15px;
+  padding: 10px 0px;
+  margin: 10px 0px;
+
+  background-color: #fcd757;
+  box-shadow: none;
+  border-style: none;
+  transition: 0.5s;
+}
+
+.check-out:hover {
+  background-color: #00a7e1;
+}
+
+.check-out > a {
+  text-decoration: none;
+  color: #fff;
+}
+
+/* dropdown meny slutar här */
+
+.product-img {
+  cursor: pointer;
+}
+
+.product-catalog {
+  background-color: #fff;
+  border-radius: 0px 0px 5px 5px;
+  height: 100vh;
+  overflow: scroll;
+}
+
+.product-container {
+  background-color: rgb(145, 145, 144);
+  height: 380px;
+  max-width: 250px;
+  position: relative;
+  box-shadow: 2px 5px 10px 0px;
+
+  background-color: #fff;
+}
+
+.read-more-btn {
+  position: absolute;
+  bottom: 12px;
+  right: 15px;
+  padding: 5px;
+
+  background-color: #fcd757;
+  box-shadow: none;
+  border-style: none;
+  transition: 0.5s;
+}
+
+.read-more-btn:hover {
+  background-color: #00a7e1;
+  border-radius: 5px;
+}
+
+.cart-icon-container {
+  display: inline;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 8px;
+
+  background-color: #ffb8d1;
+  border-radius: 20px;
+  transition: all 0.1s ease-in-out;
+}
+
+.cart-icon-hide {
+  display: none;
+}
+
+.description-text {
+  font-size: 14px;
+  cursor: default;
+}
+
+.read-more-btn {
+  position: absolute;
+  bottom: 12px;
+  right: 15px;
+  padding: 10px;
+
+  background-color: #fcd757;
+  box-shadow: none;
+  border-style: none;
+  transition: 0.5s;
+}
+
+.read-more-btn:hover {
+  background-color: #00a7e1;
+  border-radius: 5px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .cart-icon-container:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+    background-color: #00a7e1;
+  }
+}
+
+.product-name-price-container {
+  font-weight: 600;
+}
+
+@media screen and (min-width: 767px) {
+  .shopping-cart-roll-down {
+    left: 55%;
+  }
+
+  .shopping-cart-roll-down.active {
+    margin-top: 35%;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .shopping-cart-roll-down {
+    left: 64%;
+  }
+
+  .shopping-cart-roll-down.active {
+    margin-top: 25%;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .shopping-cart-roll-down {
+    left: 70%;
+  }
+
+  .shopping-cart-roll-down.active {
+    margin-top: 25%;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .shopping-cart-roll-down {
+    left: 70%;
+  }
+
+  .shopping-cart-roll-down.active {
+    margin-top: 20%;
+  }
+}
