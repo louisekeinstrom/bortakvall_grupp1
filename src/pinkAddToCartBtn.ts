@@ -107,6 +107,7 @@ const addToCart = (data: any, productId: number) => {
 		let inStock: number = allProductsArr.filter((product: any) => product.stock_status === "instock").length //denna måste finda produkt och ändra om stock_ status
 		document.querySelector('.render-stock-status')!.innerHTML = `Visar ${arrayLength} produkter varav ${inStock} är i lager`
 		  
+		
         alert('Slut på produkten'); 
         // jag lyckas ej med nedan kod?!?!? gör en alert() på den sålänge
 		addToCartBtn!.setAttribute('disabled', 'disabled')
