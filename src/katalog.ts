@@ -118,52 +118,38 @@ const renderCatalouge = (data: any) => {
 			}
 		})
 
-    // rendera ut rosa knapp endast om varan är instock
+    // rendera ut rosa knapp så här om varan är instock
     let pinkBtn = `<i class="cart-icon-container text-light fa-solid fa-cart-plus" data-product-id="${product.id}"></i>`
     
+    // rendera som nedan ifall produkten finns i varukorgen
     if(foundProductInCart){
       productsInCart.map(productInCart => {
-
-        // rendering OM produkten är slut i stock
+        // rendering OM produkten är slut i stock i varukorgen
         if(product.id === productInCart.id && productInCart.stock_status === "outofstock" /*  || product.id === productId && product.stock_quantity <= 0  */){
           
+          pinkBtn = `<i class="cart-icon-hide text-light fa-solid fa-cart-plus"></i>`
 
           console.log('Rendering if-option for popupbtn productsInCart') 
 
-          return 
-
-          // rendering om produkten finns i lager och redan är i varukorgen ta bort
-        }else if(product.id === productInCart.id){
-          console.log('Rendering else if-option for popupbtn productsInCart')
-
-          return 
-
+          return pinkBtn
         }
 
       })
-    // gör en likadan som ovan fast för allProductsArr 
+      // rendering som nedan ifall produkten är slut i stock i originalarrayen (allProductsArr)
     }else if(!foundProductInCart) {
-      
       allProductsArr.map(newProduct => {
-
-        // rendering OM produkten är slut i stock
+        // rendering om produkten är slut i stock
         if(product.id === newProduct.id && newProduct.stock_status === "outofstock" /* || product.id === productId && product.stock_quantity <= 0  */){
-          
 
           console.log('Rendering if-option for popupbtn newProduct') 
-
-          return 
-
-          // rendering om produkten finns i lager och redan är i varukorgen
-        }else if(product.id === newProduct.id){
-          console.log('Rendering else if-option for popupbtn newProduct')
-
-          return 
-
+          
+          return pinkBtn = `<i class="cart-icon-hide text-light fa-solid fa-cart-plus"></i>`
         }
 
       })
     }				
+
+    
     // gammal kod
     // if(product.stock_status === "outofstock"  /* && product.stock_quantity <= 0 */){
     //   console.log('returning if-sats')
