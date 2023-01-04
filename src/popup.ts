@@ -144,7 +144,7 @@ const popupFunc = (data: any, productId: number) => {
 		foundProductInCart = productsInCart.find(product => product.id === currentProductId)
 
 		// otherwise getting new product to be added to cart
-		 let addNewProduct: IProductsExt = allProductsArr.find((product: any) => product.id === currentProductId) 
+		 let addNewProduct: any = allProductsArr.find((product: any) => product.id === currentProductId) 
 		// OM produkten INTE hittas i varukorgen:
 		if(!foundProductInCart) { // addNewProduct.stock_quantity > 0
 			// lägg produkten som den första av sitt slag
