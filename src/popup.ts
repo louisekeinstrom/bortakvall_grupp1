@@ -206,7 +206,7 @@ const popupFunc = (data: any, productId: number) => {
 			addToCartBtn.innerHTML = `Slut i lager`
 		}
 	})
-}
+} 
 
 document.addEventListener('click', async (e) => {
 	if( (e.target as HTMLButtonElement).tagName === "BUTTON" && (e.target as HTMLButtonElement).dataset.productId || (e.target as HTMLButtonElement).tagName === "IMG" && (e.target as HTMLButtonElement).dataset.productId ){

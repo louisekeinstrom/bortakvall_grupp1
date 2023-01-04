@@ -58,7 +58,7 @@ const addToCart = (data: any, productId: number) => {
 
 	// otherwise getting new product to be added to cart
 	let addNewProduct: any = allProductsArr.find((product: any) => product.id === productId) 
-
+ 
 	// OM produkten INTE hittas i varukorgen:
 	if(!foundProductInCart) { 
 		// lägg produkten som den första av sitt slag
