@@ -17,18 +17,12 @@ export const renderStockStatus = (allProductsArr: IProductsExt[], data: any) => 
   // gör detta i klick-eventen när man lägger till/tar bort från cart.
   // kanske i en funktion som kan exporteras och återanvändas?
 
-    /*//------ Kod som funkar för initial update:
-  let arrayLength: number = data.data.length
-  let inStock: number = data.data.filter((product: any) => product.stock_status === "instock").length
-  document.querySelector('.render-stock-status')!.innerHTML = `Visar ${arrayLength} produkter varav ${inStock} är i lager` 
-  */
-
 
   // OM produkten finns i productsincart, överför stock_status därifrån till allProductsArr
   // ANNARS OM produkten inte finns i productsincart, ta stock_status från data.data
   
 
- /*  // Denna kod borde funka men gör det inte. antagligen för att jag inte översatt IProducts till IProductsExt
+ /*   // Denna kod borde funka men gör det inte. antagligen för att jag inte översatt IProducts till IProductsExt
   allProductsArr = data.data.map((product: IProductsExt) => {
     console.log('allProductsArr', allProductsArr)
 
@@ -46,19 +40,19 @@ export const renderStockStatus = (allProductsArr: IProductsExt[], data: any) => 
 
     return product.stock_status = foundProductInCart ? foundProductInCart.stock_status : product.stock_status
      
-  }) */
+  })  */
 
   //------ Kod som funkar för initial update:
   let arrayLength: number = allProductsArr.length
   let inStock: number = allProductsArr.filter((product: any) => product.stock_status === "instock").length
-
+ 
   // console.log(inStock)
 
   document.querySelector('.render-stock-status')!.innerHTML = `Visar ${arrayLength} produkter varav ${inStock} är i lager`
 
 }
 
-const renderCatalouge = (data: any) => {
+export const renderCatalouge = (data: any) => {
   allProductsArr = data.data.map((product: IProductsExt) => {
 
 		// is product in cart?
@@ -142,20 +136,12 @@ const renderCatalouge = (data: any) => {
         if(product.id === newProduct.id && newProduct.stock_status === "outofstock" /* || product.id === productId && product.stock_quantity <= 0  */){
 
           console.log('Rendering if-option for popupbtn newProduct') 
-          
+
           return pinkBtn = `<i class="cart-icon-hide text-light fa-solid fa-cart-plus"></i>`
         }
 
       })
     }				
-
-    
-    // gammal kod
-    // if(product.stock_status === "outofstock"  /* && product.stock_quantity <= 0 */){
-    //   console.log('returning if-sats')
-    //   return pinkBtn = `<i class="cart-icon-hide text-light fa-solid fa-cart-plus"></i>`
-      
-    // } 
 
     return `
             <div class="product-container m-3 col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center flex-column">

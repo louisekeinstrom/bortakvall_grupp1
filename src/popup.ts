@@ -4,12 +4,21 @@ import { IProducts } from "./interfaces";
 import { IOrder } from "./interfaces";
 import { IProductsExt } from "./interfaces";
 import { getAllProducts } from "./externalFetch";
+import { renderCatalouge } from "./katalog";
+ 
+
 
 const popupWrapper = document.querySelector('.popup-wrapper');
 const popup = document.querySelector('.popup');
 let foundProductInCart: any
 let allProductsArr: IProductsExt[] = [] 
 let productsInCart: IProductsExt[] = JSON.parse(localStorage.getItem('products_in_cart') ?? '[]') 
+
+/* const renderCatalouge = () => {
+	få in hela funktionen här på ngt sätt. försök importera så att jag kan 
+	använda renderCatalouge() längst ner i klickeventet när product is outofstock
+	googla hur importera functioner i typescript och kolla johans videos ang moduler
+} */
 
 const popupFunc = (data: any, productId: number) => {
 	allProductsArr = data.data.map((product: IProductsExt) => {
@@ -149,7 +158,7 @@ const popupFunc = (data: any, productId: number) => {
 	// popup closing when clicking outside popup
 	popupWrapper?.addEventListener('click', () => {
 		(popupWrapper as HTMLElement).style.display = 'none';
-		productsInCart = JSON.parse(localStorage.getItem('products_in_cart') ?? '[]') 
+		// productsInCart = JSON.parse(localStorage.getItem('products_in_cart') ?? '[]')
 	})
 
 	// stopping popup from closing when clicking inside popup
@@ -224,15 +233,21 @@ const popupFunc = (data: any, productId: number) => {
 
 		// disable button om produkten är slut i lager
 		if(foundProductInCart?.stock_quantity <= 0 || addNewProduct?.stock_quantity <= 0){
-			// updating product overview //måste ju eg koppla denna till en uppdaterad allProductsArr
+
+			// kalla på importerad renderStockStatus() här ist
+
+			/* // updating product overview //måste ju eg koppla denna till en uppdaterad allProductsArr
 			// kanske göra en funktion på allProductsArr ovan att kalla på här igen?
 			let arrayLength: number = allProductsArr.length
 			let inStock: number = allProductsArr.filter((product: any) => product.stock_status === "instock").length
 			document.querySelector('.render-stock-status')!.innerHTML = `Visar ${arrayLength} produkter varav ${inStock} är i lager`
-		  
+		   */
+			
 			addToCartBtn.setAttribute('disabled', 'disabled')
 			addToCartBtn.innerHTML = `Slut i lager`
 		}
+		renderCatalouge(data)
+		
 	})
 }
 
