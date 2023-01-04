@@ -35,7 +35,7 @@ for (let i = 0; i < totalPrice.length; i++) {
     sum += totalPrice[i] * amountOfProductsInCart[i];
 }
 
-document.querySelector(".total-amount")!.innerHTML += `Totalt: ${sum} kr`
+document.querySelector(".total-amount")!.innerHTML = `Totalt: ${sum} kr`
 
 }
 // funktion för att synligt rendera ut produkten i varukorgen   
@@ -47,9 +47,9 @@ cartItem.forEach((product:any) => {
         <img src="https://bortakvall.se${product.images.large}" alt="Produkt från Bortakväll" class="img-fluid mh-sm-50 m-3 popup-img" />
             <h2 class="candy-name mt-3">${product.name}</h2>
 				<p>Pris <span>${product.price}</span> kr</p>
-                    <div class="product-${product.name}">
+                    <div class="decide-amount">
                         <p data-current-product-id="${product.id}" class="increase">+</p>
-                        <p class="showAmount">${product.order_items.qty}</p>
+                        <p class="show-amount">${product.order_items.qty}</p>
                         <p data-current-product-id="${product.id}" class="decrease">-</p>
 					</div>
     </div>
@@ -58,6 +58,7 @@ cartItem.forEach((product:any) => {
 })
 }
 renderIntoCart();
+totalSum();
 
 (wholeCart as HTMLElement).addEventListener('click', (e:any) => {
     cartItem = JSON.parse(localStorage.getItem("products_in_cart") ?? '[]')  
@@ -65,7 +66,7 @@ renderIntoCart();
     const currentProductId = Number((e.target as HTMLElement).dataset.currentProductId)
     const currentProduct = cartItem.find((product:any) => product.id === currentProductId) 
    
-    if(e.target === document.querySelector(".increase") && currentProduct){
+    if(e.target === document.querySelector(".increase") && (e.target as HTMLElement).dataset.currentProductId === currentProduct.id) {
        console.log(`increased product with product ID: `, currentProductId);
         
         // uppdatera följande egenskaper
@@ -76,6 +77,8 @@ renderIntoCart();
                 console.log(foundProduct.order_items.qty)
 				// minska 1 i lager
 				foundProduct.stock_quantity --
+                console.log(foundProduct.stock_quantity)
+
 				// OM produkten då tar slut i lager, ändra status
 				if(foundProduct.stock_quantity <= 0 ){
 					return foundProduct.stock_status = "outofstock"
@@ -85,17 +88,37 @@ renderIntoCart();
 				// återkom med den uppdaterade produkten
 				return foundProduct	
 			} 
+            renderIntoCart();
         })
-
-        totalSum()
                 
-
     }else if((e.target === document.querySelector(".decrease") && currentProduct) ){
        console.log(`decreased product with product ID: `, currentProductId);
+        // uppdatera följande egenskaper
+		cartItem.map((foundProduct:any) => {
+            
+            if(foundProduct.id === currentProduct.id){
+				// subtrahera 1 av produkten
+				foundProduct.order_items.qty! --
+                console.log(foundProduct.order_items.qty)
+				// öka 1 i lager
+				foundProduct.stock_quantity ++
+                console.log(foundProduct.stock_quantity)
 
+                // om 0 varor är i korgen
+                if(foundProduct.order_items.qty <= 0 ){
+                    cartEL!.innerHTML = ` `
+                    alert("Finns ej tillräckligt antal produkter i lager")
+                }
+				// uppdatera totala summan för denna produkt
+				foundProduct.order_items.item_total = foundProduct.order_items.qty! * foundProduct.price 
+                // återkom med den uppdaterade produkten
+				return foundProduct	
+                
     }
-
-   })
+    renderIntoCart();
+})
+totalSum()
+   }})
 
    const increaseEl = Array.from(document.querySelectorAll(".increase"))
    console.log(increaseEl)
