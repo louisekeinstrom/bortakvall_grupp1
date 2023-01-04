@@ -150,6 +150,7 @@ export interface IResponse {
     status: string,
     message?: string,
     data: {
+        order_items?: any;
         id: number,
         order_date: string,
         customer_first_name: string,
