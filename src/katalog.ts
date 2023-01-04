@@ -111,10 +111,60 @@ const renderCatalouge = (data: any) => {
 
   document.querySelector('.rendering')!.innerHTML = allProductsArr.map((product: IProductsExt) => {
     
+    // is product in cart?
+		foundProductInCart = productsInCart.find((foundProductInCart: any) => {
+			if(product.id === foundProductInCart.id){
+				return foundProductInCart
+			}
+		})
 
     // rendera ut rosa knapp endast om varan är instock
     let pinkBtn = `<i class="cart-icon-container text-light fa-solid fa-cart-plus" data-product-id="${product.id}"></i>`
     
+    if(foundProductInCart){
+      productsInCart.map(productInCart => {
+
+        // rendering OM produkten är slut i stock
+        if(product.id === productInCart.id && productInCart.stock_status === "outofstock" /*  || product.id === productId && product.stock_quantity <= 0  */){
+          
+
+          console.log('Rendering if-option for popupbtn productsInCart') 
+
+          return 
+
+          // rendering om produkten finns i lager och redan är i varukorgen ta bort
+        }else if(product.id === productInCart.id){
+          console.log('Rendering else if-option for popupbtn productsInCart')
+
+          return 
+
+        }
+
+      })
+    // gör en likadan som ovan fast för allProductsArr 
+    }else if(!foundProductInCart) {
+      
+      allProductsArr.map(newProduct => {
+
+        // rendering OM produkten är slut i stock
+        if(product.id === newProduct.id && newProduct.stock_status === "outofstock" /* || product.id === productId && product.stock_quantity <= 0  */){
+          
+
+          console.log('Rendering if-option for popupbtn newProduct') 
+
+          return 
+
+          // rendering om produkten finns i lager och redan är i varukorgen
+        }else if(product.id === newProduct.id){
+          console.log('Rendering else if-option for popupbtn newProduct')
+
+          return 
+
+        }
+
+      })
+    }				
+    // gammal kod
     // if(product.stock_status === "outofstock"  /* && product.stock_quantity <= 0 */){
     //   console.log('returning if-sats')
     //   return pinkBtn = `<i class="cart-icon-hide text-light fa-solid fa-cart-plus"></i>`

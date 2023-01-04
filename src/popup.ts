@@ -67,6 +67,7 @@ const popupFunc = (data: any, productId: number) => {
 
 			console.log('Rendering default option for popupbtn')
 
+			// rendera som nedan ifall produkten finns i varukorgen
 			if(foundProductInCart){
 				productsInCart.map(productInCart => {
 
@@ -80,16 +81,11 @@ const popupFunc = (data: any, productId: number) => {
 
 						return disableBtn && btnInner && stockQtyInner
 
-						// rendering om produkten finns i lager och redan är i varukorgen ta bort
-					}else if(product.id === productInCart.id){
-						console.log('Rendering else if-option for popupbtn productsInCart')
-
-						return stockQtyInner = `Antal produkter i lager: ${productInCart.stock_quantity} st`
-
 					}
 
 				})
-			// gör en likadan som ovan fast för allProductsArr 
+
+			// rendera som nedan ifall produkten inte finns i varukorgen
 			}else if(!foundProductInCart) {
 				
 				allProductsArr.map(newProduct => {
@@ -104,18 +100,10 @@ const popupFunc = (data: any, productId: number) => {
 	
 						return disableBtn && btnInner && stockQtyInner
 	
-						// rendering om produkten finns i lager och redan är i varukorgen
-					}else if(product.id === newProduct.id){
-						console.log('Rendering else if-option for popupbtn newProduct')
-	
-						return stockQtyInner = `Antal produkter i lager: ${newProduct.stock_quantity} st`
-	
 					}
 	
 				})
-			}
-				
-			
+			}				
 			
 			return  `
 		<a href="kassa.html" class="popup-cart-sc text-secondary small">Gå till kassan <i
