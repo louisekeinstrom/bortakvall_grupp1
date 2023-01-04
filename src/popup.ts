@@ -74,9 +74,7 @@ const popupFunc = (data: any, productId: number) => {
 				}
 
 			})
-			/* MÅSTE HÄMTA INFO FRÅN products_in_cart localStorage() och inte rendera ut lägg till knapp
-			just nu startas räkningen om när man klickar på popup. Den tar inte hänsyn till om 
-			man gjort slut på produkterna med pink add to cart btn  */
+			
 			return  `
 		<a href="kassa.html" class="popup-cart-sc text-secondary small">Gå till kassan <i
 		  class="fa-solid fa-cart-shopping"></i></a>
