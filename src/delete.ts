@@ -23,7 +23,7 @@ console.log(cartItem)
 cartItem.forEach((product: any) => {
     cartEL!.innerHTML += `
     <div>
-    <i class="fa-solid fa-xmark deleteBtn" dataset-id="${product.id}"></i>
+    <i class="fa-solid fa-xmark deleteBtn" data-id="${product.id}"></i>
         <img src="https://bortakvall.se${product.images.thumbnail}" alt="Produkt från Bortakväll" class="img-fluid mh-sm-50 m-3 popup-img" />
             <h2 class="candy-name mt-3">${product.name}</h2>
                 <p>Pris <span>${product.price}</span> kr</p>
@@ -45,7 +45,7 @@ const updateCartDisplay = () => {
     cartItem.forEach((product: any) => {
         cartEL!.innerHTML += `
         <div>
-        <i class="fa-solid fa-xmark deleteBtn" dataset-id="${product.id}"></i>
+        <i class="fa-solid fa-xmark deleteBtn" data-id="${product.id}"></i>
             <img src="https://bortakvall.se${product.images.thumbnail}" alt="Produkt från Bortakväll" class="img-fluid mh-sm-50 m-3 popup-img" />
                 <h2 class="candy-name mt-3">${product.name}</h2>
                     <p>Pris <span>${product.price}</span> kr</p>
@@ -60,24 +60,10 @@ const updateCartDisplay = () => {
     });
 }
 
+
 updateCartDisplay()
 
-const deleteProductFromCart = (productId: IProductsExt) => {
-    // hitta rätt produkt som ska tas bort
-    //const productIndex = cartItem.findIndex((product: any) => product.id === productId);
-    const productIndex = cartItem.findIndex((product: any) => product.id === productId);
 
-
-    cartItem.splice(productIndex, 1);
-    console.log(productIndex)
-    console.log('deletefromcartfunc')
-    // Updatera local storage
-    localStorage.setItem('products_in_cart', JSON.stringify(cartItem));
-
-    // Uppdatera cart display
-    updateCartDisplay();
-    //renderIntoCart()
-};
 /*
 // funktion för att synligt rendera ut produkten i varukorgen   
 cartItem.forEach((product: any) => {
@@ -117,6 +103,23 @@ let renderIntoCart = () => {
     })
 }
 renderIntoCart();*/
+const deleteProductFromCart = (productId: IProductsExt) => {
+    // hitta rätt produkt som ska tas bort
+    //const productIndex = cartItem.findIndex((product: any) => product.id === productId);
+
+    const productIndex = cartItem.findIndex((product: any) => product.id === productId);
+
+
+    cartItem.splice(productIndex, 1);
+    console.log(productIndex)
+    console.log('deletefromcartfunc')
+    // Updatera local storage
+    localStorage.setItem('products_in_cart', JSON.stringify(cartItem));
+
+    // Uppdatera cart display
+    updateCartDisplay();
+    //renderIntoCart()
+};
 
 const deleteBtn = Array.from(document.querySelectorAll(".deleteBtn"))
 
@@ -124,11 +127,18 @@ deleteBtn.forEach((deleteBtn) => {
     deleteBtn.addEventListener('click', (event) => {
 
         //const productId = event.target.dataset.id
-        const productId = event.target.dataset.id
+        //const productId = event.target!.dataset.id
+        if ('dataset' in event.target) {
+            const productId = event.target.dataset.id
+            // ...
+            deleteProductFromCart(productId)
+            console.log('ifsats')
+            console.log(productId)
 
+        }
         //deleteProductFromCart(productId);
         console.log('works?')
-        deleteProductFromCart(productId)
+        //deleteProductFromCart(productId)
         // updateCartDisplay()
 
     });
