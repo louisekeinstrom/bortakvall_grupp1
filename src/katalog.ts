@@ -8,9 +8,11 @@ let foundProductInCart: any
 let allProductsArr: IProductsExt[] = []
 /* allt här är kopierat och modifierat från fetch men fetchar via externalFetch ist */
 
-export const stockStatus = (allProductsArr: IProductsExt[], data: any) => { // visa antal produkter som renderas varav hur många i lager.
+export const renderStockStatus = (allProductsArr: IProductsExt[], data: any) => { 
   
+  // visa antal produkter som renderas varav hur många i lager.
   // behöver även uppdateras när man tar slut på produkter
+
   // kan man göra det genom att mappa över productsInCart och uppdatera status på allproducts?
   // gör detta i klick-eventen när man lägger till/tar bort från cart.
   // kanske i en funktion som kan exporteras och återanvändas?
@@ -26,7 +28,7 @@ export const stockStatus = (allProductsArr: IProductsExt[], data: any) => { // v
   // ANNARS OM produkten inte finns i productsincart, ta stock_status från data.data
   
 
-  /* Denna kod borde funka men gör det inte */
+ /*  // Denna kod borde funka men gör det inte. antagligen för att jag inte översatt IProducts till IProductsExt
   allProductsArr = data.data.map((product: IProductsExt) => {
     console.log('allProductsArr', allProductsArr)
 
@@ -44,23 +46,55 @@ export const stockStatus = (allProductsArr: IProductsExt[], data: any) => { // v
 
     return product.stock_status = foundProductInCart ? foundProductInCart.stock_status : product.stock_status
      
-  })
+  }) */
 
+  //------ Kod som funkar för initial update:
   let arrayLength: number = allProductsArr.length
   let inStock: number = allProductsArr.filter((product: any) => product.stock_status === "instock").length
 
-  console.log(inStock)
+  // console.log(inStock)
 
   document.querySelector('.render-stock-status')!.innerHTML = `Visar ${arrayLength} produkter varav ${inStock} är i lager`
 
 }
 
 const renderCatalouge = (data: any) => {
-  allProductsArr = data.data
+  allProductsArr = data.data.map((product: IProductsExt) => {
 
-  console.log(data.data)
+		// is product in cart?
+		foundProductInCart = productsInCart.find((foundProductInCart: any) => {
+			if(product.id === foundProductInCart.id){
+				return foundProductInCart
+			}
+		})
+		
+		// if product is in cart, use its qty, item total, stock_quantity and stock_status. if not use original
+		return {
+			id: product.id,
+			name: product.name,
+			description: product.description,
+			price: product.price,
+			on_sale: product.on_sale,
+			images: {
+				thumbnail: product.images.thumbnail,
+				large: product.images.large
+			},
+			stock_status: foundProductInCart ? foundProductInCart.stock_status : product.stock_status, 
+			stock_quantity: foundProductInCart ? foundProductInCart.stock_quantity : product.stock_quantity, 
+			order_items: 
+			{
+				product_id: product.id,
+				qty: foundProductInCart ? foundProductInCart.order_items.qty : 0, 
+				item_price: product.price,
+				item_total: foundProductInCart ? foundProductInCart.order_items.item_total : 0, 
+			},	
+		}
+	})
 
-  data.data.sort((a: IProducts, b: IProducts) => {
+  // console.log(data.data)
+
+  // sort the products alphabetically
+  allProductsArr.sort((a: IProductsExt, b: IProductsExt) => {
     if (a.name < b.name) {
       return -1;
     }
@@ -70,13 +104,26 @@ const renderCatalouge = (data: any) => {
     return 0;
   })
 
-  stockStatus(allProductsArr, data)
+  renderStockStatus(allProductsArr, data)
+
 
   /* ändra ursprunglig array? eler gör en if sats vad som ska renderas om product in stock status ändras medan man klickar? */
-  document.querySelector('.rendering')!.innerHTML = data.data.map((product: IProducts) => {
+
+  document.querySelector('.rendering')!.innerHTML = allProductsArr.map((product: IProductsExt) => {
+    
+
+    // rendera ut rosa knapp endast om varan är instock
+    let pinkBtn = `<i class="cart-icon-container text-light fa-solid fa-cart-plus" data-product-id="${product.id}"></i>`
+    
+    // if(product.stock_status === "outofstock"  /* && product.stock_quantity <= 0 */){
+    //   console.log('returning if-sats')
+    //   return pinkBtn = `<i class="cart-icon-hide text-light fa-solid fa-cart-plus"></i>`
+      
+    // } 
+
     return `
             <div class="product-container m-3 col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center flex-column">
-              <i class="cart-icon-container text-light fa-solid fa-cart-plus" data-product-id="${product.id}"></i>
+              ${pinkBtn}
               <img
                 src="https://bortakvall.se${product.images.thumbnail}"
                 alt="Produkt från Bortakväll"
@@ -102,7 +149,7 @@ const renderCatalouge = (data: any) => {
 const fetchProducts = async () => {
 
   try {
-    const data = await getAllProducts()
+    const data: IProducts = await getAllProducts()
 
     // console.log("Found all products from API: ", data.data)
 
