@@ -1,6 +1,3 @@
-const cartBtn = document.querySelector(".shopping-cart-btn"); //knapp för cart
-const cartMenu = document.querySelector(".cart-product"); //cart
-
 const shoppingCart = document.querySelector(".cart-product");
 const cartNode = document.querySelectorAll(".cart-icon-container"); //lägg till varukorg-ikon
 
@@ -14,12 +11,6 @@ const amountEl = document.querySelector(".amount");
 let amountOfUnits = 1;
 
 let cartIconEl = Array.prototype.slice.call(cartNode); //gör om nodelist till array
-
-//  visar/döljer shoppingvagnen
-cartBtn.addEventListener("click", (e) => {
-  cartMenu.classList.toggle("active");
-  e.preventDefault;
-});
 
 // denna funkar på så sätt att den lägger till ett objekt. Dock är den inte fäst på lägg till-knappen och den har inte rätt info.
 cartTest.addEventListener("click", () => {

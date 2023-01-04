@@ -56,14 +56,15 @@
               </div>
             </div>
 
-            <div class="row"><hr /></div>
-            <!-- enskild produkt -->
+            <div class="row">
+              <hr />
+            </div>
             <div class="row product-in-overview">
+              <!-- var enskild produkt. renderas i renderKassa.ts -->
+              <!-- 
               <div class="col-6">
                 <p class="product-list">
-                  <span id="product-name"
-                    >godis godis godis godis godis godis</span
-                  >
+                  <span id="product-name">godis godis godis godis godis godis</span>
                 </p>
               </div>
               <div class="col-2">
@@ -81,26 +82,34 @@
                   <span id="product-price-total">x</span> kr
                 </p>
               </div>
+              -->
             </div>
 
-            <div class="row"><hr /></div>
-
             <div class="row">
-              <div class="col-10">
-                <h6>Summa total</h6>
+              <hr />
+            </div>
+            <div class="row products-total">
+              <!-- rendera ut totalen i kassa.ts -->
+              <!-- 
+              <div class="col-8">
+                <h6>Total</h6>
               </div>
               <div class="col-2">
-                <h6><span id="sum-total">x</span> kr</h6>
+                <h6>x st</h6>
               </div>
+              <div class="col-2">
+                <h6>x kr</h6>
+              </div> 
+              -->
             </div>
           </div>
         </div>
 
-        <div class="customer-container mt-4 p-5">
+        <div class="customer-container mt-4 p-5 contact">
           <!--hide class="customer-container"-->
           <h2 class="text-center">Kontaktuppgifter</h2>
 
-          <form>
+          <form class="customerInfo">
             <div class="row justify-content-center mx-auto">
               <div class="col-25">
                 <label for="firstName">Förnamn:</label>
@@ -132,7 +141,7 @@
               </div>
               <div class="col-75">
                 <input
-                  type="adress"
+                  type="text"
                   id="adress"
                   name="adress"
                   placeholder="Adress"
@@ -144,7 +153,7 @@
               </div>
               <div class="col-75">
                 <input
-                  type="postcode"
+                  type="text"
                   id="postcode"
                   name="postcode"
                   placeholder="Postnr"
@@ -156,7 +165,7 @@
               </div>
               <div class="col-75">
                 <input
-                  type="city"
+                  type="text"
                   id="city"
                   name="city"
                   placeholder="Stad"
@@ -224,5 +233,7 @@ ordernr + tackmeddelande -->
         </div>
       </div>
     </div>
+    <script type="module" src="src/main.ts"></script>
+    <script type="module" src="src/kassa.ts"></script>
   </body>
 </html>

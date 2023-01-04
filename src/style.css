@@ -15,6 +15,7 @@ h1 {
   font-size: 70px;
   cursor: default;
 }
+
 @media screen and (max-width: 768px) {
   h1 {
     font-size: 10vw;
@@ -80,10 +81,9 @@ h1 {
   display: flex;
   flex-direction: column;
   background-color: #fff;
-  left: 64%;
   top: -120%;
   height: 600px;
-  width: 400px;
+  width: 300px;
   overflow: scroll;
   padding: 10px;
   box-shadow: 2px 5px 10px 0px;
@@ -93,8 +93,29 @@ h1 {
 }
 
 .shopping-cart-roll-down.active {
+  /*top: 0;*/
   top: 0;
+  margin-top: 55%;
+  /*kanske*/
 }
+
+.decide-amount {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+}
+
+.decide-amount > p {
+  display: flex;
+  align-items: center;
+}
+
+/* test
+.active {
+  top: 0;
+}*/
 
 .cart-product {
   display: flex;
@@ -210,9 +231,15 @@ h1 {
 
 /* dropdown meny slutar här */
 
+.product-img {
+  cursor: pointer;
+}
+
 .product-catalog {
   background-color: #fff;
   border-radius: 0px 0px 5px 5px;
+  height: 100vh;
+  overflow: scroll;
 }
 
 .product-container {
@@ -254,6 +281,10 @@ h1 {
   transition: all 0.1s ease-in-out;
 }
 
+.cart-icon-hide {
+  display: none;
+}
+
 .description-text {
   font-size: 14px;
   cursor: default;
@@ -286,4 +317,44 @@ h1 {
 
 .product-name-price-container {
   font-weight: 600;
+}
+
+@media screen and (min-width: 767px) {
+  .shopping-cart-roll-down {
+    left: 55%;
+  }
+
+  .shopping-cart-roll-down.active {
+    margin-top: 35%;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .shopping-cart-roll-down {
+    left: 64%;
+  }
+
+  .shopping-cart-roll-down.active {
+    margin-top: 25%;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .shopping-cart-roll-down {
+    left: 70%;
+  }
+
+  .shopping-cart-roll-down.active {
+    margin-top: 25%;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .shopping-cart-roll-down {
+    left: 70%;
+  }
+
+  .shopping-cart-roll-down.active {
+    margin-top: 20%;
+  }
 }
