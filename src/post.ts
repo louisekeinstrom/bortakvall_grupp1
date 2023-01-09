@@ -1,5 +1,5 @@
 export { }
-import { IResponse, IOrder, IError } from "./interfaces"
+import { IResponse, IOrder } from "./interfaces"
 
 /*
 export const postOrder = async (fullOrder: IOrder) => {
