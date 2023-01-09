@@ -38,10 +38,11 @@ let totalSum = () => {
 }
 
 // funktion för att synligt rendera ut produkten i varukorgen   
-let renderIntoCart = () => {
+export let renderIntoCart = () => {
     cartItem = JSON.parse(localStorage.getItem("products_in_cart") ?? '[]')
-    cartItem.forEach((product: any) => {
-        cartEL!.innerHTML += `
+    cartEL!.innerHTML = cartItem
+    .map((product: any) => 
+     `
     <div class="rendered-products-in-cart">
         <img src="https://bortakvall.se${product.images.large}" alt="Produkt från Bortakväll" class="img-fluid mh-sm-50 m-3 popup-img" />
             <h2 class="candy-name mt-3">${product.name}</h2>
@@ -53,10 +54,9 @@ let renderIntoCart = () => {
 					</div>
     </div>
     `
-        return cartItem
-    })
+    ).join('')
+    totalSum();
 }
-
 renderIntoCart();
 totalSum();
 
