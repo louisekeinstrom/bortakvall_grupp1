@@ -75,7 +75,7 @@ const addToCart = (data: any, productId: number) => {
 		// OM produkten hittas i varukorgen
 	} else if (foundProductInCart && foundProductInCart.stock_quantity > 0) {
 		// uppdatera följande egenskaper
-		productsInCart.map(foundProduct => {
+		productsInCart.map((foundProduct: any) => {
 			if (foundProduct.id === foundProductInCart!.id) {
 				// addera 1 av produkten
 				foundProduct.order_items.qty! ++

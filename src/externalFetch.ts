@@ -1,8 +1,6 @@
-export{};
+export { };
 import "./fetch"
-import { IProducts } from "./interfaces";
-import { IOrder } from "./interfaces";
-import { IProductsExt } from "./interfaces";
+
 
 // funktion för att hämta samtliga produkter från APIt
 export const getAllProducts = async () => {

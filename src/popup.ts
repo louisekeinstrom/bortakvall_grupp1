@@ -88,6 +88,8 @@ const popupFunc = (data: any, productId: number) => {
 
 						return disableBtn && btnInner && stockQtyInner
 
+					} else {
+						return null
 					}
 
 				})
@@ -107,6 +109,8 @@ const popupFunc = (data: any, productId: number) => {
 
 						return disableBtn && btnInner && stockQtyInner
 
+					} else {
+						return null
 					}
 
 				})
@@ -141,6 +145,8 @@ const popupFunc = (data: any, productId: number) => {
 			</div>
 		  </div>
 		`
+		} else {
+			return null
 		}
 	}).join('')
 
@@ -212,6 +218,8 @@ const popupFunc = (data: any, productId: number) => {
 					foundProduct.order_items.item_total = foundProduct.order_items.qty! * foundProduct.price
 					// återkom med den uppdaterade produkten
 					return foundProduct
+				} else {
+					return null
 				}
 			})
 		}
@@ -224,6 +232,8 @@ const popupFunc = (data: any, productId: number) => {
 		let productUpdate = productsInCart.map(product => {
 			if (product.id === currentProductId) {
 				return product.stock_quantity
+			} else {
+				return null
 			}
 		}).join('')
 		const stockQtyEl = document.querySelector('.stock-qty');

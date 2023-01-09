@@ -15,7 +15,7 @@ const lastName = document.querySelector('#lastName') as HTMLInputElement
 const adress = document.querySelector('#adress') as HTMLInputElement
 const postcode = document.querySelector('#postcode') as HTMLInputElement
 const city = document.querySelector('#city') as HTMLInputElement
-const tel = document.querySelector('#tel') as HTMLInputElement
+//const tel = document.querySelector('#tel') as HTMLInputElement
 const email = document.querySelector('#email') as HTMLInputElement
 
 

@@ -4,9 +4,9 @@ import "./fetch"
 import "./popup"
 //import { IProductsExt } from "./interfaces";
 
-const addToCartBtnEl = document.querySelector(".popup-add-to-cart")
+//const addToCartBtnEl = document.querySelector(".popup-add-to-cart")
 const cartEL = document.querySelector(".cart-product")
-const cartIconEl = Array.from(document.querySelectorAll(".cart-icon-container"))
+//const cartIconEl = Array.from(document.querySelectorAll(".cart-icon-container"))
 let cartItem = JSON.parse(localStorage.getItem("products_in_cart") ?? '[]')
 
 const wholeCart = document.querySelector('.shopping-cart-roll-down')
