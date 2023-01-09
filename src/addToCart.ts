@@ -1,4 +1,5 @@
 export { }
+//import { IProductsExt } from "./interfaces"
 
 
 //const addToCartBtnEl = document.querySelector(".popup-add-to-cart")
@@ -41,9 +42,10 @@ let totalSum = () => {
 export let renderIntoCart = () => {
     cartItem = JSON.parse(localStorage.getItem("products_in_cart") ?? '[]')
     cartEL!.innerHTML = cartItem
-    .map((product: any) => 
-     `
+        .map((product: any) =>
+            `
     <div class="rendered-products-in-cart">
+    <i class="fa-solid fa-xmark deleteBtn" data-id="${product.id}"></i>
         <img src="https://bortakvall.se${product.images.large}" alt="Produkt från Bortakväll" class="img-fluid mh-sm-50 m-3 popup-img" />
             <h2 class="candy-name mt-3">${product.name}</h2>
 				<p>Pris <span>${product.price}</span> kr</p>
@@ -54,14 +56,18 @@ export let renderIntoCart = () => {
 					</div>
     </div>
     `
-    ).join('')
+        ).join('')
     totalSum();
 }
 renderIntoCart();
 totalSum();
 
-(wholeCart as HTMLElement).addEventListener('click', (e: any) => {
+//Klistra ev in i samma klickevent som increase/decrease när de fungerar
+
+(wholeCart as HTMLElement)!.addEventListener('click', (e: any) => {
     cartItem = JSON.parse(localStorage.getItem("products_in_cart") ?? '[]')
+    const currentDeleteId = Number((e.target as HTMLElement).dataset.id)
+
 
     const currentProductId = Number((e.target as HTMLElement).dataset.currentProductId)
     const currentProduct = cartItem.find((product: any) => product.id === currentProductId)
@@ -117,6 +123,10 @@ totalSum();
         })
 
         totalSum();
+    } else if (e.target.classList.contains('deleteBtn') && currentDeleteId) {
+        console.log(`u clicked delete for product with id`, currentDeleteId)
+
+        //deleteProductFromCart(currentDeleteId)
     }
 })
 
@@ -125,7 +135,30 @@ console.log(increaseEl)
 
 const decreaseEl = Array.from(document.querySelectorAll(".decrease"))
 
-console.log(decreaseEl)
+console.log(decreaseEl);
+//delete
+/*(wholeCart as HTMLElement).addEventListener('click', (e: any) => {
+    const currentDeleteId = Number((e.target as HTMLElement).dataset.id)
+    if (e.target.classList.contains('deleteBtn') && currentDeleteId) {
+        console.log(`u clicked delete for product with id`, currentDeleteId)
+
+    }
+    /*if (e.target.classList.contains('deleteBtn')) {
+        e.target.parentElement.remove();
+        console.log(`u clicked delete for product with id`, )
+    }*/
+/*
+})*/
+
+
+/*const currentProductId = Number((e.target as HTMLElement).dataset.currentProductId)*/
+//Klistra ev in i samma klickevent som increase/decrease när de fungerar
+
+
+
+
+
+
 
 
 
@@ -155,7 +188,7 @@ console.log(decreaseEl)
 
 //  visar/döljer shoppingvagnen
 cartBtn!.addEventListener("click", (e) => {
-    cartItem = JSON.parse(localStorage.getItem("products_in_cart") ?? '[]')
+    //cartItem = JSON.parse(localStorage.getItem("products_in_cart") ?? '[]')
     cartMenu!.classList.toggle("active")
     e.preventDefault
     console.log("Du klickade på cart")
@@ -163,3 +196,45 @@ cartBtn!.addEventListener("click", (e) => {
 
 // hela funktionen
 
+const deleteProductFromCart = (productId: any) => {
+    // hitta rätt produkt som ska tas bort
+    //const productIndex = cartItem.findIndex((product: any) => product.id === productId);
+
+    const productIndex = cartItem.findIndex((product: any) => product.id === productId);
+
+
+    cartItem.splice(productIndex, 1);
+    console.log(productIndex)
+    console.log('deletefromcartfunc')
+    // Updatera local storage
+    localStorage.setItem('products_in_cart', JSON.stringify(cartItem));
+
+    // Uppdatera cart display
+    //updateCartDisplay();
+    renderIntoCart()
+};
+
+/*const currentProductId = Number((e.target as HTMLElement).dataset.currentProductId)*/
+//Klistra ev in i samma klickevent som increase/decrease när de fungerar
+/*
+const deleteBtn = Array.from(document.querySelectorAll(".deleteBtn"))
+
+deleteBtn.forEach((deleteBtn) => {
+    deleteBtn.addEventListener('click', (event) => {
+
+        //const productId = event.target.dataset.id
+        //const productId = event.target!.dataset.id
+        if ('dataset' in event.target) {
+            const productId = event.target.dataset.id
+            // ...
+            deleteProductFromCart(productId)
+            console.log('ifsats')
+            console.log(productId)
+
+        }
+        //deleteProductFromCart(productId);
+        console.log('works?')
+        //deleteProductFromCart(productId)
+        // updateCartDisplay()
+
+    })*/
