@@ -2,7 +2,7 @@ export { };
 import { IProductsExt } from "./interfaces";
 import { getAllProducts } from "./externalFetch";
 import { renderCatalouge } from "./katalog";
-
+import { renderIntoCart } from "./addToCart";
 
 
 const popupWrapper = document.querySelector('.popup-wrapper');
@@ -254,7 +254,7 @@ const popupFunc = (data: any, productId: number) => {
 			addToCartBtn.innerHTML = `Slut i lager`
 		}
 		renderCatalouge(data)
-
+		renderIntoCart()
 	})
 }
 
