@@ -1,5 +1,5 @@
 export { };
-import "./fetch"
+
 
 
 // funktion för att hämta samtliga produkter från APIt

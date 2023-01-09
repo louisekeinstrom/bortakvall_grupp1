@@ -1,5 +1,4 @@
 export { };
-import "./fetch"
 import { IProductsExt } from "./interfaces";
 import { getAllProducts } from "./externalFetch";
 import { renderCatalouge } from "./katalog";

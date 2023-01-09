@@ -1,6 +1,4 @@
 export { };
-import "./fetch"
-import "./popup"
 import { IProductsExt } from "./interfaces";
 import { getAllProducts } from "./externalFetch";
 

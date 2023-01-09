@@ -1,8 +1,5 @@
 export { }
-import "./interfaces"
-import "./fetch"
-import "./popup"
-//import { IProductsExt } from "./interfaces";
+
 
 //const addToCartBtnEl = document.querySelector(".popup-add-to-cart")
 const cartEL = document.querySelector(".cart-product")
