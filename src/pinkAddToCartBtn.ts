@@ -106,6 +106,7 @@ const addToCart = (data: any, productId: number) => {
 
 		alert('Slut på produkten');
 		// jag lyckas ej med nedan kod?!?!? gör en alert() på den sålänge
+
 		addToCartBtn!.setAttribute('disabled', 'disabled')
 		addToCartBtn!.classList.add('hide')
 	}

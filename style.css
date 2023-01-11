@@ -1,0 +1,9 @@
+.product{
+    background-color: rgb(145, 145, 144);
+    height: 230px;
+    max-width: 230px;
+}
+
+.products-grid{
+    background-color: dimgray;
+}
