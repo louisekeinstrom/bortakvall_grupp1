@@ -9,6 +9,7 @@ const total = document.querySelector('.products-total')
 
 /* rendera ut i kassan */
 const renderKassa = () => {
+  productsInCart = JSON.parse(localStorage.getItem('products_in_cart') ?? '[]')
   // each product
   productsInCart.sort((a: IProductsExt, b: IProductsExt) => {
     if (a.name < b.name) {

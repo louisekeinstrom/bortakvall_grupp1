@@ -76,8 +76,8 @@ totalSum();
     const currentProductId = Number((e.target as HTMLElement).dataset.currentProductId)
     const currentProduct = cartItem.find((product: any) => product.id === currentProductId)
 
-    if (e.target === document.querySelector(".increase") && currentProduct.id) {
-        e.stopPropagation();
+    if (e.target.classList.contains('increase') && currentProduct.id) {
+        e.stopImmediatePropagation();
 
         console.log(`increased product with product ID: `, currentProduct);
 
@@ -102,9 +102,12 @@ totalSum();
                 return foundProduct
             }
         })
+        localStorage.setItem('products_in_cart', JSON.stringify(cartItem))
+        renderIntoCart();
+        totalSum();
 
-    } else if ((e.target === document.querySelector(".decrease") && currentProduct)) {
-        e.stopPropagation();
+    } else if (e.target.classList.contains('decrease') && currentProduct.id) {
+        e.stopImmediatePropagation();
 
         console.log(`decreased product with product ID: `, currentProduct);
         // uppdatera följande egenskaper
@@ -117,10 +120,14 @@ totalSum();
                 // öka 1 i lager
                 foundProduct.stock_quantity++
                 console.log(foundProduct.stock_quantity)
+                
 
                 // om 0 varor är i korgen
                 if (foundProduct.order_items.qty <= 0) {
-                    cartEL!.innerHTML = ` `
+                    localStorage.setItem('products_in_cart', JSON.stringify(cartItem))
+                    deleteProductFromCart(foundProduct.id);
+                    renderIntoCart();
+                    totalSum();
                 }
                 // uppdatera totala summan för denna produkt
                 foundProduct.order_items.item_total = foundProduct.order_items.qty! * foundProduct.price
@@ -129,8 +136,10 @@ totalSum();
 
             }
         })
-
+        localStorage.setItem('products_in_cart', JSON.stringify(cartItem))
+        renderIntoCart();
         totalSum();
+
     } else if (e.target.classList.contains('deleteBtn') && currentDeleteId) {
 
         console.log(`u clicked delete for product with id`, currentDeleteId)
