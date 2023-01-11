@@ -1,6 +1,7 @@
 export { };
 import { IProductsExt } from "./interfaces";
 import { getAllProducts } from "./externalFetch";
+import { renderIntoCart } from "./addToCart";
 
 
 let productsInCart: IProductsExt[] = JSON.parse(localStorage.getItem('products_in_cart') ?? '[]')
@@ -108,6 +109,8 @@ const addToCart = (data: any, productId: number) => {
 		addToCartBtn!.setAttribute('disabled', 'disabled')
 		addToCartBtn!.classList.add('hide')
 	}
+
+	renderIntoCart()
 
 }
 
