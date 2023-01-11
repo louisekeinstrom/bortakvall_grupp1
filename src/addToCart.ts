@@ -136,9 +136,12 @@ totalSum();
         console.log(`u clicked delete for product with id`, currentDeleteId)
 
         deleteProductFromCart(currentDeleteId)
-        e.stopPropagation();
+
+        //e.stopPropagation();
+        e.stopImmediatePropagation()
 
     }
+
 });
 
 
@@ -150,6 +153,53 @@ console.log(increaseEl)
 const decreaseEl = Array.from(document.querySelectorAll(".decrease"))
 
 console.log(decreaseEl);
+//delete
+/*(wholeCart as HTMLElement).addEventListener('click', (e: any) => {
+    const currentDeleteId = Number((e.target as HTMLElement).dataset.id)
+    if (e.target.classList.contains('deleteBtn') && currentDeleteId) {
+        console.log(`u clicked delete for product with id`, currentDeleteId)
+
+    }
+    /*if (e.target.classList.contains('deleteBtn')) {
+        e.target.parentElement.remove();
+        console.log(`u clicked delete for product with id`, )
+    }*/
+/*
+})*/
+
+
+/*const currentProductId = Number((e.target as HTMLElement).dataset.currentProductId)*/
+//Klistra ev in i samma klickevent som increase/decrease när de fungerar
+
+
+
+
+
+
+
+
+
+
+//    let amountOfProducts = cartItem.map((product:any) => {
+//     return product.order_items.qty
+//    })
+//    console.log(amountOfProducts)
+
+//    för att öka produkter i varukorg
+// increaseEl.forEach((e)=> {
+//     e.addEventListener("click", (product) => {
+//     console.log("yay u increased")
+//     product.order_items.qty[i]++
+//     console.log(product.order_items.qty)
+//     })
+// })
+
+//    //    för att minska produkter i varukorg
+//    decreaseEl!.forEach((e) => {
+//     e.addEventListener("click", () => {
+//     console.log("yay u decreased")
+//     })
+//    })
 
 
 
@@ -176,8 +226,8 @@ const deleteProductFromCart = (productId: any) => {
     // Updatera local storage
     localStorage.setItem('products_in_cart', JSON.stringify(cartItem));
 
-
+    // Uppdatera cart display
+    //updateCartDisplay();
     renderIntoCart()
 };
-
 
