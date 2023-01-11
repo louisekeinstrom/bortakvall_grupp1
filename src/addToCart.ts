@@ -120,9 +120,7 @@ totalSum();
                 // öka 1 i lager
                 foundProduct.stock_quantity++
                 console.log(foundProduct.stock_quantity)
-                localStorage.setItem('products_in_cart', JSON.stringify(cartItem))
-                renderIntoCart();
-                totalSum();
+                
 
                 // om 0 varor är i korgen
                 if (foundProduct.order_items.qty <= 0) {
