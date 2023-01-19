@@ -98,10 +98,24 @@ const addToCart = (data: any, productId: number) => {
 	// hide button om produkten är slut i lager
 	if (foundProductInCart && foundProductInCart?.stock_quantity <= 0) {
 		const addToCartBtn: HTMLElement = document.querySelector('.cart-icon-container')!;
-		// updating product overview //måste ju eg koppla denna till en uppdaterad allProductsArr
-		// kanske göra en funktion på allProductsArr ovan att kalla på här igen?
-		let arrayLength: number = allProductsArr.length
-		let inStock: number = allProductsArr.filter((product: any) => product.stock_status === "instock").length //denna måste finda produkt och ändra om stock_ status
+		// updating array
+		productsInCart = JSON.parse(localStorage.getItem('products_in_cart') ?? '[]')
+		
+		const arrayLength: number = allProductsArr.length
+
+		// de produkter som är outofstock i productsInCart måste jag filtrera ur från allproductsArr
+		//find intersecting products from the two arrays and change stock_ status in 
+		allProductsArr.map((product:any) => {
+			if(productsInCart.includes(product) && product === productsInCart.filter((productInCart:any )=> productInCart.stock_status === "outofstock") ){
+				product.stock_status="outofstock"
+			}
+		})
+
+		console.log('Products from allProductsArr that are out of stock:', allProductsArr.filter((product:any) => product.stock_status === "outofstock"))
+
+		let inStock: number = allProductsArr
+			.filter((product: any) => product.stock_status === "instock")
+			.length 
 		document.querySelector('.render-stock-status')!.innerHTML = `Visar ${arrayLength} produkter varav ${inStock} är i lager`
 
 		alert('Slut på produkten');
@@ -109,7 +123,7 @@ const addToCart = (data: any, productId: number) => {
 		addToCartBtn!.setAttribute('disabled', 'disabled')
 		addToCartBtn!.classList.add('hide')
 	}
-
+	console.log('Products from allProductsArr that are out of stock:', allProductsArr.filter((product:any) => product.stock_status === "outofstock"))
 	renderIntoCart()
 
 }
