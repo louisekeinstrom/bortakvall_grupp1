@@ -211,7 +211,7 @@ const popupFunc = (data: any, productId: number) => {
 					foundProduct.stock_quantity--
 					// OM produkten då tar slut i lager, ändra status
 					if (foundProduct.stock_quantity <= 0) {
-						return foundProduct.stock_status = "outofstock"
+						foundProduct.stock_status = "outofstock"
 					}
 					// uppdatera totala summan för denna produkt
 					foundProduct.order_items.item_total = foundProduct.order_items.qty! * foundProduct.price
@@ -219,7 +219,7 @@ const popupFunc = (data: any, productId: number) => {
 					return foundProduct
 				} else {
 					return null
-				}
+				} 
 			})
 		}
 

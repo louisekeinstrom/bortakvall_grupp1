@@ -104,7 +104,7 @@ const addToCart = (data: any, productId: number) => {
 		const arrayLength: number = allProductsArr.length
 
 		// de produkter som är outofstock i productsInCart måste jag filtrera ur från allproductsArr
-		//find intersecting products from the two arrays and change stock_ status in 
+		//find intersecting products from the two arrays and change stock_ status in allProductsArr
 		allProductsArr.map((product:any) => {
 			if(productsInCart.includes(product) && product === productsInCart.filter((productInCart:any )=> productInCart.stock_status === "outofstock") ){
 				product.stock_status="outofstock"
