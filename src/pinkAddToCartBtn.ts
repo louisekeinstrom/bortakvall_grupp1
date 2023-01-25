@@ -95,19 +95,20 @@ const addToCart = (data: any, productId: number) => {
 	console.log('Products currently in cart: ', productsInCart)
 	localStorage.setItem('products_in_cart', JSON.stringify(productsInCart))
 
+	foundProductInCart = productsInCart.find(product => product.id === productId)
+
 	// hide button om produkten är slut i lager
 	if (foundProductInCart && foundProductInCart?.stock_quantity <= 0) {
 		const addToCartBtn: HTMLElement = document.querySelector('.cart-icon-container')!;
+		addToCartBtn!.setAttribute('style', 'display:none')
 		// updating product overview //måste ju eg koppla denna till en uppdaterad allProductsArr
 		// kanske göra en funktion på allProductsArr ovan att kalla på här igen?
 		let arrayLength: number = allProductsArr.length
 		let inStock: number = allProductsArr.filter((product: any) => product.stock_status === "instock").length //denna måste finda produkt och ändra om stock_ status
 		document.querySelector('.render-stock-status')!.innerHTML = `Visar ${arrayLength} produkter varav ${inStock} är i lager`
-
-		alert('Slut på produkten');
+		
+		// alert('Slut på produkten');
 		// jag lyckas ej med nedan kod?!?!? gör en alert() på den sålänge
-		addToCartBtn!.setAttribute('disabled', 'disabled')
-		addToCartBtn!.classList.add('hide')
 	}
 
 	renderIntoCart()
