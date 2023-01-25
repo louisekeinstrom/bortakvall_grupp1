@@ -74,9 +74,9 @@ totalSum();
         fetchProducts()
         // uppdatera följande egenskaper
         cartItem.map((foundProduct: any) => {
+            // OM produkten är slut i lager, ändra status
             if (foundProduct.stock_quantity <= 0) {
                fetchProducts()
-               e.target.setAttribute("style", "display:none")
                return foundProduct.stock_status = "outofstock"
             }
             if (foundProduct.id === currentProduct.id) {
@@ -84,7 +84,7 @@ totalSum();
                 foundProduct.order_items.qty++
                 // minska 1 i lager
                 foundProduct.stock_quantity--
-                // OM produkten då tar slut i lager, ändra status
+                fetchProducts()
                 // uppdatera totala summan för denna produkt
                 foundProduct.order_items.item_total = foundProduct.order_items.qty! * foundProduct.price
                 // återkom med den uppdaterade produkten
