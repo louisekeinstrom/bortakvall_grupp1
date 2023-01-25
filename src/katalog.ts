@@ -172,7 +172,7 @@ export const renderCatalouge = (data: any) => {
 
 }
 
-const fetchProducts = async () => {
+export const fetchProducts = async () => {
 
   try {
     const data: IProducts = await getAllProducts()

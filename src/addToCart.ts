@@ -1,18 +1,13 @@
 export { }
-//import { IProductsExt } from "./interfaces"
+import { fetchProducts } from "./katalog";
 
-
-//const addToCartBtnEl = document.querySelector(".popup-add-to-cart")
 const cartEL = document.querySelector(".cart-product")
-//const cartIconEl = Array.from(document.querySelectorAll(".cart-icon-container"))
 let cartItem = JSON.parse(localStorage.getItem("products_in_cart") ?? '[]')
 
 const wholeCart = document.querySelector('.shopping-cart-roll-down')
 
 const cartBtn = document.querySelector(".shopping-cart-btn"); //knapp för cart
 const cartMenu = document.querySelector(".cart-product"); //cart
-
-console.log(cartItem)
 
 // funktion för totala summan
 let totalSum = () => {
@@ -62,8 +57,6 @@ export let renderIntoCart = () => {
 renderIntoCart();
 totalSum();
 
-//Klistra ev in i samma klickevent som increase/decrease när de fungerar
-
 
 
 (wholeCart as HTMLElement)!.addEventListener('click', (e: any) => {
@@ -78,22 +71,18 @@ totalSum();
 
     if (e.target.classList.contains('increase') && currentProduct.id) {
         e.stopImmediatePropagation();
-
-        console.log(`increased product with product ID: `, currentProduct);
-
+        fetchProducts()
         // uppdatera följande egenskaper
         cartItem.map((foundProduct: any) => {
             if (foundProduct.id === currentProduct.id) {
                 // addera 1 av produkten
                 foundProduct.order_items.qty++
-                console.log(foundProduct.order_items.qty)
                 // minska 1 i lager
                 foundProduct.stock_quantity--
-                console.log(foundProduct.stock_quantity)
 
                 // OM produkten då tar slut i lager, ändra status
                 if (foundProduct.stock_quantity <= 0) {
-                    alert("Finns ej tillräckligt i lager")
+                    e.target.setAttribute("style", "display:none")
                     return foundProduct.stock_status = "outofstock"
                 }
                 // uppdatera totala summan för denna produkt
@@ -101,6 +90,7 @@ totalSum();
                 // återkom med den uppdaterade produkten
                 return foundProduct
             }
+            fetchProducts()
         })
         localStorage.setItem('products_in_cart', JSON.stringify(cartItem))
         renderIntoCart();
@@ -108,18 +98,15 @@ totalSum();
 
     } else if (e.target.classList.contains('decrease') && currentProduct.id) {
         e.stopImmediatePropagation();
-
-        console.log(`decreased product with product ID: `, currentProduct);
+        fetchProducts()
         // uppdatera följande egenskaper
         cartItem.map((foundProduct: any) => {
 
             if (foundProduct.id === currentProduct.id) {
                 // subtrahera 1 av produkten
                 foundProduct.order_items.qty!--
-                console.log(foundProduct.order_items.qty)
                 // öka 1 i lager
                 foundProduct.stock_quantity++
-                console.log(foundProduct.stock_quantity)
                 
 
                 // om 0 varor är i korgen
@@ -135,108 +122,41 @@ totalSum();
                 return foundProduct
 
             }
+            fetchProducts()
         })
         localStorage.setItem('products_in_cart', JSON.stringify(cartItem))
         renderIntoCart();
         totalSum();
 
     } else if (e.target.classList.contains('deleteBtn') && currentDeleteId) {
-
-        console.log(`u clicked delete for product with id`, currentDeleteId)
+        fetchProducts()
 
         deleteProductFromCart(currentDeleteId)
 
-        //e.stopPropagation();
         e.stopImmediatePropagation()
 
     }
 
 });
 
-
-
-
-const increaseEl = Array.from(document.querySelectorAll(".increase"))
-console.log(increaseEl)
-
-const decreaseEl = Array.from(document.querySelectorAll(".decrease"))
-
-console.log(decreaseEl);
-//delete
-/*(wholeCart as HTMLElement).addEventListener('click', (e: any) => {
-    const currentDeleteId = Number((e.target as HTMLElement).dataset.id)
-    if (e.target.classList.contains('deleteBtn') && currentDeleteId) {
-        console.log(`u clicked delete for product with id`, currentDeleteId)
-
-    }
-    /*if (e.target.classList.contains('deleteBtn')) {
-        e.target.parentElement.remove();
-        console.log(`u clicked delete for product with id`, )
-    }*/
-/*
-})*/
-
-
-/*const currentProductId = Number((e.target as HTMLElement).dataset.currentProductId)*/
-//Klistra ev in i samma klickevent som increase/decrease när de fungerar
-
-
-
-
-
-
-
-
-
-
-//    let amountOfProducts = cartItem.map((product:any) => {
-//     return product.order_items.qty
-//    })
-//    console.log(amountOfProducts)
-
-//    för att öka produkter i varukorg
-// increaseEl.forEach((e)=> {
-//     e.addEventListener("click", (product) => {
-//     console.log("yay u increased")
-//     product.order_items.qty[i]++
-//     console.log(product.order_items.qty)
-//     })
-// })
-
-//    //    för att minska produkter i varukorg
-//    decreaseEl!.forEach((e) => {
-//     e.addEventListener("click", () => {
-//     console.log("yay u decreased")
-//     })
-//    })
-
-
-
 //  visar/döljer shoppingvagnen
 cartBtn!.addEventListener("click", (e) => {
-    //cartItem = JSON.parse(localStorage.getItem("products_in_cart") ?? '[]')
     cartMenu!.classList.toggle("active")
     e.preventDefault
-    console.log("Du klickade på cart")
 })
 
 // hela funktionen
 
 const deleteProductFromCart = (productId: any) => {
     // hitta rätt produkt som ska tas bort
-    //const productIndex = cartItem.findIndex((product: any) => product.id === productId);
-
     const productIndex = cartItem.findIndex((product: any) => product.id === productId);
 
-
     cartItem.splice(productIndex, 1);
-    console.log(productIndex)
-    console.log('deletefromcartfunc')
+
     // Updatera local storage
     localStorage.setItem('products_in_cart', JSON.stringify(cartItem));
 
     // Uppdatera cart display
-    //updateCartDisplay();
     renderIntoCart()
 };
 
