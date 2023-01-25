@@ -8,39 +8,7 @@ let foundProductInCart: any
 let allProductsArr: IProductsExt[] = []
 /* allt här är kopierat och modifierat från fetch men fetchar via externalFetch ist */
 
-export const renderStockStatus = (allProductsArr: IProductsExt[] /*data: any*/) => {
-
-  // visa antal produkter som renderas varav hur många i lager.
-  // behöver även uppdateras när man tar slut på produkter
-
-  // kan man göra det genom att mappa över productsInCart och uppdatera status på allproducts?
-  // gör detta i klick-eventen när man lägger till/tar bort från cart.
-  // kanske i en funktion som kan exporteras och återanvändas?
-
-
-  // OM produkten finns i productsincart, överför stock_status därifrån till allProductsArr
-  // ANNARS OM produkten inte finns i productsincart, ta stock_status från data.data
-
-
-  /*   // Denna kod borde funka men gör det inte. antagligen för att jag inte översatt IProducts till IProductsExt
-   allProductsArr = data.data.map((product: IProductsExt) => {
-     console.log('allProductsArr', allProductsArr)
- 
-     // is product in cart?
-     foundProductInCart = productsInCart.find((foundProductInCart: any) => {
-       if(product.id === foundProductInCart.id){
-         return foundProductInCart
-       }
-     })
-     
-     // console.log('foundProductInCart', foundProductInCart)
- 
-     // if product is in cart, use its stock_status. if not use original
-     console.log(product.stock_status = foundProductInCart ? foundProductInCart.stock_status : product.stock_status)
- 
-     return product.stock_status = foundProductInCart ? foundProductInCart.stock_status : product.stock_status
-      
-   })  */
+export const renderStockStatus = (allProductsArr: IProductsExt[] ) => {
 
   //------ Kod som funkar för initial update:
   let arrayLength: number = allProductsArr.length
@@ -53,6 +21,8 @@ export const renderStockStatus = (allProductsArr: IProductsExt[] /*data: any*/) 
 }
 
 export const renderCatalouge = (data: any) => {
+
+  productsInCart = JSON.parse(localStorage.getItem('products_in_cart') ?? '[]')
   allProductsArr! = data.data.map((product: IProductsExt) => {
 
     // is product in cart?
@@ -125,10 +95,10 @@ export const renderCatalouge = (data: any) => {
 
           console.log('Rendering if-option for popupbtn productsInCart')
 
-          return pinkBtn
-        } else {
+        return pinkBtn
+        }  else {
           return null //HÄR HAR VI ÄNDRAT
-        }
+        } 
 
       })
       // rendering som nedan ifall produkten är slut i stock i originalarrayen (allProductsArr)
@@ -139,10 +109,10 @@ export const renderCatalouge = (data: any) => {
 
           console.log('Rendering if-option for popupbtn newProduct')
 
-          return pinkBtn = `<i class="cart-icon-hide text-light fa-solid fa-cart-plus"></i>`
+          return  pinkBtn = `<i class="cart-icon-hide text-light fa-solid fa-cart-plus"></i>`
         } else {
           return null
-        }
+        } 
 
       })
     }
@@ -172,7 +142,7 @@ export const renderCatalouge = (data: any) => {
 
 }
 
-const fetchProducts = async () => {
+export const fetchProducts = async () => {
 
   try {
     const data: IProducts = await getAllProducts()

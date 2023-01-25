@@ -10,7 +10,7 @@ let allProductsArr: IProductsExt[] = []
 
 /* addClasslist="hide" kan jag göra i renderingen i fetch.ts om producten är slut i lager. hämta då localStorage() för att */
 
-const addToCart = (data: any, productId: number) => {
+const addToCart = (data: any, productId: number, currentCartButton:any) => {
 	allProductsArr = data.data.map((product: IProductsExt) => {
 
 
@@ -62,12 +62,12 @@ const addToCart = (data: any, productId: number) => {
 		addNewProduct!.order_items.qty++
 		// minska antal i lager med -1
 		addNewProduct!.stock_quantity--
+		// räkna ut total kostnad för produkten 
+		addNewProduct!.order_items.item_total = addNewProduct!.order_items.qty * addNewProduct!.price
 		// om lagerantalet blir 0, ändra lagerstatus till "outofstock"
 		if (addNewProduct!.stock_quantity <= 0) {
 			addNewProduct!.stock_status = "outofstock"
 		}
-		// räkna ut total kostnad för produkten 
-		addNewProduct!.order_items.item_total = addNewProduct!.order_items.qty * addNewProduct!.price
 		// pusha produkten till arrayen productsInCart
 		productsInCart.push(addNewProduct!)
 
@@ -80,12 +80,12 @@ const addToCart = (data: any, productId: number) => {
 				foundProduct.order_items.qty! ++
 				// minska 1 i lager
 				foundProduct.stock_quantity--
+				// uppdatera totala summan för denna produkt
+				foundProduct.order_items.item_total = foundProduct.order_items.qty! * foundProduct.price
 				// OM produkten då tar slut i lager, ändra status
 				if (foundProduct.stock_quantity <= 0) {
 					return foundProduct.stock_status = "outofstock"
 				}
-				// uppdatera totala summan för denna produkt
-				foundProduct.order_items.item_total = foundProduct.order_items.qty! * foundProduct.price
 				// återkom med den uppdaterade produkten
 				return foundProduct
 			}
@@ -95,19 +95,18 @@ const addToCart = (data: any, productId: number) => {
 	console.log('Products currently in cart: ', productsInCart)
 	localStorage.setItem('products_in_cart', JSON.stringify(productsInCart))
 
+	foundProductInCart = productsInCart.find(product => product.id === productId)
+
 	// hide button om produkten är slut i lager
 	if (foundProductInCart && foundProductInCart?.stock_quantity <= 0) {
-		const addToCartBtn: HTMLElement = document.querySelector('.cart-icon-container')!;
+		const addToCartBtn: HTMLElement = currentCartButton!
+		addToCartBtn!.setAttribute('style', 'display:none')
 		// updating product overview //måste ju eg koppla denna till en uppdaterad allProductsArr
 		// kanske göra en funktion på allProductsArr ovan att kalla på här igen?
 		let arrayLength: number = allProductsArr.length
 		let inStock: number = allProductsArr.filter((product: any) => product.stock_status === "instock").length //denna måste finda produkt och ändra om stock_ status
 		document.querySelector('.render-stock-status')!.innerHTML = `Visar ${arrayLength} produkter varav ${inStock} är i lager`
-
-		alert('Slut på produkten');
-		// jag lyckas ej med nedan kod?!?!? gör en alert() på den sålänge
-		addToCartBtn!.setAttribute('disabled', 'disabled')
-		addToCartBtn!.classList.add('hide')
+		
 	}
 
 	renderIntoCart()
@@ -132,7 +131,7 @@ document.addEventListener('click', async (e) => {
 			// console.log("Found all products from API: ", data.data)
 
 			// add clicked product to cart-function
-			addToCart(data, productId)
+			addToCart(data, productId, e.target)
 
 		} catch (e) {
 			console.log("Something went wrong: ", e)
