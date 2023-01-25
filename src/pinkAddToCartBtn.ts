@@ -62,12 +62,12 @@ const addToCart = (data: any, productId: number, currentCartButton:any) => {
 		addNewProduct!.order_items.qty++
 		// minska antal i lager med -1
 		addNewProduct!.stock_quantity--
+		// räkna ut total kostnad för produkten 
+		addNewProduct!.order_items.item_total = addNewProduct!.order_items.qty * addNewProduct!.price
 		// om lagerantalet blir 0, ändra lagerstatus till "outofstock"
 		if (addNewProduct!.stock_quantity <= 0) {
 			addNewProduct!.stock_status = "outofstock"
 		}
-		// räkna ut total kostnad för produkten 
-		addNewProduct!.order_items.item_total = addNewProduct!.order_items.qty * addNewProduct!.price
 		// pusha produkten till arrayen productsInCart
 		productsInCart.push(addNewProduct!)
 
@@ -80,12 +80,12 @@ const addToCart = (data: any, productId: number, currentCartButton:any) => {
 				foundProduct.order_items.qty! ++
 				// minska 1 i lager
 				foundProduct.stock_quantity--
+				// uppdatera totala summan för denna produkt
+				foundProduct.order_items.item_total = foundProduct.order_items.qty! * foundProduct.price
 				// OM produkten då tar slut i lager, ändra status
 				if (foundProduct.stock_quantity <= 0) {
 					return foundProduct.stock_status = "outofstock"
 				}
-				// uppdatera totala summan för denna produkt
-				foundProduct.order_items.item_total = foundProduct.order_items.qty! * foundProduct.price
 				// återkom med den uppdaterade produkten
 				return foundProduct
 			}
