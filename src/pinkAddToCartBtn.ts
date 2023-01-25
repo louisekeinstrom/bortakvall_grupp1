@@ -92,6 +92,7 @@ const addToCart = (data: any, productId: number, currentCartButton:any) => {
 		})
 	}
 
+
 	console.log('Products currently in cart: ', productsInCart)
 	localStorage.setItem('products_in_cart', JSON.stringify(productsInCart))
 
