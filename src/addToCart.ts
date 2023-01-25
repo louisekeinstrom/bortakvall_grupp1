@@ -133,11 +133,12 @@ totalSum();
         
         deleteProductFromCart(currentDeleteId)
         
+        localStorage.setItem('products_in_cart', JSON.stringify(cartItem))
+
         e.stopImmediatePropagation()
         
         fetchProducts()
     }
-
 });
 
 //  visar/döljer shoppingvagnen
@@ -157,6 +158,7 @@ const deleteProductFromCart = (productId: any) => {
     // Updatera local storage
     localStorage.setItem('products_in_cart', JSON.stringify(cartItem));
 
+    fetchProducts()
     // Uppdatera cart display
     renderIntoCart()
 };

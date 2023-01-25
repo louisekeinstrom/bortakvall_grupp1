@@ -21,6 +21,8 @@ export const renderStockStatus = (allProductsArr: IProductsExt[] ) => {
 }
 
 export const renderCatalouge = (data: any) => {
+
+  productsInCart = JSON.parse(localStorage.getItem('products_in_cart') ?? '[]')
   allProductsArr! = data.data.map((product: IProductsExt) => {
 
     // is product in cart?
