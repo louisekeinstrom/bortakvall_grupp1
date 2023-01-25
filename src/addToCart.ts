@@ -74,23 +74,24 @@ totalSum();
         fetchProducts()
         // uppdatera följande egenskaper
         cartItem.map((foundProduct: any) => {
+            if (foundProduct.stock_quantity <= 0) {
+               fetchProducts()
+               e.target.setAttribute("style", "display:none")
+               return foundProduct.stock_status = "outofstock"
+            }
             if (foundProduct.id === currentProduct.id) {
                 // addera 1 av produkten
                 foundProduct.order_items.qty++
                 // minska 1 i lager
                 foundProduct.stock_quantity--
-
                 // OM produkten då tar slut i lager, ändra status
-                if (foundProduct.stock_quantity <= 0) {
-                    e.target.setAttribute("style", "display:none")
-                    return foundProduct.stock_status = "outofstock"
-                }
                 // uppdatera totala summan för denna produkt
                 foundProduct.order_items.item_total = foundProduct.order_items.qty! * foundProduct.price
                 // återkom med den uppdaterade produkten
                 return foundProduct
             }
             fetchProducts()
+            
         })
         localStorage.setItem('products_in_cart', JSON.stringify(cartItem))
         renderIntoCart();
@@ -129,12 +130,12 @@ totalSum();
         totalSum();
 
     } else if (e.target.classList.contains('deleteBtn') && currentDeleteId) {
-        fetchProducts()
-
+        
         deleteProductFromCart(currentDeleteId)
-
+        
         e.stopImmediatePropagation()
-
+        
+        fetchProducts()
     }
 
 });
