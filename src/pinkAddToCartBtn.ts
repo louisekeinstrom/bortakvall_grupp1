@@ -10,7 +10,7 @@ let allProductsArr: IProductsExt[] = []
 
 /* addClasslist="hide" kan jag göra i renderingen i fetch.ts om producten är slut i lager. hämta då localStorage() för att */
 
-const addToCart = (data: any, productId: number) => {
+const addToCart = (data: any, productId: number, currentCartButton:any) => {
 	allProductsArr = data.data.map((product: IProductsExt) => {
 
 
@@ -99,7 +99,7 @@ const addToCart = (data: any, productId: number) => {
 
 	// hide button om produkten är slut i lager
 	if (foundProductInCart && foundProductInCart?.stock_quantity <= 0) {
-		const addToCartBtn: HTMLElement = document.querySelector('.cart-icon-container')!;
+		const addToCartBtn: HTMLElement = currentCartButton!
 		addToCartBtn!.setAttribute('style', 'display:none')
 		// updating product overview //måste ju eg koppla denna till en uppdaterad allProductsArr
 		// kanske göra en funktion på allProductsArr ovan att kalla på här igen?
@@ -131,7 +131,7 @@ document.addEventListener('click', async (e) => {
 			// console.log("Found all products from API: ", data.data)
 
 			// add clicked product to cart-function
-			addToCart(data, productId)
+			addToCart(data, productId, e.target)
 
 		} catch (e) {
 			console.log("Something went wrong: ", e)
